@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerJumpController : MonoBehaviour
 {
     [SerializeField] float yPower = 400f;
@@ -26,11 +27,6 @@ public class PlayerJumpController : MonoBehaviour
         vectorYPower = new Vector2(0, yPower);
     }
 
-    void Update()
-    {
-
-    }
-
     void FixedUpdate()
     {
 
@@ -49,10 +45,10 @@ public class PlayerJumpController : MonoBehaviour
     {
         if (collision.collider.CompareTag("EditorOnly"))
             canJump = true;
-        
+
 
     }
-    
+
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("EditorOnly"))
@@ -60,6 +56,6 @@ public class PlayerJumpController : MonoBehaviour
             canJump = false;
 
         }
-        
+
     }
 }
