@@ -11,6 +11,9 @@ public class Distance : MonoBehaviour
     [Tooltip("立即激活进度条。")]
     private bool immediate;
     [SerializeField]
+    [Tooltip("关联的cube")]
+    private DeathLogic player;
+    [SerializeField]
     [Tooltip("增长速度。每秒增长50次speed。")]
     private int speed = 1;
     /// <summary>
@@ -57,6 +60,8 @@ public class Distance : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        Debug.Assert(player);
+        player.OnDied += StopProgress;
         distance = GetComponent<Text>();
         enabled = immediate;
     }

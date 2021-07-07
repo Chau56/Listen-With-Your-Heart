@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-
 public class AutoMovement : MonoBehaviour
 {
-    Rigidbody2D myRigidbody;
-    [SerializeField] float speed = 8f;      //物体移动速度
-    [SerializeField] bool canMove = true;    //控制方块暂停
+    private Rigidbody2D myRigidbody;
+    [SerializeField]
+    [Tooltip("物体移动速度")]
+    private float speed = 8f;
+    [SerializeField]
+    [Tooltip("控制方块暂停")]
+    private bool canMove = true;
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (canMove)
         {
@@ -18,8 +21,8 @@ public class AutoMovement : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Start()
     {
-        myRigidbody = this.GetComponent<Rigidbody2D>();
+        myRigidbody = GetComponent<Rigidbody2D>();
     }
 }
