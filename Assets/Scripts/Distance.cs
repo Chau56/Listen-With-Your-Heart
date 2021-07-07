@@ -3,24 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Text))]
 public class Distance : MonoBehaviour
 {
-    Text distance;
+    private Text distance;
     [SerializeField]
     [Tooltip("立即激活进度条。")]
-    bool immediate;
+    private bool immediate;
     [SerializeField]
-    [Tooltip("增长速度。每秒增长50次。")]
-    int speed = 1;
+    [Tooltip("增长速度。每秒增长50次speed。")]
+    private int speed = 1;
+    /// <summary>
+    /// 向外暴露的距离值。
+    /// </summary>
+    public int DistanceValue
+    {
+        get
+        {
+            Debug.Log($"{nameof(DistanceValue)} get.");
+            return value;
+        }
+    }
     /// <summary>
     /// 真正的值。
     /// </summary>
-    int value;
+    private int value;
     /// <summary>
-    /// 激活进度条。歌曲结束时自动停止。
+    /// 激活进度条。
     /// </summary>
     public void StartProgress()
     {
+        Debug.Log($"{nameof(StartProgress)}");
         enabled = true;
     }
     /// <summary>
@@ -28,6 +41,7 @@ public class Distance : MonoBehaviour
     /// </summary>
     public void StopProgress()
     {
+        Debug.Log($"{nameof(StopProgress)}");
         enabled = false;
     }
     /// <summary>
@@ -35,17 +49,20 @@ public class Distance : MonoBehaviour
     /// </summary>
     public void ResetProgress()
     {
+        Debug.Log($"{nameof(ResetProgress)}");
+        value = 0;
         distance.text = "0";
     }
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         distance = GetComponent<Text>();
         enabled = immediate;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         value += speed;
         distance.text = value.ToString();
