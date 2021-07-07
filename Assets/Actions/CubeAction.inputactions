@@ -1,0 +1,74 @@
+{
+    "name": "CubeAction",
+    "maps": [
+        {
+            "name": "Cube",
+            "id": "f42b9f81-49b5-40e9-aa45-85f9d87ac984",
+            "actions": [
+                {
+                    "name": "Jump1",
+                    "type": "Button",
+                    "id": "de9dc7d7-fa42-4be2-a409-e75a0a15cdb2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Jump2",
+                    "type": "Button",
+                    "id": "d3b4a11c-16a6-4d01-b172-0a9afe7490e1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "aee29416-93b9-4514-bc20-7ce9e81c474b",
+                    "path": "<Touchscreen>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "877a9f1d-dbfc-48d6-b588-8723de2e1384",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c7ffb7db-5be8-4d0f-bd73-bd03da149e7a",
+                    "path": "<Touchscreen>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c24e096a-2e21-4275-bc45-a933b00d568d",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
