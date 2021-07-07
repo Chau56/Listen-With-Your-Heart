@@ -5,12 +5,12 @@ using UnityEngine;
 public class AutoMovement : MonoBehaviour
 {
     Rigidbody2D myRigidbody;
-    [SerializeField] public float speed = 5f;      //方块移动速度
-    [SerializeField] public bool canMove = true;    //控制方块暂停
+    [SerializeField] float speed = 5f;      //鏂瑰潡绉诲姩閫熷害
+    [SerializeField] bool canMove = true;    //鎺у埗鏂瑰潡鏆傚仠
 
     void Update()
     {
-        if (canMove == true)
+        if (canMove)
         {
             myRigidbody.transform.Translate(speed * Time.deltaTime, 0, 0);  
         }
