@@ -6,8 +6,8 @@ public class PlayerJumpController : MonoBehaviour
 {
     [SerializeField] float yPower = 400f;
     [SerializeField] string controllerButton = "Jump";
-    [SerializeField] float speed = 9.0f;//char controlKey;
     Rigidbody2D rig;
+    //[SerializeField] float speed = 9.0f;//char controlKey;
     bool canJump;
 
 
