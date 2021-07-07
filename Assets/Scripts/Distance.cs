@@ -6,15 +6,12 @@ using UnityEngine.UI;
 public class Distance : MonoBehaviour
 {
     Text distance;
-    //[SerializeField]
-    //[Tooltip("会被source覆盖。仅用于测试。")]
-    //float maxValue;
-    //[SerializeField]
-    //[Tooltip("用此source的clip计算出maxValue。")]
-    //AudioSource source;
     [SerializeField]
     [Tooltip("立即激活进度条。")]
     bool immediate;
+    [SerializeField]
+    [Tooltip("增长速度。每秒增长50次。")]
+    int speed = 1;
     /// <summary>
     /// 真正的值。
     /// </summary>
@@ -50,7 +47,7 @@ public class Distance : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        value += 1;
+        value += speed;
         distance.text = value.ToString();
     }
 }
