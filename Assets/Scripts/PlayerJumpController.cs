@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class PlayerJumpController : MonoBehaviour
 {
-    [SerializeField] float ySpeed = 10f;
+    [SerializeField] float yPower = 400f;
     [SerializeField] string controllerButton = "Jump";
     //[SerializeField] float speed = 6.0f;//跳跃测试用水平速度
     Rigidbody2D rig;
-    Vector2 vectorGravity;
-    Vector2 vectorVelocity;
-    [SerializeField] bool isJump;//预留接口：用于判断是否跳跃来添加动画
+    Vector2 vectorYPower;
+    public bool isJump
+    {
+        get
+        {
+            return !canJump;
+        }
+    }//预留接口：用于判断是否跳跃来添加动画
     bool canJump;
 
 
@@ -18,9 +23,7 @@ public class PlayerJumpController : MonoBehaviour
     {
         rig = GetComponent<Rigidbody2D>();
         canJump = true;
-        vectorGravity = new Vector2(0, 9.8f);
-        isJump = false;
-        vectorVelocity = new Vector2(0, ySpeed);
+        vectorYPower = new Vector2(0, yPower);
     }
 
     void Update()
@@ -30,18 +33,12 @@ public class PlayerJumpController : MonoBehaviour
 
     void FixedUpdate()
     {
-        //跳跃测试用水平移动
-        /*Vector2 position = transform.position;
-        position.x += speed * Time.deltaTime;
-        transform.position = position;*/
-        if (rig.velocity.y != 0)
-            isJump = true;
+
         if (Input.GetButton(controllerButton) && canJump)//判断玩家有无输入A键，输入则跳跃
         {
 
             //canJump用来记录方块是否落地，初始为true,当发生碰撞被检测后被重置为true
-            rig.velocity = vectorVelocity;
-            //rig.AddForce(vectorYPower, ForceMode2D.Force);
+            rig.AddForce(vectorYPower, ForceMode2D.Force);
             canJump = false;
         }
         else
