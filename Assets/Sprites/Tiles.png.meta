@@ -104,6 +104,9 @@ TextureImporter:
   - first:
       213: 5891617607487913053
     second: Tiles_33
+  - first:
+      213: 3342371246333263808
+    second: Tiles_34
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -914,6 +917,27 @@ TextureImporter:
       bones: []
       spriteID: d5cf0c6bffa33c150800000000000000
       internalID: 5891617607487913053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tiles_34
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 0
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cf7c2d90fc726e20800000000000000
+      internalID: 3342371246333263808
       vertices: []
       indices: 
       edges: []
