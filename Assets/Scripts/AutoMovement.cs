@@ -5,24 +5,20 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class AutoMovement : MonoBehaviour
 {
-    private Rigidbody2D myRigidbody;
-    [SerializeField]
-    [Tooltip("物体移动速度")]
-    private float speed = 8f;
-    [SerializeField]
-    [Tooltip("控制方块暂停")]
-    private bool canMove = true;
+    Rigidbody2D myRigidbody;
+    [SerializeField] float speed = 8f;      //方块移动速度
+    public static  bool canMove = true;    //控制方块暂停
 
-    private void FixedUpdate()
+    void Update()
     {
         if (canMove)
         {
-            myRigidbody.AddForce(Vector2.right * speed);
+            myRigidbody.transform.Translate(speed * Time.deltaTime, 0, 0);
         }
     }
 
-    private void Start()
+    void Start()
     {
-        myRigidbody = GetComponent<Rigidbody2D>();
+        myRigidbody = this.GetComponent<Rigidbody2D>();
     }
 }
