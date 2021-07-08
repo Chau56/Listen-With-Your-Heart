@@ -55,10 +55,10 @@ public class DeathLogic : MonoBehaviour
         {
             OnDied();
         }
-        else if (tag == wallsTag && collision.contacts.All(point =>
+        else if (tag == wallsTag && collision.contacts.Any(point =>
             {
                 Debug.Log($"{this.tag} death collision {point.normal}");
-                return point.normal.x > 0.2f;
+                return Mathf.Abs(point.normal.x) > 0.2f;
             }
         ))
         {

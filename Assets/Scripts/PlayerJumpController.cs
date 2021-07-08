@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class PlayerJumpController : MonoBehaviour
@@ -38,7 +37,7 @@ public class PlayerJumpController : MonoBehaviour
     /// <summary>
     /// 调用就可能跳。
     /// </summary>
-    public void Jump(InputAction.CallbackContext _)
+    public void Jump()
     {
         Debug.Log($"{tag} will jump.");
         if (canJump)
