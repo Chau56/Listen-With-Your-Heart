@@ -763,6 +763,10 @@ PrefabInstance:
       propertyPath: events
       value: 
       objectReference: {fileID: 1584574702}
+    - target: {fileID: 1788482910, guid: a28c5a83ebec1b340b6f5fa4b36bb96f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1618605024238393543, guid: a28c5a83ebec1b340b6f5fa4b36bb96f, type: 3}
       propertyPath: events
       value: 
@@ -815,6 +819,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube
       objectReference: {fileID: 0}
+    - target: {fileID: 1618605024966769032, guid: a28c5a83ebec1b340b6f5fa4b36bb96f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618605024966769043, guid: a28c5a83ebec1b340b6f5fa4b36bb96f, type: 3}
+      propertyPath: jumpSpeed
+      value: 17
+      objectReference: {fileID: 0}
     - target: {fileID: 1618605024966769046, guid: a28c5a83ebec1b340b6f5fa4b36bb96f, type: 3}
       propertyPath: m_Size.x
       value: 0.9956627
@@ -823,6 +835,10 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 1.0022933
       objectReference: {fileID: 0}
+    - target: {fileID: 1618605025089634273, guid: a28c5a83ebec1b340b6f5fa4b36bb96f, type: 3}
+      propertyPath: m_GravityScale
+      value: -5
+      objectReference: {fileID: 0}
     - target: {fileID: 1618605025089634274, guid: a28c5a83ebec1b340b6f5fa4b36bb96f, type: 3}
       propertyPath: m_Size.x
       value: 1.007627
@@ -830,6 +846,10 @@ PrefabInstance:
     - target: {fileID: 1618605025089634274, guid: a28c5a83ebec1b340b6f5fa4b36bb96f, type: 3}
       propertyPath: m_Size.y
       value: 0.9973061
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618605025089634285, guid: a28c5a83ebec1b340b6f5fa4b36bb96f, type: 3}
+      propertyPath: jumpSpeed
+      value: -17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a28c5a83ebec1b340b6f5fa4b36bb96f, type: 3}
