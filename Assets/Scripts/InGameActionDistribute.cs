@@ -15,8 +15,6 @@ public class InGameActionDistribute : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        Debug.Assert(player1, player1);
-        Debug.Assert(player2, player2);
         inputs = new CubeAction();
         var cube = inputs.Cube;
         cube.Jump1.performed += player1.Jump;

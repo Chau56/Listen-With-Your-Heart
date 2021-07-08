@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6130072c162be84486ac21960416418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
+  speed: 5
   canMove: 1
 --- !u!50 &3569899373375566653
 Rigidbody2D:
@@ -134,8 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb2a02b322ca54a47a2ec0fd10c2479d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSpeed: -10
-  ground: {fileID: 8257331370976343170, guid: 0ba3e861d3793a949a00fb656c857f40, type: 3}
+  jumpSpeed: -5.5
 --- !u!114 &3569899373375566655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,6 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spikes: {fileID: 5468869588327251839, guid: 87c8c3e121a31e246bf1ecaad2c66a48, type: 3}
   walls: {fileID: 6475185677538400806, guid: f31222a4af328ab4d8d984c5c316800c, type: 3}
+  revivePoint: {fileID: 0}
 --- !u!61 &3569899373375566648
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -12,7 +12,10 @@ public class Distance : MonoBehaviour
     private bool immediate;
     [SerializeField]
     [Tooltip("关联的cube")]
-    private DeathLogic player;
+    private DeathLogic playerSelf;
+    [SerializeField]
+    [Tooltip("另一个cube")]
+    private DeathLogic playerAnother;
     [SerializeField]
     [Tooltip("增长速度。每秒增长50次speed。")]
     private int speed = 1;
@@ -23,7 +26,7 @@ public class Distance : MonoBehaviour
     {
         get
         {
-            Debug.Log($"{nameof(DistanceValue)} get.");
+            Debug.Log($"{playerSelf.tag} {nameof(DistanceValue)} get.");
             return value;
         }
     }
@@ -36,7 +39,7 @@ public class Distance : MonoBehaviour
     /// </summary>
     public void StartProgress()
     {
-        Debug.Log($"{nameof(StartProgress)}");
+        Debug.Log($"{playerSelf.tag} {nameof(StartProgress)}");
         enabled = true;
     }
     /// <summary>
@@ -44,15 +47,15 @@ public class Distance : MonoBehaviour
     /// </summary>
     public void StopProgress()
     {
-        Debug.Log($"{nameof(StopProgress)}");
-        enabled = false;
+        Debug.Log($"{playerSelf.tag} {nameof(StopProgress)}");
+        if (this) enabled = false;
     }
     /// <summary>
     /// 重置进度条。
     /// </summary>
     public void ResetProgress()
     {
-        Debug.Log($"{nameof(ResetProgress)}");
+        Debug.Log($"{playerSelf.tag} {nameof(ResetProgress)}");
         value = 0;
         distance.text = "0";
     }
@@ -60,8 +63,8 @@ public class Distance : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        Debug.Assert(player);
-        player.OnDied += StopProgress;
+        playerSelf.OnDied += StopProgress;
+        playerAnother.OnRevive += StartProgress;
         distance = GetComponent<Text>();
         enabled = immediate;
     }

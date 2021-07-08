@@ -12,17 +12,23 @@ public class AutoMovement : MonoBehaviour
     [SerializeField]
     [Tooltip("¿ØÖÆ·½¿éÔÝÍ£")]
     private bool canMove = true;
+    private Vector2 velocity;
 
-    private void FixedUpdate()
-    {
-        if (canMove)
-        {
-            myRigidbody.AddForce(Vector2.right * speed);
-        }
-    }
+    //private void FixedUpdate()
+    //{
+    //    if (canMove)
+    //    {
+    //        myRigidbody.AddForce(velocity);
+    //    }
+    //}
 
     private void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
+        velocity = Vector2.right * speed;
+        if (canMove)
+        {
+            myRigidbody.AddForce(velocity, ForceMode2D.Impulse);
+        }
     }
 }

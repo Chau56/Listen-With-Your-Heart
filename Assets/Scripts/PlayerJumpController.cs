@@ -10,11 +10,10 @@ public class PlayerJumpController : MonoBehaviour
     [Tooltip("跳跃速度。")]
     private float jumpSpeed = 3f;
     private Rigidbody2D rigidBody;
-    private Vector2 vectorYPower;
-    [SerializeField]
-    [Tooltip("地面。所有和这个物体tag相同的都被看作地面。")]
-    private GameObject ground;
-    private string groundTag;
+    //[SerializeField]
+    //[Tooltip("地面。所有和这个物体tag相同的都被看作地面。")]
+    //private GameObject ground;
+    //private string groundTag;
     /// <summary>
     /// 暴露的接口，指示是否在跳跃。
     /// </summary>
@@ -32,38 +31,28 @@ public class PlayerJumpController : MonoBehaviour
 
     private void Start()
     {
-        Debug.Assert(ground, ground);
+        //Debug.Assert(ground, ground);
         rigidBody = GetComponent<Rigidbody2D>();
-        Debug.Assert(rigidBody, rigidBody);
-        vectorYPower = new Vector2(0, jumpSpeed);
-        groundTag = ground.tag;
+        //groundTag = ground.tag;
     }
     /// <summary>
     /// 调用就可能跳。
     /// </summary>
     public void Jump(InputAction.CallbackContext _)
     {
-        Debug.Log($"{tag} jumped.");
-        if (canJump)//判断玩家有无输入A键，输入则跳跃
+        Debug.Log($"{tag} will jump.");
+        if (canJump)
         {
-            //canJump用来记录方块是否落地，初始为true,当发生碰撞被检测后被重置为true
-            rigidBody.AddForce(vectorYPower, ForceMode2D.Impulse);
+            Debug.Log($"{tag} jumped.");
+            rigidBody.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
             canJump = false;
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)//检测碰撞当碰撞发生后重置canJump让物体重新能够有一次跳跃机会
     {
-        if (collision.collider.CompareTag(groundTag))
-            canJump = true;
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag(groundTag))
-        {
-            canJump = false;
-        }
-
+        Debug.Log($"{tag} enter {collision.collider.tag}");
+        //if (collision.collider.CompareTag(groundTag))
+        canJump = true;
     }
 }
