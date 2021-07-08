@@ -8,7 +8,10 @@ using UnityEngine.InputSystem.Utilities;
 
 public class @CubeAction : IInputActionCollection, IDisposable
 {
-    public InputActionAsset asset { get; }
+    public InputActionAsset asset
+    {
+        get;
+    }
     public @CubeAction()
     {
         asset = InputActionAsset.FromJson(@"{
@@ -165,6 +168,52 @@ public class @CubeAction : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Game"",
+            ""id"": ""c1be2b32-0d33-48a6-a127-726524f9bbd7"",
+            ""actions"": [
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""a2796d44-5601-4249-9ece-72bebd59a2ac"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Resume"",
+                    ""type"": ""Button"",
+                    ""id"": ""75acbacc-ed8f-484b-9145-dfab3dc2ce38"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e8046819-5159-429c-ab76-ef6b0a7445d7"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""515a8339-6e1d-493f-ad2b-c5152a6127a9"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Resume"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -179,6 +228,10 @@ public class @CubeAction : IInputActionCollection, IDisposable
         m_Cheat_Pause2 = m_Cheat.FindAction("Pause2", throwIfNotFound: true);
         m_Cheat_Impulse1 = m_Cheat.FindAction("Impulse1", throwIfNotFound: true);
         m_Cheat_Impulse2 = m_Cheat.FindAction("Impulse2", throwIfNotFound: true);
+        // Game
+        m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
+        m_Game_Pause = m_Game.FindAction("Pause", throwIfNotFound: true);
+        m_Game_Resume = m_Game.FindAction("Resume", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -233,14 +286,29 @@ public class @CubeAction : IInputActionCollection, IDisposable
     public struct CubeActions
     {
         private @CubeAction m_Wrapper;
-        public CubeActions(@CubeAction wrapper) { m_Wrapper = wrapper; }
+        public CubeActions(@CubeAction wrapper)
+        {
+            m_Wrapper = wrapper;
+        }
         public InputAction @Jump1 => m_Wrapper.m_Cube_Jump1;
         public InputAction @Jump2 => m_Wrapper.m_Cube_Jump2;
-        public InputActionMap Get() { return m_Wrapper.m_Cube; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
+        public InputActionMap Get()
+        {
+            return m_Wrapper.m_Cube;
+        }
+        public void Enable()
+        {
+            Get().Enable();
+        }
+        public void Disable()
+        {
+            Get().Disable();
+        }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CubeActions set) { return set.Get(); }
+        public static implicit operator InputActionMap(CubeActions set)
+        {
+            return set.Get();
+        }
         public void SetCallbacks(ICubeActions instance)
         {
             if (m_Wrapper.m_CubeActionsCallbackInterface != null)
@@ -276,16 +344,31 @@ public class @CubeAction : IInputActionCollection, IDisposable
     public struct CheatActions
     {
         private @CubeAction m_Wrapper;
-        public CheatActions(@CubeAction wrapper) { m_Wrapper = wrapper; }
+        public CheatActions(@CubeAction wrapper)
+        {
+            m_Wrapper = wrapper;
+        }
         public InputAction @Pause1 => m_Wrapper.m_Cheat_Pause1;
         public InputAction @Pause2 => m_Wrapper.m_Cheat_Pause2;
         public InputAction @Impulse1 => m_Wrapper.m_Cheat_Impulse1;
         public InputAction @Impulse2 => m_Wrapper.m_Cheat_Impulse2;
-        public InputActionMap Get() { return m_Wrapper.m_Cheat; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
+        public InputActionMap Get()
+        {
+            return m_Wrapper.m_Cheat;
+        }
+        public void Enable()
+        {
+            Get().Enable();
+        }
+        public void Disable()
+        {
+            Get().Disable();
+        }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CheatActions set) { return set.Get(); }
+        public static implicit operator InputActionMap(CheatActions set)
+        {
+            return set.Get();
+        }
         public void SetCallbacks(ICheatActions instance)
         {
             if (m_Wrapper.m_CheatActionsCallbackInterface != null)
@@ -322,6 +405,62 @@ public class @CubeAction : IInputActionCollection, IDisposable
         }
     }
     public CheatActions @Cheat => new CheatActions(this);
+
+    // Game
+    private readonly InputActionMap m_Game;
+    private IGameActions m_GameActionsCallbackInterface;
+    private readonly InputAction m_Game_Pause;
+    private readonly InputAction m_Game_Resume;
+    public struct GameActions
+    {
+        private @CubeAction m_Wrapper;
+        public GameActions(@CubeAction wrapper)
+        {
+            m_Wrapper = wrapper;
+        }
+        public InputAction @Pause => m_Wrapper.m_Game_Pause;
+        public InputAction @Resume => m_Wrapper.m_Game_Resume;
+        public InputActionMap Get()
+        {
+            return m_Wrapper.m_Game;
+        }
+        public void Enable()
+        {
+            Get().Enable();
+        }
+        public void Disable()
+        {
+            Get().Disable();
+        }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GameActions set)
+        {
+            return set.Get();
+        }
+        public void SetCallbacks(IGameActions instance)
+        {
+            if (m_Wrapper.m_GameActionsCallbackInterface != null)
+            {
+                @Pause.started -= m_Wrapper.m_GameActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnPause;
+                @Resume.started -= m_Wrapper.m_GameActionsCallbackInterface.OnResume;
+                @Resume.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnResume;
+                @Resume.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnResume;
+            }
+            m_Wrapper.m_GameActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
+                @Resume.started += instance.OnResume;
+                @Resume.performed += instance.OnResume;
+                @Resume.canceled += instance.OnResume;
+            }
+        }
+    }
+    public GameActions @Game => new GameActions(this);
     public interface ICubeActions
     {
         void OnJump1(InputAction.CallbackContext context);
@@ -333,5 +472,10 @@ public class @CubeAction : IInputActionCollection, IDisposable
         void OnPause2(InputAction.CallbackContext context);
         void OnImpulse1(InputAction.CallbackContext context);
         void OnImpulse2(InputAction.CallbackContext context);
+    }
+    public interface IGameActions
+    {
+        void OnPause(InputAction.CallbackContext context);
+        void OnResume(InputAction.CallbackContext context);
     }
 }

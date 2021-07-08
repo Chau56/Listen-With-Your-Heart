@@ -1,84 +1,80 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class InGameActionDistribute : MonoBehaviour
+public class InGameActionDistribute
 {
-    private CubeAction inputs;
-    [SerializeField]
-    [Tooltip("第一个玩家。")]
-    private GameObject player1;
-    [SerializeField]
-    [Tooltip("第二个玩家。")]
-    private GameObject player2;
+    public static readonly InGameActionDistribute instance = new InGameActionDistribute();
+    private readonly CubeAction inputs;
+    private CubeAction.CubeActions cube;
+    private CubeAction.CheatActions cheat;
+    /// <summary>
+    /// 1是black 2是white。
+    /// 或者全部反过来也可以。
+    /// </summary>
+    public event Action
+        Jump1, Jump2, Impulse1, Impulse2, Pause1, Pause2, GamePause, GameResume;
 
-    private void MapJump1()
+    /// <summary>
+    /// 默认注册器。
+    /// </summary>
+    private void DefaultRegister()
     {
-        if(player1.TryGetComponent<PlayerJumpController>(out var jump1))
-        inputs.Cube.Jump1.performed += _ =>
+        inputs.Game.Pause.performed += _ =>
         {
-            jump1.Jump();
-            Debug.Log($"{nameof(jump1)}");
+            GamePause();
         };
-        else Debug.LogWarning($"{nameof(player1)}'s {nameof(PlayerJumpController)} is null.");
-    }
-    private void MapJump2()
-    {
-        if(player2.TryGetComponent<PlayerJumpController>(out var jump2))
-        inputs.Cube.Jump2.performed += _ =>
+        GamePause += () => Debug.Log("game paused");
+
+        inputs.Game.Resume.performed += _ =>
         {
-            jump2.Jump();
-            Debug.Log($"{nameof(jump2)}");
+            GameResume();
         };
-        else Debug.LogWarning($"{nameof(player2)}'s {nameof(PlayerJumpController)} is null.");
-    }
+        GameResume += () => Debug.Log("game resumed");
 
-    private void MapCheat1()
-    {
-        if (player1.TryGetComponent<AutoMovement>(out var cheat1))
+        cube.Jump1.performed += _ =>
         {
-            var cheat = inputs.Cheat;
-            cheat.Pause1.performed += _ =>
-            {
-                cheat1.Pause();
-                Debug.Log($"{nameof(cheat.Pause1)}");
-            };
-            cheat.Impulse1.performed += _ =>
-            {
-                cheat1.Impulse();
-                Debug.Log($"{nameof(cheat.Impulse1)}");
-            };
-        }
-        else Debug.LogWarning($"{nameof(player1)}'s {nameof(AutoMovement)} is null.");
-    }
-    private void MapCheat2()
-    {
-        if (player2.TryGetComponent<AutoMovement>(out var cheat2))
-        {
-            var cheat = inputs.Cheat;
-            cheat.Pause2.performed += _ =>
-            {
-                cheat2.Pause();
-                Debug.Log($"{nameof(cheat.Pause2)}");
-            };
-            cheat.Impulse2.performed += _ =>
-            {
-                cheat2.Impulse();
-                Debug.Log($"{nameof(cheat.Impulse2)}");
-            };
-        }
-        else Debug.LogWarning($"{nameof(player2)}'s {nameof(AutoMovement)} is null.");
-    }
+            Jump1();
+        };
+        Jump1 += () => Debug.Log($"{nameof(Jump1)}");
 
+        cube.Jump2.performed += _ =>
+        {
+            Jump2();
+        };
+        Jump2 += () => Debug.Log($"{nameof(Jump2)}");
+
+        cheat.Impulse1.performed += _ =>
+        {
+            Impulse1();
+        };
+        Impulse1 += () => Debug.Log($"{nameof(Impulse1)}");
+
+        cheat.Impulse2.performed += _ =>
+        {
+            Impulse2();
+        };
+        Impulse2 += () => Debug.Log($"{nameof(Impulse2)}");
+
+        cheat.Pause1.performed += _ =>
+        {
+            Pause1();
+        };
+        Pause1 += () => Debug.Log($"{nameof(Pause1)}");
+
+        cheat.Pause2.performed += _ =>
+        {
+            Pause2();
+        };
+        Pause2 += () => Debug.Log($"{nameof(Pause2)}");
+
+    }
     // Start is called before the first frame update
-    private void Awake()
+    private InGameActionDistribute()
     {
         inputs = new CubeAction();
         inputs.Enable();
-        MapJump1();
-        MapJump2();
-        MapCheat1();
-        MapCheat2();
-
+        cube = inputs.Cube;
+        cheat = inputs.Cheat;
+        DefaultRegister();
     }
 }

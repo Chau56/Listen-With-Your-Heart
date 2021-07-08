@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -67,6 +65,9 @@ public class Distance : MonoBehaviour
         playerAnother.OnRevive += StartProgress;
         distance = GetComponent<Text>();
         enabled = immediate;
+        var input = InGameActionDistribute.instance;
+        input.GamePause += StopProgress;
+        input.GameResume += StartProgress;
     }
 
     // Update is called once per frame

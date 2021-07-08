@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
@@ -9,10 +7,9 @@ public class PlayerJumpController : MonoBehaviour
     [Tooltip("跳跃速度。")]
     private float jumpSpeed = 3f;
     private Rigidbody2D rigidBody;
-    //[SerializeField]
-    //[Tooltip("地面。所有和这个物体tag相同的都被看作地面。")]
-    //private GameObject ground;
-    //private string groundTag;
+    [SerializeField]
+    [Tooltip("这是哪个玩家？")]
+    private PlayerEnum player;
     /// <summary>
     /// 暴露的接口，指示是否在跳跃。
     /// </summary>
@@ -30,9 +27,17 @@ public class PlayerJumpController : MonoBehaviour
 
     private void Start()
     {
-        //Debug.Assert(ground, ground);
         rigidBody = GetComponent<Rigidbody2D>();
-        //groundTag = ground.tag;
+        var input = InGameActionDistribute.instance;
+        switch (player)
+        {
+            case PlayerEnum.Black:
+                input.Jump1 += Jump;
+                break;
+            case PlayerEnum.White:
+                input.Jump2 += Jump;
+                break;
+        }
     }
     /// <summary>
     /// 调用就可能跳。
