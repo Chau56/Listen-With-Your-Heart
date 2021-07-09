@@ -26,16 +26,13 @@ jobs:
         uses: actions/checkout@v2
       - uses: actions/cache@v2
         with:
-          path: ${{ matrix.projectPath }}/Library
-          key: Library-${{ matrix.projectPath }}-${{ matrix.targetPlatform }}
-          restore-keys: |
-            Library-${{ matrix.projectPath }}-
-            Library-
+          path: UnityLibrary
+          key: unity
       # Runs a single command using the runners shell
       - name: Unity - Activate
   # You may pin to the exact commit or the version.
   # uses: game-ci/unity-activate@cda570d7590fe63b7f718e6a052e170462c07361
-        uses: game-ci/unity-activate@v1.3
+        uses: game-ci/unity-request-activation-file@v2.0-alpha-1
         with:
     # Version of unity to use for building the project.
           unityVersion: 2020.3.13f1 # optional, default is 2019.2.11f1
