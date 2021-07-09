@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class PlayerJumpController : MonoBehaviour
@@ -10,6 +11,7 @@ public class PlayerJumpController : MonoBehaviour
     [SerializeField]
     [Tooltip("这是哪个玩家？")]
     private PlayerEnum player;
+    private bool jumpPressed;
     /// <summary>
     /// 暴露的接口，指示是否在跳跃。
     /// </summary>
@@ -32,25 +34,41 @@ public class PlayerJumpController : MonoBehaviour
         switch (player)
         {
             case PlayerEnum.Black:
-                input.Jump1 += Jump;
+                input.Jump1Start += JumpStart;
+                input.Jump1Finished += JumpFinished;
                 break;
             case PlayerEnum.White:
-                input.Jump2 += Jump;
+                input.Jump2Start += JumpStart;
+                input.Jump2Finished += JumpFinished;
                 break;
         }
+    }
+    private void JumpStart()
+    {
+        Debug.Log($"{tag} will jump.");
+        jumpPressed = true;
+    }
+    private void JumpFinished()
+    {
+        Debug.Log($"{tag} will stop jumping.");
+        jumpPressed = false;
     }
     /// <summary>
     /// 调用就可能跳。
     /// </summary>
     public void Jump()
     {
-        Debug.Log($"{tag} will jump.");
-        if (canJump)
+        if (canJump && jumpPressed)
         {
             Debug.Log($"{tag} jumped.");
             rigidBody.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
             canJump = false;
         }
+    }
+
+    private void FixedUpdate()
+    {
+        Jump();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)//检测碰撞当碰撞发生后重置canJump让物体重新能够有一次跳跃机会

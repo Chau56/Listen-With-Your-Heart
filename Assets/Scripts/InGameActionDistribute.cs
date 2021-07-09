@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InGameActionDistribute
 {
@@ -12,20 +13,20 @@ public class InGameActionDistribute
     /// 或者全部反过来也可以。
     /// </summary>
     public event Action
-        Jump1, Jump2, Impulse1, Impulse2, Pause1, Pause2, GamePause, GameResume;
+        Impulse1, Impulse2, Pause1, Pause2, GamePause, GameResume, Jump1Start, Jump1Finished, Jump2Start, Jump2Finished;
 
     /// <summary>
     /// 默认注册器。
     /// </summary>
     private void DefaultRegister()
     {
-        inputs.Game.Pause.performed += _ =>
+        inputs.Game.Pause.started += _ =>
         {
             GamePause();
         };
         GamePause += () => Debug.Log("game paused");
 
-        inputs.Game.Resume.performed += _ =>
+        inputs.Game.Resume.started += _ =>
         {
             GameResume();
         };
@@ -33,35 +34,47 @@ public class InGameActionDistribute
 
         cube.Jump1.performed += _ =>
         {
-            Jump1();
+            Jump1Finished();
         };
-        Jump1 += () => Debug.Log($"{nameof(Jump1)}");
+        Jump1Finished += () => Debug.Log($"{nameof(Jump1Finished)}");
+
+        cube.Jump1.started += _ =>
+        {
+            Jump1Start();
+        };
+        Jump1Start += () => Debug.Log($"{nameof(Jump1Start)}");
 
         cube.Jump2.performed += _ =>
         {
-            Jump2();
+            Jump2Finished();
         };
-        Jump2 += () => Debug.Log($"{nameof(Jump2)}");
+        Jump2Finished += () => Debug.Log($"{nameof(Jump2Finished)}");
 
-        cheat.Impulse1.performed += _ =>
+        cube.Jump2.started += _ =>
+        {
+            Jump2Start();
+        };
+        Jump2Start += () => Debug.Log($"{nameof(Jump2Start)}");
+
+        cheat.Impulse1.started += _ =>
         {
             Impulse1();
         };
         Impulse1 += () => Debug.Log($"{nameof(Impulse1)}");
 
-        cheat.Impulse2.performed += _ =>
+        cheat.Impulse2.started += _ =>
         {
             Impulse2();
         };
         Impulse2 += () => Debug.Log($"{nameof(Impulse2)}");
 
-        cheat.Pause1.performed += _ =>
+        cheat.Pause1.started += _ =>
         {
             Pause1();
         };
         Pause1 += () => Debug.Log($"{nameof(Pause1)}");
 
-        cheat.Pause2.performed += _ =>
+        cheat.Pause2.started += _ =>
         {
             Pause2();
         };

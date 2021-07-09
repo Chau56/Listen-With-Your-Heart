@@ -8,10 +8,7 @@ using UnityEngine.InputSystem.Utilities;
 
 public class @CubeAction : IInputActionCollection, IDisposable
 {
-    public InputActionAsset asset
-    {
-        get;
-    }
+    public InputActionAsset asset { get; }
     public @CubeAction()
     {
         asset = InputActionAsset.FromJson(@"{
@@ -43,7 +40,7 @@ public class @CubeAction : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""aee29416-93b9-4514-bc20-7ce9e81c474b"",
                     ""path"": ""<Touchscreen>/press"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump1"",
@@ -54,7 +51,7 @@ public class @CubeAction : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""877a9f1d-dbfc-48d6-b588-8723de2e1384"",
                     ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump1"",
@@ -65,7 +62,7 @@ public class @CubeAction : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""c7ffb7db-5be8-4d0f-bd73-bd03da149e7a"",
                     ""path"": ""<Touchscreen>/press"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump2"",
@@ -76,7 +73,7 @@ public class @CubeAction : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""c24e096a-2e21-4275-bc45-a933b00d568d"",
                     ""path"": ""<Keyboard>/j"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump2"",
@@ -286,29 +283,14 @@ public class @CubeAction : IInputActionCollection, IDisposable
     public struct CubeActions
     {
         private @CubeAction m_Wrapper;
-        public CubeActions(@CubeAction wrapper)
-        {
-            m_Wrapper = wrapper;
-        }
+        public CubeActions(@CubeAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump1 => m_Wrapper.m_Cube_Jump1;
         public InputAction @Jump2 => m_Wrapper.m_Cube_Jump2;
-        public InputActionMap Get()
-        {
-            return m_Wrapper.m_Cube;
-        }
-        public void Enable()
-        {
-            Get().Enable();
-        }
-        public void Disable()
-        {
-            Get().Disable();
-        }
+        public InputActionMap Get() { return m_Wrapper.m_Cube; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CubeActions set)
-        {
-            return set.Get();
-        }
+        public static implicit operator InputActionMap(CubeActions set) { return set.Get(); }
         public void SetCallbacks(ICubeActions instance)
         {
             if (m_Wrapper.m_CubeActionsCallbackInterface != null)
@@ -344,31 +326,16 @@ public class @CubeAction : IInputActionCollection, IDisposable
     public struct CheatActions
     {
         private @CubeAction m_Wrapper;
-        public CheatActions(@CubeAction wrapper)
-        {
-            m_Wrapper = wrapper;
-        }
+        public CheatActions(@CubeAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @Pause1 => m_Wrapper.m_Cheat_Pause1;
         public InputAction @Pause2 => m_Wrapper.m_Cheat_Pause2;
         public InputAction @Impulse1 => m_Wrapper.m_Cheat_Impulse1;
         public InputAction @Impulse2 => m_Wrapper.m_Cheat_Impulse2;
-        public InputActionMap Get()
-        {
-            return m_Wrapper.m_Cheat;
-        }
-        public void Enable()
-        {
-            Get().Enable();
-        }
-        public void Disable()
-        {
-            Get().Disable();
-        }
+        public InputActionMap Get() { return m_Wrapper.m_Cheat; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CheatActions set)
-        {
-            return set.Get();
-        }
+        public static implicit operator InputActionMap(CheatActions set) { return set.Get(); }
         public void SetCallbacks(ICheatActions instance)
         {
             if (m_Wrapper.m_CheatActionsCallbackInterface != null)
@@ -414,29 +381,14 @@ public class @CubeAction : IInputActionCollection, IDisposable
     public struct GameActions
     {
         private @CubeAction m_Wrapper;
-        public GameActions(@CubeAction wrapper)
-        {
-            m_Wrapper = wrapper;
-        }
+        public GameActions(@CubeAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @Pause => m_Wrapper.m_Game_Pause;
         public InputAction @Resume => m_Wrapper.m_Game_Resume;
-        public InputActionMap Get()
-        {
-            return m_Wrapper.m_Game;
-        }
-        public void Enable()
-        {
-            Get().Enable();
-        }
-        public void Disable()
-        {
-            Get().Disable();
-        }
+        public InputActionMap Get() { return m_Wrapper.m_Game; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(GameActions set)
-        {
-            return set.Get();
-        }
+        public static implicit operator InputActionMap(GameActions set) { return set.Get(); }
         public void SetCallbacks(IGameActions instance)
         {
             if (m_Wrapper.m_GameActionsCallbackInterface != null)

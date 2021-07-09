@@ -55,8 +55,9 @@ public class DeathLogic : MonoBehaviour
         }
         else if (tag == wallsTag && collision.contacts.Any(point =>
             {
-                Debug.Log($"{this.tag} death collision {point.normal}");
-                return Mathf.Abs(point.normal.x) > 0.2f;
+                var positionY = transform.InverseTransformPoint(point.point).y;
+                Debug.Log($"{this.tag} death collision y {positionY}");
+                return positionY >= -0.4f;
             }
         ))
         {
