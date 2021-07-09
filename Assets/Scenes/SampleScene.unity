@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad980451443d70438faac0bc6c235a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: -4.064617, y: -0.73538446, z: 0}
+  m_TrackedObjectOffset: {x: -2.9344606, y: -1.9952925, z: 0}
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_ZDamping: 1
   m_TargetMovementOnly: 1
   m_ScreenX: 0.39552432
-  m_ScreenY: 0.54538465
+  m_ScreenY: 0.57
   m_CameraDistance: 10
   m_DeadZoneWidth: 0.34
   m_DeadZoneHeight: 1.21
@@ -184,8 +184,8 @@ MonoBehaviour:
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 0.71
   m_SoftZoneHeight: 2
-  m_BiasX: -0.00000092628846
-  m_BiasY: 0
+  m_BiasX: -0.0000009665619
+  m_BiasY: -0.0000003017957
   m_CenterOnActivate: 1
   m_GroupFramingMode: 2
   m_AdjustmentMode: 0
@@ -298,7 +298,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 7.48
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -322,7 +322,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.53741884, y: 0.67351604, z: -10}
+  m_LocalPosition: {x: 0.3234949, y: 0.024525285, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1947590407}
@@ -396,7 +396,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1788482908}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 7
+    OrthographicSize: 7.48
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -417,7 +417,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1152810521}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4631729, y: -0.099999905, z: -10}
+  m_LocalPosition: {x: -0.1565752, y: -0.9480933, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 515981392}
@@ -460,6 +460,14 @@ PrefabInstance:
       propertyPath: playerAnother
       value: 
       objectReference: {fileID: 1060123701}
+    - target: {fileID: 1811050032762889505, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1811050032762889505, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 2203628749608283554, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
       propertyPath: player
       value: 
@@ -559,6 +567,42 @@ PrefabInstance:
     - target: {fileID: 5153757831533841846, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7432200480266652959, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 145
+      objectReference: {fileID: 0}
+    - target: {fileID: 7432200480266652959, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7432200480266652959, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7432200480266652959, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7813958165795232136, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 145
+      objectReference: {fileID: 0}
+    - target: {fileID: 7813958165795232136, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7813958165795232136, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7813958165795232136, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -20.39065
+      objectReference: {fileID: 0}
+    - target: {fileID: 8295399518417737841, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -3.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
@@ -773,13 +817,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 55.512074, y: -5.6192126}
+    - - {x: 55.556187, y: -6.7808027}
       - {x: 55.539536, y: 8.279053}
       - {x: -25.334347, y: 8.235401}
       - {x: -25.337723, y: -0.30947423}
-      - {x: -25.32681, y: -5.4461465}
-      - {x: -25.255625, y: -5.444474}
-      - {x: 42.519855, y: -5.6230855}
+      - {x: -25.310226, y: -6.727641}
 --- !u!50 &1930002343
 Rigidbody2D:
   serializedVersion: 4
