@@ -32,7 +32,7 @@ public class AudioController : MonoBehaviour
         {
             return;
         }
-        moveAS.volume -= 0.1f;
+        moveAS.volume -= Mathf.Deg2Rad - 0.01f;
     }
 
     private void Play()
