@@ -93,8 +93,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   immediate: 1
-  playerSelf: {fileID: 0}
-  playerAnother: {fileID: 0}
+  playerSelf: {fileID: 6143841159879116285, guid: 33a50f26c234d5d49b5b1c7797659b37, type: 3}
+  playerAnother: {fileID: 7685317719583735682, guid: ed1a8174f1d37944dad85deb0232e4f1, type: 3}
   speed: 1
 --- !u!1 &5663029778774835441
 GameObject:
@@ -189,8 +189,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   immediate: 1
-  playerSelf: {fileID: 0}
-  playerAnother: {fileID: 0}
+  playerSelf: {fileID: 7685317719583735682, guid: ed1a8174f1d37944dad85deb0232e4f1, type: 3}
+  playerAnother: {fileID: 6143841159879116285, guid: 33a50f26c234d5d49b5b1c7797659b37, type: 3}
   speed: 1
 --- !u!1 &6259396398837847838
 GameObject:
