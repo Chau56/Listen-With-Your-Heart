@@ -1,15 +1,17 @@
 using System;
+using GameHardware;
 using UnityEngine;
 
 public class GameEvents : MonoBehaviour
 {
-    public event Action GameFailed, GamePause, GameResume;
+    public event Action GameFailed, GamePause, GameResume, Jump1Start, Jump2Start, Jump1Finished, Jump2Finished;
     [SerializeField]
     private DeathLogic player1;
     private bool p1Dead;
     [SerializeField]
     private DeathLogic player2;
     private bool p2Dead;
+    private bool gameFailed, gamePaused;
 
     // Start is called before the first frame update
     private void Start()
@@ -20,7 +22,6 @@ public class GameEvents : MonoBehaviour
 
     private void OnDestroy()
     {
-        RevokeSelfEvents();
         RevokeInputEvents();
     }
 
@@ -28,7 +29,26 @@ public class GameEvents : MonoBehaviour
     {
         player1.OnDied += CheckBlackFailed;
         player2.OnDied += CheckWhiteFailed;
-        GameFailed += Log;
+        GameFailed += RegisterGameFailed;
+        GamePause += RegisterGamePaused;
+        GameResume += RegisterGameResume;
+    }
+
+    private void RegisterGameFailed()
+    {
+        gameFailed = true;
+    }
+
+    private void RegisterGamePaused()
+    {
+        gamePaused = true;
+        Jump1Finished();
+        Jump2Finished();
+    }
+
+    private void RegisterGameResume()
+    {
+        gamePaused = false;
     }
 
     private void RegisterInputEvents()
@@ -36,6 +56,10 @@ public class GameEvents : MonoBehaviour
         var input = InGameActionDistribute.instance;
         input.Pause += InvokePause;
         input.Resume += InvokeResume;
+        input.Jump1Start += InvokeJump1;
+        input.Jump1Finished += FinishJump1;
+        input.Jump2Start += InvokeJump2;
+        input.Jump2Finished += FinishJump2;
     }
 
     private void RevokeInputEvents()
@@ -43,26 +67,49 @@ public class GameEvents : MonoBehaviour
         var input = InGameActionDistribute.instance;
         input.Pause -= InvokePause;
         input.Resume -= InvokeResume;
+        input.Jump1Start -= InvokeJump1;
+        input.Jump1Finished -= FinishJump1;
+        input.Jump2Start -= InvokeJump2;
+        input.Jump2Finished -= FinishJump2;
+    }
+
+    private void DoOnNotFinished(Action action)
+    {
+        if (!gameFailed) action();
+    }
+    private void DoOnNotPaused(Action action)
+    {
+        if (!(gamePaused || gameFailed)) action();
     }
 
     private void InvokePause()
     {
-        GamePause();
+        DoOnNotFinished(GamePause);
     }
 
     private void InvokeResume()
     {
-        GameResume();
+        DoOnNotFinished(GameResume);
     }
 
-    private void RevokeSelfEvents()
+    private void InvokeJump1()
     {
-        GameFailed = () => { };
+        DoOnNotPaused(Jump1Start);
     }
 
-    private void Log()
+    private void InvokeJump2()
     {
-        Debug.Log("Game failed.");
+        DoOnNotPaused(Jump2Start);
+    }
+
+    private void FinishJump1()
+    {
+        DoOnNotPaused(Jump1Finished);
+    }
+
+    private void FinishJump2()
+    {
+        DoOnNotPaused(Jump2Finished);
     }
 
     private void CheckBlackFailed()
@@ -79,8 +126,11 @@ public class GameEvents : MonoBehaviour
 
     private void CheckFailed()
     {
+        Debug.Log("check game failed");
         if (p1Dead && p2Dead)
         {
+            gameFailed = true;
+            Debug.Log("Game failed.");
             GameFailed();
         }
     }

@@ -19,15 +19,30 @@ public class AudioController : MonoBehaviour
     [Tooltip("淡出音量减小时间间隔")]
     [Min(0)]
     private float interval = 0.01f;
+    [SerializeField]
+    [Tooltip("最大音量。会覆盖AudioSource的音量。")]
+    [Range(0, 1)]
     private float volume;
-    //[SerializeField]
-    //private bool pause = false;//isPlaying接口
-    //private int playTimes = 0;//播放次数
+    /// <summary>
+    /// 最大音量。
+    /// </summary>
+    public float Volume
+    {
+        get
+        {
+            return volume;
+        }
+        set
+        {
+            if (value < 0) volume = 0;
+            else if (value > 1) volume = 1;
+            else volume = value;
+        }
+    }
 
     private void Start()
     {
         moveAS = GetComponent<AudioSource>();//初始化  
-        volume = moveAS.volume;
         RegisterEvents();
     }
 
@@ -39,7 +54,7 @@ public class AudioController : MonoBehaviour
     }
     private void Pause()
     {
-        StartCoroutine(FadeOutEffect());
+        StartCoroutine(FadeOutEffect(false));
     }
     //private void Play()
     //{
@@ -47,55 +62,33 @@ public class AudioController : MonoBehaviour
     //}
     private void Unpause()
     {
-        FadeInEffect();
+        StartCoroutine(FadeInEffect(false));
     }
     private void Stop()
     {
-        moveAS.Stop();
+        StartCoroutine(FadeOutEffect(true));
     }
 
-    private IEnumerator FadeOutEffect()
+    private IEnumerator FadeOutEffect(bool stop)
     {
+        Debug.Log($"fadeout stop {stop}");
         while (moveAS.volume > 0)
         {
             moveAS.volume -= decline;
             yield return new WaitForSecondsRealtime(interval);
         }
-        moveAS.Pause();
+        if (stop) moveAS.Stop();
+        else moveAS.Pause();
     }
-    private IEnumerator FadeInEffect()
+    private IEnumerator FadeInEffect(bool play)
     {
-        while (moveAS.volume < volume)
+        Debug.Log($"fadein play {play}");
+        while (moveAS.volume < Volume)
         {
             moveAS.volume += decline;
             yield return new WaitForSecondsRealtime(interval);
         }
-        moveAS.UnPause();
+        if (play) moveAS.Play();
+        else moveAS.UnPause();
     }
-
-
-    //private void Play()
-    //{
-    //    if (playTimes == 0)
-    //    {
-    //        playTimes++;
-    //        moveAS.Play();
-    //    }
-    //    return;
-    //}
-
-    //拓展死亡
-    // Update is called once per frame
-    //private void Update()
-    //{
-    //if (isPlaying == false)
-    //{
-    //    FadeOutEffect();
-    //}
-    //if (AutoMovement.canMove == true)
-    //{
-    //    Play();
-    //} 
-
-    //}
 }

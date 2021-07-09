@@ -8,7 +8,10 @@ using UnityEngine.InputSystem.Utilities;
 
 public class @CubeAction : IInputActionCollection, IDisposable
 {
-    public InputActionAsset asset { get; }
+    public InputActionAsset asset
+    {
+        get;
+    }
     public @CubeAction()
     {
         asset = InputActionAsset.FromJson(@"{
@@ -107,7 +110,7 @@ public class @CubeAction : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e8046819-5159-429c-ab76-ef6b0a7445d7"",
-                    ""path"": ""<Keyboard>/l"",
+                    ""path"": ""<Keyboard>/p"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -193,14 +196,29 @@ public class @CubeAction : IInputActionCollection, IDisposable
     public struct CubeActions
     {
         private @CubeAction m_Wrapper;
-        public CubeActions(@CubeAction wrapper) { m_Wrapper = wrapper; }
+        public CubeActions(@CubeAction wrapper)
+        {
+            m_Wrapper = wrapper;
+        }
         public InputAction @Jump1 => m_Wrapper.m_Cube_Jump1;
         public InputAction @Jump2 => m_Wrapper.m_Cube_Jump2;
-        public InputActionMap Get() { return m_Wrapper.m_Cube; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
+        public InputActionMap Get()
+        {
+            return m_Wrapper.m_Cube;
+        }
+        public void Enable()
+        {
+            Get().Enable();
+        }
+        public void Disable()
+        {
+            Get().Disable();
+        }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CubeActions set) { return set.Get(); }
+        public static implicit operator InputActionMap(CubeActions set)
+        {
+            return set.Get();
+        }
         public void SetCallbacks(ICubeActions instance)
         {
             if (m_Wrapper.m_CubeActionsCallbackInterface != null)
@@ -234,14 +252,29 @@ public class @CubeAction : IInputActionCollection, IDisposable
     public struct GameActions
     {
         private @CubeAction m_Wrapper;
-        public GameActions(@CubeAction wrapper) { m_Wrapper = wrapper; }
+        public GameActions(@CubeAction wrapper)
+        {
+            m_Wrapper = wrapper;
+        }
         public InputAction @Pause => m_Wrapper.m_Game_Pause;
         public InputAction @Resume => m_Wrapper.m_Game_Resume;
-        public InputActionMap Get() { return m_Wrapper.m_Game; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
+        public InputActionMap Get()
+        {
+            return m_Wrapper.m_Game;
+        }
+        public void Enable()
+        {
+            Get().Enable();
+        }
+        public void Disable()
+        {
+            Get().Disable();
+        }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(GameActions set) { return set.Get(); }
+        public static implicit operator InputActionMap(GameActions set)
+        {
+            return set.Get();
+        }
         public void SetCallbacks(IGameActions instance)
         {
             if (m_Wrapper.m_GameActionsCallbackInterface != null)

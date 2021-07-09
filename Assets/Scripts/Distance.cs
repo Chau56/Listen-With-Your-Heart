@@ -17,6 +17,8 @@ public class Distance : MonoBehaviour
     [SerializeField]
     [Tooltip("增长速度。每秒增长50次speed。")]
     private int speed = 1;
+    [SerializeField]
+    private GameEvents events;
     /// <summary>
     /// 向外暴露的距离值。
     /// </summary>
@@ -81,16 +83,14 @@ public class Distance : MonoBehaviour
 
     private void RegisterInputEvents()
     {
-        var input = InGameActionDistribute.instance;
-        input.Pause += StopProgress;
-        input.Resume += StartProgress;
+        events.GamePause += StopProgress;
+        events.GameResume += StartProgress;
     }
 
     private void RevokeInputEvents()
     {
-        var input = InGameActionDistribute.instance;
-        input.Pause -= StopProgress;
-        input.Resume -= StartProgress;
+        events.GamePause -= StopProgress;
+        events.GameResume -= StartProgress;
     }
 
     // Update is called once per frame
