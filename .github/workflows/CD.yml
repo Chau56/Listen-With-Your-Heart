@@ -8,12 +8,6 @@ on:
   push:
     branches: [ production ]
 
-env:
-  UNITY_LICENSE: <?xml version="1.0" encoding="UTF-8"?><root><SystemInfo><IsoCode>en</IsoCode><UserName>tlmeg</UserName><OperatingSystem>win32</OperatingSystem><OperatingSystemNumeric></OperatingSystemNumeric><ProcessorType>Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz</ProcessorType><ProcessorSpeed>2400</ProcessorSpeed><ProcessorCount>8</ProcessorCount><ProcessorCores>0</ProcessorCores><PhysicalMemoryMB>8036.8515625</PhysicalMemoryMB><ComputerName>Trash</ComputerName><ComputerModel>N/A</ComputerModel><UnityVersion>2017.2.0</UnityVersion><SupportedLicenseVersion>6.x</SupportedLicenseVersion></SystemInfo><License id="Terms"><MachineID Value="mJj/kid8FKa/J4OCfs2XxvOZOi4=" /><MachineBindings><Binding Key="1" Value="00342-35602-45605-AAOEM" /><Binding Key="2" Value="C52DE_24_A190B0_83.C" /><Binding Key="4" Value="MTBNR1JUMg==" /><Binding Key="5" Value="40:23:43:96:6f:f9" /></MachineBindings><UnityVersion Value="5.6.0" /></License></root>
-  # Allows you to run this workflow manually from the Actions tab
-  # workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   build:
@@ -30,6 +24,20 @@ jobs:
           path: UnityLibrary
           key: ${{runner.os}}-unity
       # Runs a single command using the runners shell
+      - name: Unity - Request Activation File
+  # You may pin to the exact commit or the version.
+  # uses: game-ci/unity-request-activation-file@de1240e14622163607d94eecb76d8fbc250d4504
+        uses: game-ci/unity-request-activation-file@v2.0-alpha-1
+        with:
+    # Version of unity to use for building the project.
+          unityVersion: 2020.3.13f1 # optional, default is 2019.2.11f1
+      - name: Unity - Activate
+  # You may pin to the exact commit or the version.
+  # uses: game-ci/unity-activate@cda570d7590fe63b7f718e6a052e170462c07361
+        uses: game-ci/unity-activate@v1.3
+        with:
+    # Version of unity to use for building the project.
+          unityVersion: 2020.3.13f1 # optional, default is 2019.2.11f1
       - name: Unity - Builder
         # You may pin to the exact commit or the version.
         # uses: game-ci/unity-builder@9fff3627757a76db932be572b62521043322e901
