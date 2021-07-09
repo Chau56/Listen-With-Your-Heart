@@ -29,9 +29,11 @@ public class AutoMovement : MonoBehaviour
         myRigidbody.velocity = Vector2.zero;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        Debug.Log($"{tag} velocity {myRigidbody.velocity}");
+        var v = myRigidbody.velocity;
+        Debug.Log($"{tag} velocity {v}");
+        if (Mathf.Approximately(v.x, 0)) Impulse();
     }
     private void Start()
     {

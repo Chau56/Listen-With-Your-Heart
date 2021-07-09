@@ -61,10 +61,15 @@ public class Distance : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        playerSelf.OnDied += StopProgress;
-        playerAnother.OnRevive += StartProgress;
         distance = GetComponent<Text>();
         enabled = immediate;
+        RegisterEvents();
+    }
+
+    private void RegisterEvents()
+    {
+        playerSelf.OnDied += StopProgress;
+        playerAnother.OnRevive += StartProgress;
         var input = InGameActionDistribute.instance;
         input.GamePause += StopProgress;
         input.GameResume += StartProgress;

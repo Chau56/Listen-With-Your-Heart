@@ -30,6 +30,11 @@ public class PlayerJumpController : MonoBehaviour
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        RegisterEvents();
+    }
+
+    private void RegisterEvents()
+    {
         var input = InGameActionDistribute.instance;
         switch (player)
         {
@@ -43,20 +48,20 @@ public class PlayerJumpController : MonoBehaviour
                 break;
         }
     }
+
     private void JumpStart()
     {
         Debug.Log($"{tag} will jump.");
         jumpPressed = true;
     }
+
     private void JumpFinished()
     {
         Debug.Log($"{tag} will stop jumping.");
         jumpPressed = false;
     }
-    /// <summary>
-    /// 调用就可能跳。
-    /// </summary>
-    public void Jump()
+
+    private void Jump()
     {
         if (canJump && jumpPressed)
         {
