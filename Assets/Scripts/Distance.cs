@@ -6,9 +6,6 @@ public class Distance : MonoBehaviour
 {
     private Text distance;
     [SerializeField]
-    [Tooltip("立即激活进度条。")]
-    private bool immediate;
-    [SerializeField]
     [Tooltip("关联的cube")]
     private DeathLogic playerSelf;
     [SerializeField]
@@ -19,6 +16,8 @@ public class Distance : MonoBehaviour
     private int speed = 1;
     [SerializeField]
     private GameEvents events;
+    private bool run;
+    private bool died;
     /// <summary>
     /// 向外暴露的距离值。
     /// </summary>
@@ -40,7 +39,7 @@ public class Distance : MonoBehaviour
     public void StartProgress()
     {
         Debug.Log($"{playerSelf.tag} {nameof(StartProgress)}");
-        enabled = true;
+        run = true;
     }
     /// <summary>
     /// 停止进度条。
@@ -48,7 +47,7 @@ public class Distance : MonoBehaviour
     public void StopProgress()
     {
         Debug.Log($"{playerSelf.tag} {nameof(StopProgress)}");
-        if (this) enabled = false;
+        run = false;
     }
     /// <summary>
     /// 重置进度条。
@@ -63,40 +62,43 @@ public class Distance : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        run = false;
         distance = GetComponent<Text>();
-        if (immediate) StartProgress();
-        else ResetProgress();
         RegisterSelfEvents();
         RegisterInputEvents();
     }
 
-    private void OnDestroy()
-    {
-        RevokeInputEvents();
-    }
-
     private void RegisterSelfEvents()
     {
-        playerSelf.OnDied += StopProgress;
-        playerAnother.OnRevive += StartProgress;
+        playerSelf.OnDied += () =>
+        {
+            StopProgress();
+            died = true;
+        };
+        playerAnother.OnRevive += () =>
+        {
+            StartProgress();
+            died = false;
+        };
     }
 
     private void RegisterInputEvents()
     {
         events.GamePause += StopProgress;
-        events.GameResume += StartProgress;
-    }
-
-    private void RevokeInputEvents()
-    {
-        events.GamePause -= StopProgress;
-        events.GameResume -= StartProgress;
+        events.GameResume += () =>
+        {
+            if (!died) StartProgress();
+        };
+        events.GameStart += StartProgress;
     }
 
     // Update is called once per frame
     private void FixedUpdate()
     {
-        value += speed;
-        distance.text = value.ToString();
+        if (run)
+        {
+            value += speed;
+            distance.text = value.ToString();
+        }
     }
 }

@@ -26,13 +26,13 @@ namespace GameHardware
             {
                 Pause();
             };
-            Pause += () => Debug.Log("game paused");
+            Pause += () => Debug.Log("hardware paused");
 
             inputs.Game.Resume.started += _ =>
             {
                 Resume();
             };
-            Resume += () => Debug.Log("game resumed");
+            Resume += () => Debug.Log("hardware resumed");
 
             cube.Jump1.performed += context =>
             {

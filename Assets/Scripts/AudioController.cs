@@ -48,18 +48,19 @@ public class AudioController : MonoBehaviour
 
     private void RegisterEvents()
     {
-        events.GameFailed += Stop;
+        events.GameEnd += Stop;
         events.GameResume += Unpause;
         events.GamePause += Pause;
+        events.GameStart += Play;
     }
     private void Pause()
     {
         StartCoroutine(FadeOutEffect(false));
     }
-    //private void Play()
-    //{
-    //    moveAS.Play();
-    //}
+    private void Play()
+    {
+        StartCoroutine(FadeInEffect(true));
+    }
     private void Unpause()
     {
         StartCoroutine(FadeInEffect(false));

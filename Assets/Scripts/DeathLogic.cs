@@ -28,39 +28,68 @@ public class DeathLogic : MonoBehaviour
     private GameObject revivePoint;
     private string reviveTag;
     private new Rigidbody2D rigidbody;
+    [SerializeField]
+    private GameEvents events;
+    private bool paused, died;
     // Start is called before the first frame update
     private void Start()
     {
+        paused = true;
         spikesTag = spikes.tag;
         //wallsTag = walls.tag;
         reviveTag = revivePoint.tag;
         rigidbody = GetComponent<Rigidbody2D>();
         RegisterSelfEvents();
+        RegisterEvents();
     }
+
+    private void DiedCheck()
+    {
+        if (!paused) OnDied();
+    }
+
+    private void ReviveCheck()
+    {
+        if (!paused && died) OnRevive();
+    }
+
     private void RegisterSelfEvents()
     {
         OnDied += () =>
         {
             gameObject.SetActive(false);
+            died = true;
             Debug.Log($"{tag} died.");
         };
         OnRevive += () =>
         {
             gameObject.SetActive(true);
+            died = false;
             Debug.Log($"{tag} revived.");
         };
     }
 
-    private void RevokeSelfEvents()
+    private void RegisterEvents()
     {
-        OnDied = () => { };
-        OnRevive = () => { };
+        events.GameStart += Resume;
+        events.GamePause += Pause;
+        events.GameResume += Resume;
+    }
+
+    private void Pause()
+    {
+        paused = true;
+    }
+
+    private void Resume()
+    {
+        paused = false;
     }
 
     private void OnBecameInvisible()
     {
         Debug.Log($"{tag} invisible.");
-        if (gameObject.activeInHierarchy) OnDied();
+        if (gameObject.activeInHierarchy) DiedCheck();
     }
 
     //private bool IsDeathCollision(ContactPoint2D point)
@@ -81,11 +110,11 @@ public class DeathLogic : MonoBehaviour
         Debug.Log($"{this.tag} enter {tag}.");
         if (tag == spikesTag)
         {
-            OnDied();
+            DiedCheck();
         }
         else if (tag == reviveTag)
         {
-            OnRevive();
+            ReviveCheck();
         }
     }
 
@@ -94,7 +123,7 @@ public class DeathLogic : MonoBehaviour
         Debug.Log($"{tag} velocity {x}.");
         if (x < 1)
         {
-            OnDied();
+            DiedCheck();
         }
     }
 
@@ -108,10 +137,5 @@ public class DeathLogic : MonoBehaviour
     {
         string tag = collision.collider.tag;
         Debug.Log($"{this.tag} exit {tag}.");
-    }
-
-    private void OnDestroy()
-    {
-        RevokeSelfEvents();
     }
 }
