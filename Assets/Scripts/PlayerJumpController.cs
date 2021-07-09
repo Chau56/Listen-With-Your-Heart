@@ -1,12 +1,11 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class PlayerJumpController : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("跳跃速度。")]
-    private float jumpSpeed = 3f;
+    private Vector2 jumpSpeed = new Vector2(0, 17);
     private Rigidbody2D rigidBody;
     [SerializeField]
     [Tooltip("这是哪个玩家？")]
@@ -49,6 +48,22 @@ public class PlayerJumpController : MonoBehaviour
         }
     }
 
+    private void RevokeEvents()
+    {
+        var input = InGameActionDistribute.instance;
+        switch (player)
+        {
+            case PlayerEnum.Black:
+                input.Jump1Start -= JumpStart;
+                input.Jump1Finished -= JumpFinished;
+                break;
+            case PlayerEnum.White:
+                input.Jump2Start -= JumpStart;
+                input.Jump2Finished -= JumpFinished;
+                break;
+        }
+    }
+
     private void JumpStart()
     {
         Debug.Log($"{tag} will jump.");
@@ -66,7 +81,7 @@ public class PlayerJumpController : MonoBehaviour
         if (canJump && jumpPressed)
         {
             Debug.Log($"{tag} jumped.");
-            rigidBody.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+            rigidBody.AddForce(jumpSpeed, ForceMode2D.Impulse);
             canJump = false;
         }
     }
@@ -81,5 +96,10 @@ public class PlayerJumpController : MonoBehaviour
         Debug.Log($"{tag} enter {collision.collider.tag}");
         //if (collision.collider.CompareTag(groundTag))
         canJump = true;
+    }
+
+    private void OnDestroy()
+    {
+        RevokeEvents();
     }
 }

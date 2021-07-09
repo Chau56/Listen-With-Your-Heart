@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GameEvents : MonoBehaviour
 {
-    public event Action GameFailed;
+    public event Action GameFailed, GamePause, GameResume;
     [SerializeField]
     private DeathLogic player1;
     private bool p1Dead;
@@ -14,22 +14,71 @@ public class GameEvents : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        player1.OnDied += () => CheckFailed(PlayerEnum.Black);
-        player2.OnDied += () => CheckFailed(PlayerEnum.White);
-        GameFailed += () => Debug.Log("Game failed.");
+        RegisterSelfEvents();
+        RegisterInputEvents();
     }
 
-    private void CheckFailed(PlayerEnum player)
+    private void OnDestroy()
     {
-        switch (player)
-        {
-            case PlayerEnum.Black:
-                p1Dead = true;
-                break;
-            case PlayerEnum.White:
-                p2Dead = true;
-                break;
-        }
+        RevokeSelfEvents();
+        RevokeInputEvents();
+    }
+
+    private void RegisterSelfEvents()
+    {
+        player1.OnDied += CheckBlackFailed;
+        player2.OnDied += CheckWhiteFailed;
+        GameFailed += Log;
+    }
+
+    private void RegisterInputEvents()
+    {
+        var input = InGameActionDistribute.instance;
+        input.Pause += InvokePause;
+        input.Resume += InvokeResume;
+    }
+
+    private void RevokeInputEvents()
+    {
+        var input = InGameActionDistribute.instance;
+        input.Pause -= InvokePause;
+        input.Resume -= InvokeResume;
+    }
+
+    private void InvokePause()
+    {
+        GamePause();
+    }
+
+    private void InvokeResume()
+    {
+        GameResume();
+    }
+
+    private void RevokeSelfEvents()
+    {
+        GameFailed = () => { };
+    }
+
+    private void Log()
+    {
+        Debug.Log("Game failed.");
+    }
+
+    private void CheckBlackFailed()
+    {
+        p1Dead = true;
+        CheckFailed();
+    }
+
+    private void CheckWhiteFailed()
+    {
+        p2Dead = true;
+        CheckFailed();
+    }
+
+    private void CheckFailed()
+    {
         if (p1Dead && p2Dead)
         {
             GameFailed();

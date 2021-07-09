@@ -62,17 +62,35 @@ public class Distance : MonoBehaviour
     private void Start()
     {
         distance = GetComponent<Text>();
-        enabled = immediate;
-        RegisterEvents();
+        if (immediate) StartProgress();
+        else ResetProgress();
+        RegisterSelfEvents();
+        RegisterInputEvents();
     }
 
-    private void RegisterEvents()
+    private void OnDestroy()
+    {
+        RevokeInputEvents();
+    }
+
+    private void RegisterSelfEvents()
     {
         playerSelf.OnDied += StopProgress;
         playerAnother.OnRevive += StartProgress;
+    }
+
+    private void RegisterInputEvents()
+    {
         var input = InGameActionDistribute.instance;
-        input.GamePause += StopProgress;
-        input.GameResume += StartProgress;
+        input.Pause += StopProgress;
+        input.Resume += StartProgress;
+    }
+
+    private void RevokeInputEvents()
+    {
+        var input = InGameActionDistribute.instance;
+        input.Pause -= StopProgress;
+        input.Resume -= StartProgress;
     }
 
     // Update is called once per frame

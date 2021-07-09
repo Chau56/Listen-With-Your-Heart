@@ -26,7 +26,7 @@
                 {
                     "name": "",
                     "id": "aee29416-93b9-4514-bc20-7ce9e81c474b",
-                    "path": "<Touchscreen>/press",
+                    "path": "<Pointer>/press",
                     "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "",
@@ -48,7 +48,7 @@
                 {
                     "name": "",
                     "id": "c7ffb7db-5be8-4d0f-bd73-bd03da149e7a",
-                    "path": "<Touchscreen>/press",
+                    "path": "<Pointer>/press",
                     "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "",
@@ -64,90 +64,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Cheat",
-            "id": "45b7f2a3-8d19-49fc-888f-d5e5fcdf30f7",
-            "actions": [
-                {
-                    "name": "Pause1",
-                    "type": "Button",
-                    "id": "84981d35-c07b-45bc-b5bf-3b87c3ae152c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Pause2",
-                    "type": "Button",
-                    "id": "72e492a0-075a-4bef-b908-3ee075d1250e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Impulse1",
-                    "type": "Button",
-                    "id": "185ac96f-e926-46db-ae79-5184c9336f6b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Impulse2",
-                    "type": "Button",
-                    "id": "9368958b-7620-45e6-9827-cf0f2944b600",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "11424a8e-85ca-4895-adb0-b0bf5f926cb0",
-                    "path": "<Keyboard>/o",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pause1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f2538f1b-fd46-4704-a3e0-5f9a07a25228",
-                    "path": "<Keyboard>/p",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pause2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "664c3c01-2c9f-41bf-9eb3-f401baf38066",
-                    "path": "<Keyboard>/u",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Impulse1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b51a026d-a220-432d-a27e-6959cc25e7eb",
-                    "path": "<Keyboard>/i",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Impulse2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

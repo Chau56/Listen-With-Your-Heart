@@ -7,13 +7,13 @@ public class InGameActionDistribute
     public static readonly InGameActionDistribute instance = new InGameActionDistribute();
     private readonly CubeAction inputs;
     private CubeAction.CubeActions cube;
-    private CubeAction.CheatActions cheat;
+    private float screenHalfHeight;
     /// <summary>
     /// 1是black 2是white。
     /// 或者全部反过来也可以。
     /// </summary>
     public event Action
-        Impulse1, Impulse2, Pause1, Pause2, GamePause, GameResume, Jump1Start, Jump1Finished, Jump2Start, Jump2Finished;
+        Pause, Resume, Jump1Start, Jump1Finished, Jump2Start, Jump2Finished;
 
     /// <summary>
     /// 默认注册器。
@@ -22,64 +22,62 @@ public class InGameActionDistribute
     {
         inputs.Game.Pause.started += _ =>
         {
-            GamePause();
+            Pause();
         };
-        GamePause += () => Debug.Log("game paused");
+        Pause += () => Debug.Log("game paused");
 
         inputs.Game.Resume.started += _ =>
         {
-            GameResume();
+            Resume();
         };
-        GameResume += () => Debug.Log("game resumed");
+        Resume += () => Debug.Log("game resumed");
 
-        cube.Jump1.performed += _ =>
+        cube.Jump1.performed += context =>
         {
-            Jump1Finished();
+            JumpFilter(context.control, Jump1Finished, PlayerEnum.Black);
         };
         Jump1Finished += () => Debug.Log($"{nameof(Jump1Finished)}");
 
-        cube.Jump1.started += _ =>
+        cube.Jump1.started += context =>
         {
-            Jump1Start();
+            JumpFilter(context.control, Jump1Start, PlayerEnum.Black);
         };
         Jump1Start += () => Debug.Log($"{nameof(Jump1Start)}");
 
-        cube.Jump2.performed += _ =>
+        cube.Jump2.performed += context =>
         {
-            Jump2Finished();
+            JumpFilter(context.control, Jump2Finished, PlayerEnum.White);
         };
         Jump2Finished += () => Debug.Log($"{nameof(Jump2Finished)}");
 
-        cube.Jump2.started += _ =>
+        cube.Jump2.started += context =>
         {
-            Jump2Start();
+            JumpFilter(context.control, Jump2Start, PlayerEnum.White);
         };
         Jump2Start += () => Debug.Log($"{nameof(Jump2Start)}");
-
-        cheat.Impulse1.started += _ =>
+    }
+    private void JumpFilter(InputControl control, Action action, PlayerEnum player)
+    {
+        Debug.Log($"jump filter {control}");
+        switch (control.device)
         {
-            Impulse1();
-        };
-        Impulse1 += () => Debug.Log($"{nameof(Impulse1)}");
-
-        cheat.Impulse2.started += _ =>
-        {
-            Impulse2();
-        };
-        Impulse2 += () => Debug.Log($"{nameof(Impulse2)}");
-
-        cheat.Pause1.started += _ =>
-        {
-            Pause1();
-        };
-        Pause1 += () => Debug.Log($"{nameof(Pause1)}");
-
-        cheat.Pause2.started += _ =>
-        {
-            Pause2();
-        };
-        Pause2 += () => Debug.Log($"{nameof(Pause2)}");
-
+            case Keyboard _:
+                action();
+                break;
+            case Pointer screen:
+                float y = screen.position.y.ReadValue();
+                Debug.Log($"screen hit y {y}");
+                if (player == PlayerEnum.White && y > screenHalfHeight || player == PlayerEnum.Black && y < screenHalfHeight)
+                {
+                    action();
+                }
+                break;
+        }
+    }
+    private void RegisterScreen()
+    {
+        screenHalfHeight = (float)Screen.height / 2;
+        Debug.Log($"half screen {screenHalfHeight}");
     }
     // Start is called before the first frame update
     private InGameActionDistribute()
@@ -87,7 +85,7 @@ public class InGameActionDistribute
         inputs = new CubeAction();
         inputs.Enable();
         cube = inputs.Cube;
-        cheat = inputs.Cheat;
         DefaultRegister();
+        RegisterScreen();
     }
 }

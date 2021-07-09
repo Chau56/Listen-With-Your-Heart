@@ -790,7 +790,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   events: {fileID: 1584574702}
-  isPlaying: 1
+  decline: 0.1
+  interval: 0.01
 --- !u!1 &1893147944
 GameObject:
   m_ObjectHideFlags: 0

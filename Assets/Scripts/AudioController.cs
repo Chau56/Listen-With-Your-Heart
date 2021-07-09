@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 /// <summary>
 ///在功能01 - 1的基础上，canMove = true方块开始移动的时候，播放BGM
@@ -11,52 +12,90 @@ public class AudioController : MonoBehaviour
     [SerializeField]
     private GameEvents events;
     [SerializeField]
-    private bool isPlaying = true;//isPlaying接口
-    private int playTimes = 0;//播放次数
+    [Tooltip("淡出音量减小值")]
+    [Min(1e-5f)]
+    private float decline = 0.1f;
+    [SerializeField]
+    [Tooltip("淡出音量减小时间间隔")]
+    [Min(0)]
+    private float interval = 0.01f;
+    private float volume;
+    //[SerializeField]
+    //private bool pause = false;//isPlaying接口
+    //private int playTimes = 0;//播放次数
 
     private void Start()
     {
         moveAS = GetComponent<AudioSource>();//初始化  
-        var input = InGameActionDistribute.instance;
-        input.GameResume += Play;
-        input.GamePause += Pause;
-        events.GameFailed += Pause;
+        volume = moveAS.volume;
+        RegisterEvents();
+    }
+
+    private void RegisterEvents()
+    {
+        events.GameFailed += Stop;
+        events.GameResume += Unpause;
+        events.GamePause += Pause;
     }
     private void Pause()
     {
-        isPlaying = false;
+        StartCoroutine(FadeOutEffect());
     }
-    public void FadeOutEffect()
+    //private void Play()
+    //{
+    //    moveAS.Play();
+    //}
+    private void Unpause()
     {
-        while (moveAS.volume <= 0)
-        {
-            return;
-        }
-        moveAS.volume -= Mathf.Deg2Rad - 0.01f;
+        FadeInEffect();
+    }
+    private void Stop()
+    {
+        moveAS.Stop();
     }
 
-    private void Play()
+    private IEnumerator FadeOutEffect()
     {
-        if (playTimes == 0)
+        while (moveAS.volume > 0)
         {
-            playTimes++;
-            moveAS.Play();
+            moveAS.volume -= decline;
+            yield return new WaitForSecondsRealtime(interval);
         }
-        return;
+        moveAS.Pause();
     }
+    private IEnumerator FadeInEffect()
+    {
+        while (moveAS.volume < volume)
+        {
+            moveAS.volume += decline;
+            yield return new WaitForSecondsRealtime(interval);
+        }
+        moveAS.UnPause();
+    }
+
+
+    //private void Play()
+    //{
+    //    if (playTimes == 0)
+    //    {
+    //        playTimes++;
+    //        moveAS.Play();
+    //    }
+    //    return;
+    //}
 
     //拓展死亡
     // Update is called once per frame
-    private void Update()
-    {
-        if (isPlaying == false)
-        {
-            FadeOutEffect();
-        }
-        //if (AutoMovement.canMove == true)
-        //{
-        //    Play();
-        //} 
+    //private void Update()
+    //{
+    //if (isPlaying == false)
+    //{
+    //    FadeOutEffect();
+    //}
+    //if (AutoMovement.canMove == true)
+    //{
+    //    Play();
+    //} 
 
-    }
+    //}
 }

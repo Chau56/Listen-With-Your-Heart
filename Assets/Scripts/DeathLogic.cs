@@ -35,9 +35,9 @@ public class DeathLogic : MonoBehaviour
         //wallsTag = walls.tag;
         reviveTag = revivePoint.tag;
         rigidbody = GetComponent<Rigidbody2D>();
-        RegisterEvents();
+        RegisterSelfEvents();
     }
-    private void RegisterEvents()
+    private void RegisterSelfEvents()
     {
         OnDied += () =>
         {
@@ -49,6 +49,12 @@ public class DeathLogic : MonoBehaviour
             gameObject.SetActive(true);
             Debug.Log($"{tag} revived.");
         };
+    }
+
+    private void RevokeSelfEvents()
+    {
+        OnDied = () => { };
+        OnRevive = () => { };
     }
 
     private void OnBecameInvisible()
@@ -66,10 +72,13 @@ public class DeathLogic : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        string tag = collision.collider.tag;
+        TagSensor(collision.gameObject.tag);
+        SpeedSensor(rigidbody.velocity.x);
+    }
+
+    private void TagSensor(string tag)
+    {
         Debug.Log($"{this.tag} enter {tag}.");
-        float vX = rigidbody.velocity.x;
-        Debug.Log($"{this.tag} velocity {vX}.");
         if (tag == spikesTag)
         {
             OnDied();
@@ -78,23 +87,15 @@ public class DeathLogic : MonoBehaviour
         {
             OnRevive();
         }
-        if (vX < 1)
+    }
+
+    private void SpeedSensor(float x)
+    {
+        Debug.Log($"{tag} velocity {x}.");
+        if (x < 1)
         {
             OnDied();
-            //bool shouldDie = false;
-            //var contacts = new ContactPoint2D[collision.contactCount];
-            //collision.GetContacts(contacts);
-            //foreach (var item in contacts)
-            //{
-            //    if (IsDeathCollision(item))
-            //    {
-            //        shouldDie = true;
-            //        break;
-            //    }
-            //}
-            //if(shouldDie) OnDied();
         }
-
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -107,5 +108,10 @@ public class DeathLogic : MonoBehaviour
     {
         string tag = collision.collider.tag;
         Debug.Log($"{this.tag} exit {tag}.");
+    }
+
+    private void OnDestroy()
+    {
+        RevokeSelfEvents();
     }
 }

@@ -29,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7685317719583735689}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -11.5, y: 5.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb2a02b322ca54a47a2ec0fd10c2479d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSpeed: -17
+  jumpSpeed: {x: 0, y: -17}
   player: 1
 --- !u!114 &7685317719583735695
 MonoBehaviour:
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveOnStart: 1
-  speed: 8.5
+  speed: {x: 8.5, y: 0}
   player: 1
 --- !u!114 &7685317719583735682
 MonoBehaviour:
