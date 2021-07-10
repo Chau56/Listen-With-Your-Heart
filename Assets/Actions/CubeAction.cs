@@ -47,7 +47,7 @@ public class @CubeAction : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""877a9f1d-dbfc-48d6-b588-8723de2e1384"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": """",
