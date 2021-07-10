@@ -157,4 +157,10 @@ public class GameEvents : MonoBehaviour
             GameEnd();
         }
     }
+
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause) Time.timeScale = 0;
+        else Time.timeScale = 1;
+    }
 }
