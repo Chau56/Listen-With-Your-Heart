@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class CubeDetection : MonoBehaviour
+public class EndlineDetection : MonoBehaviour
 {
     public event Action OnHitEndline;
     

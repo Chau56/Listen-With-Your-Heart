@@ -36,7 +36,7 @@ public class Distance : MonoBehaviour
     /// <summary>
     /// 激活进度条。
     /// </summary>
-    public void StartProgress()
+    private void StartProgress()
     {
         Debug.Log($"{playerSelf.tag} {nameof(StartProgress)}");
         run = true;
@@ -44,7 +44,7 @@ public class Distance : MonoBehaviour
     /// <summary>
     /// 停止进度条。
     /// </summary>
-    public void StopProgress()
+    private void StopProgress()
     {
         Debug.Log($"{playerSelf.tag} {nameof(StopProgress)}");
         run = false;
@@ -52,7 +52,7 @@ public class Distance : MonoBehaviour
     /// <summary>
     /// 重置进度条。
     /// </summary>
-    public void ResetProgress()
+    private void ResetProgress()
     {
         Debug.Log($"{playerSelf.tag} {nameof(ResetProgress)}");
         value = 0;

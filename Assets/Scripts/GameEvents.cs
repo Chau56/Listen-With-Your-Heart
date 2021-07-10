@@ -18,7 +18,7 @@ public class GameEvents : MonoBehaviour
     private bool p2Dead, p2Jumped;
     private bool gameNotEnd, gamePaused;
     [SerializeField]
-    private CubeDetection endline;
+    private EndlineDetection endline;
     [SerializeField]
     [Tooltip("游戏延迟多长时间后才开始。单位秒")]
     private float startDelay = 1;
@@ -232,7 +232,13 @@ public class GameEvents : MonoBehaviour
 
     private void OnDestroy()
     {
+        Debug.Log("game events destroyed");
         RevokeInputEvents();
+    }
+
+    private void OnApplicationQuit()
+    {
+        gameNotEnd = false;
     }
     #endregion
 }

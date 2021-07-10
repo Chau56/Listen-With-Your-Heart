@@ -166,4 +166,9 @@ public class DeathLogic : MonoBehaviour
         string tag = collision.collider.tag;
         Debug.Log($"{this.tag} exit {tag}.");
     }
+
+    private void OnApplicationQuit()
+    {
+        notEnd = false;
+    }
 }
