@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 namespace GameHardware
 {
@@ -57,6 +58,27 @@ namespace GameHardware
                 JumpFilter(context.control, Jump2Start, PlayerEnum.White);
             };
             Jump2Start += () => Debug.Log($"{nameof(Jump2Start)}");
+
+            cube.Jump.performed += context =>
+            {
+                JumpFilter(context.control, Jump1Finished, PlayerEnum.Black);
+            };
+
+            cube.Jump.started += context =>
+            {
+                JumpFilter(context.control, Jump1Start, PlayerEnum.Black);
+            };
+
+            cube.Jump.performed += context =>
+            {
+                JumpFilter(context.control, Jump2Finished, PlayerEnum.White);
+            };
+
+            cube.Jump.started += context =>
+            {
+                JumpFilter(context.control, Jump2Start, PlayerEnum.White);
+            };
+
         }
         private void JumpFilter(InputControl control, Action action, PlayerEnum player)
         {
@@ -66,14 +88,26 @@ namespace GameHardware
                 case Keyboard _:
                     action();
                     break;
-                case Pointer screen:
-                    float y = screen.position.y.ReadValue();
-                    Debug.Log($"screen hit y {y}");
-                    if (player == PlayerEnum.White && y > screenHalfHeight || player == PlayerEnum.Black && y < screenHalfHeight)
+                case Touchscreen screen:
+                    foreach (var item in screen.touches)
                     {
-                        action();
+                        TouchCheck(item.position, action, player);
                     }
                     break;
+                case Mouse mouse:
+                    TouchCheck(mouse.position, action, player);
+                    break;
+            }
+        }
+
+        private void TouchCheck(Vector2Control position,Action action,PlayerEnum player)
+        {
+            float y = position.y.ReadValue();
+            Debug.Log($"screen hit y {y}");
+            if (player == PlayerEnum.White && y > screenHalfHeight || player == PlayerEnum.Black && y < screenHalfHeight)
+            {
+                action();
+                return;
             }
         }
         private void RegisterScreen()

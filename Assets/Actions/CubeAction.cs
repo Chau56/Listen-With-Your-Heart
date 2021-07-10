@@ -33,39 +33,25 @@ public class @CubeAction : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""dfd49699-343e-49be-b87d-8f0eb20d488c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""aee29416-93b9-4514-bc20-7ce9e81c474b"",
-                    ""path"": ""<Pointer>/press"",
-                    ""interactions"": ""Press(behavior=1)"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Jump1"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""877a9f1d-dbfc-48d6-b588-8723de2e1384"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump1"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c7ffb7db-5be8-4d0f-bd73-bd03da149e7a"",
-                    ""path"": ""<Pointer>/press"",
-                    ""interactions"": ""Press(behavior=1)"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Jump2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -77,6 +63,17 @@ public class @CubeAction : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0f71b15c-aeb6-49ae-9d08-1407eab30d83"",
+                    ""path"": ""<Pointer>/press"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -135,6 +132,7 @@ public class @CubeAction : IInputActionCollection, IDisposable
         m_Cube = asset.FindActionMap("Cube", throwIfNotFound: true);
         m_Cube_Jump1 = m_Cube.FindAction("Jump1", throwIfNotFound: true);
         m_Cube_Jump2 = m_Cube.FindAction("Jump2", throwIfNotFound: true);
+        m_Cube_Jump = m_Cube.FindAction("Jump", throwIfNotFound: true);
         // Game
         m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
         m_Game_Pause = m_Game.FindAction("Pause", throwIfNotFound: true);
@@ -190,12 +188,14 @@ public class @CubeAction : IInputActionCollection, IDisposable
     private ICubeActions m_CubeActionsCallbackInterface;
     private readonly InputAction m_Cube_Jump1;
     private readonly InputAction m_Cube_Jump2;
+    private readonly InputAction m_Cube_Jump;
     public struct CubeActions
     {
         private @CubeAction m_Wrapper;
         public CubeActions(@CubeAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump1 => m_Wrapper.m_Cube_Jump1;
         public InputAction @Jump2 => m_Wrapper.m_Cube_Jump2;
+        public InputAction @Jump => m_Wrapper.m_Cube_Jump;
         public InputActionMap Get() { return m_Wrapper.m_Cube; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -211,6 +211,9 @@ public class @CubeAction : IInputActionCollection, IDisposable
                 @Jump2.started -= m_Wrapper.m_CubeActionsCallbackInterface.OnJump2;
                 @Jump2.performed -= m_Wrapper.m_CubeActionsCallbackInterface.OnJump2;
                 @Jump2.canceled -= m_Wrapper.m_CubeActionsCallbackInterface.OnJump2;
+                @Jump.started -= m_Wrapper.m_CubeActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_CubeActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_CubeActionsCallbackInterface.OnJump;
             }
             m_Wrapper.m_CubeActionsCallbackInterface = instance;
             if (instance != null)
@@ -221,6 +224,9 @@ public class @CubeAction : IInputActionCollection, IDisposable
                 @Jump2.started += instance.OnJump2;
                 @Jump2.performed += instance.OnJump2;
                 @Jump2.canceled += instance.OnJump2;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
         }
     }
@@ -270,6 +276,7 @@ public class @CubeAction : IInputActionCollection, IDisposable
     {
         void OnJump1(InputAction.CallbackContext context);
         void OnJump2(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
     public interface IGameActions
     {
