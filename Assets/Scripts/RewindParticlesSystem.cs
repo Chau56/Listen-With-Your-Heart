@@ -6,6 +6,7 @@ using UnityEngine;
 public class RewindParticlesSystem : MonoBehaviour
 {
     ParticleSystem[] particleSystems;
+    public GameObject Block;
 
     float[] simulationTimes;
 
@@ -18,7 +19,8 @@ public class RewindParticlesSystem : MonoBehaviour
         simulationTimes = new float[particleSystems.Length];
     }
 
-    void OnEnable()
+
+    void Start()
     {
         if (particleSystems == null)
         {
@@ -30,13 +32,15 @@ public class RewindParticlesSystem : MonoBehaviour
             simulationTimes[i] = 0.0f;
         }
         particleSystems[0].Simulate(startTime, true, false, true);
+
+        Invoke("Reborn", 0.65f);
     }
 
     void Update()
     {
-
+        
         particleSystems[0].Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-
+        
         for (int i = particleSystems.Length - 1; i >= 0; i--)
         {
             //bool useAutoRandomSeed = particleSystems[i].useAutoRandomSeed;
@@ -56,8 +60,15 @@ public class RewindParticlesSystem : MonoBehaviour
             {
                 particleSystems[i].Play(false);
                 particleSystems[i].Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
+
             }
+
         }
+    }
+
+    void Reborn()
+    {
+        Block.SetActive(true);
     }
 }
 
