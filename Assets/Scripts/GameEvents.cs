@@ -6,7 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class GameEvents : MonoBehaviour
 {
-    public event Action GameStart, GameFailed, GameWin, GamePause, GameResume, Jump1Start, Jump2Start, Jump1Finished, Jump2Finished;
+    public event Action
+        GameStart, GameFailed, GameWin, GamePause, GameResume,
+        Jump1Start, Jump2Start, Jump1Finished, Jump2Finished,
+        BlackWillRevive, WhiteWillRevive;
     [SerializeField]
     private DeathLogic player1;
     private bool p1Dead, p1Jumped;
@@ -22,10 +25,12 @@ public class GameEvents : MonoBehaviour
     [SerializeField]
     [Tooltip("游戏延迟多长时间后才结束。单位秒")]
     private float endDelay = 1;
+    private Vector2 gravity;
 
     // Start is called before the first frame update
     private void Start()
     {
+        gravity = Physics2D.gravity;
         RegisterSelfEvents();
         RegisterInputEvents();
         StartCoroutine(WaitToStart());
@@ -45,15 +50,12 @@ public class GameEvents : MonoBehaviour
         player2.gameObject.SetActive(true);
     }
 
-    private void OnDestroy()
-    {
-        RevokeInputEvents();
-    }
-
     private void RegisterSelfEvents()
     {
         player1.OnDied += CheckBlackFailed;
         player2.OnDied += CheckWhiteFailed;
+        player1.OnHitRevive += ReviveWhite;
+        player2.OnHitRevive += ReviveBlack;
         endline.OnHitEndline += HitEndline;
         GameFailed += RegisterGameFailed;
         GamePause += RegisterGamePaused;
@@ -99,37 +101,23 @@ public class GameEvents : MonoBehaviour
         Debug.Log("game resumed");
         gamePaused = false;
     }
-    #region Input Area
-    private void RegisterInputEvents()
-    {
-        var input = InGameActionDistribute.instance;
-        input.Pause += InvokePause;
-        input.Resume += InvokeResume;
-        input.Jump1Start += InvokeJump1;
-        input.Jump1Finished += FinishJump;
-        input.Jump2Start += InvokeJump2;
-        input.Jump2Finished += FinishJump;
-    }
 
-    private void RevokeInputEvents()
-    {
-        var input = InGameActionDistribute.instance;
-        input.Pause -= InvokePause;
-        input.Resume -= InvokeResume;
-        input.Jump1Start -= InvokeJump1;
-        input.Jump1Finished -= FinishJump;
-        input.Jump2Start -= InvokeJump2;
-        input.Jump2Finished -= FinishJump;
-    }
-    #endregion
     private void InvokePause()
     {
-        if (gameNotEnd && !gamePaused) GamePause();
+        if (gameNotEnd && !gamePaused)
+        {
+            Physics2D.gravity = Vector2.zero;
+            GamePause();
+        }
     }
 
     private void InvokeResume()
     {
-        if (gameNotEnd && gamePaused) GameResume();
+        if (gameNotEnd && gamePaused)
+        {
+            Physics2D.gravity = gravity;
+            GameResume();
+        }
     }
 
     private void InvokeJump1()
@@ -191,6 +179,20 @@ public class GameEvents : MonoBehaviour
         }
     }
 
+    private void ReviveBlack()
+    {
+        Debug.Log("black will revive.");
+        p1Dead = false;
+        BlackWillRevive();
+    }
+
+    private void ReviveWhite()
+    {
+        Debug.Log("white will revive.");
+        p2Dead = false;
+        WhiteWillRevive();
+    }
+
     private void OnApplicationPause(bool pause)
     {
         Debug.Log("app paused");
@@ -204,4 +206,33 @@ public class GameEvents : MonoBehaviour
         yield return new WaitForSecondsRealtime(endDelay);
         SceneManager.LoadSceneAsync(0);
     }
+
+    #region Input Area
+    private void RegisterInputEvents()
+    {
+        var input = InGameActionDistribute.instance;
+        input.Pause += InvokePause;
+        input.Resume += InvokeResume;
+        input.Jump1Start += InvokeJump1;
+        input.Jump1Finished += FinishJump;
+        input.Jump2Start += InvokeJump2;
+        input.Jump2Finished += FinishJump;
+    }
+
+    private void RevokeInputEvents()
+    {
+        var input = InGameActionDistribute.instance;
+        input.Pause -= InvokePause;
+        input.Resume -= InvokeResume;
+        input.Jump1Start -= InvokeJump1;
+        input.Jump1Finished -= FinishJump;
+        input.Jump2Start -= InvokeJump2;
+        input.Jump2Finished -= FinishJump;
+    }
+
+    private void OnDestroy()
+    {
+        RevokeInputEvents();
+    }
+    #endregion
 }

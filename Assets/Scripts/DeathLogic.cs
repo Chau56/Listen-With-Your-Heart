@@ -12,9 +12,9 @@ public class DeathLogic : MonoBehaviour
     /// </summary>
     public event Action OnDied;
     /// <summary>
-    /// 碰到复活点就会触发。
+    /// 这个方块碰到复活点就会触发，而不是复活方块时触发！
     /// </summary>
-    public event Action OnRevive;
+    public event Action OnHitRevive;
     [SerializeField]
     [Tooltip("tag相同的都会被视为尖刺。")]
     private GameObject spikes;
@@ -26,50 +26,44 @@ public class DeathLogic : MonoBehaviour
     private new Rigidbody2D rigidbody;
     [SerializeField]
     private GameEvents events;
-    private bool paused, died;
+    [SerializeField]
+    [Tooltip("这是哪个玩家？")]
+    private PlayerEnum player;
+    private bool paused, notEnd, died;
     // Start is called before the first frame update
     private void Start()
     {
-        paused = true;
         spikesTag = spikes.tag;
-        //wallsTag = walls.tag;
         reviveTag = revivePoint.tag;
         rigidbody = GetComponent<Rigidbody2D>();
         RegisterSelfEvents();
         RegisterEvents();
     }
 
-    private void DiedCheck()
-    {
-        if (!paused) OnDied();
-    }
-
-    private void ReviveCheck()
-    {
-        if (!paused && died) OnRevive();
-    }
-
     private void RegisterSelfEvents()
     {
         OnDied += () =>
-        {
-            gameObject.SetActive(false);
-            died = true;
             Debug.Log($"{tag} died.");
-        };
-        OnRevive += () =>
-        {
-            gameObject.SetActive(true);
-            died = false;
-            Debug.Log($"{tag} revived.");
-        };
+        OnHitRevive += () =>
+            Debug.Log($"{tag} hit revivepoint.");
     }
 
     private void RegisterEvents()
     {
-        events.GameStart += Resume;
+        events.GameStart += GameStart;
         events.GamePause += Pause;
         events.GameResume += Resume;
+        events.GameFailed += GameEnd;
+        events.GameWin += GameEnd;
+        switch (player)
+        {
+            case PlayerEnum.Black:
+                events.BlackWillRevive += Revive;
+                break;
+            case PlayerEnum.White:
+                events.WhiteWillRevive += Revive;
+                break;
+        }
     }
 
     private void Pause()
@@ -84,10 +78,53 @@ public class DeathLogic : MonoBehaviour
         paused = false;
     }
 
+    private void GameStart()
+    {
+        notEnd = true;
+    }
+
+    private void GameEnd()
+    {
+        notEnd = false;
+    }
+
+    private void Die()
+    {
+        if (CheckValid())
+        {
+            gameObject.SetActive(false);
+            died = true;
+            OnDied();
+        }
+    }
+
+    private void HitRevive()
+    {
+        if (CheckValid())
+        {
+            OnHitRevive();
+        }
+    }
+
+    private void Revive()
+    {
+        Debug.Log("opposite hit revive");
+        if (died)
+        {
+            gameObject.SetActive(true);
+            died = false;
+        }
+    }
+
+    private bool CheckValid()
+    {
+        return !(paused || died) && notEnd;
+    }
+
     private void OnBecameInvisible()
     {
         Debug.Log($"{tag} invisible.");
-        if (gameObject.activeInHierarchy) DiedCheck();
+        Die();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -101,11 +138,11 @@ public class DeathLogic : MonoBehaviour
         Debug.Log($"{this.tag} enter {tag}.");
         if (tag == spikesTag)
         {
-            DiedCheck();
+            Die();
         }
         else if (tag == reviveTag)
         {
-            ReviveCheck();
+            HitRevive();
         }
     }
 
@@ -114,7 +151,7 @@ public class DeathLogic : MonoBehaviour
         Debug.Log($"{tag} velocity {x}.");
         if (x < 1)
         {
-            DiedCheck();
+            Die();
         }
     }
 

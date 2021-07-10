@@ -35,15 +35,7 @@ public class @CubeAction : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""JumpStart"",
-                    ""type"": ""Button"",
-                    ""id"": ""dfd49699-343e-49be-b87d-8f0eb20d488c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""JumpStop"",
+                    ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""97dcf5cf-e182-4e34-abd7-adc0c58edca4"",
                     ""expectedControlType"": ""Button"",
@@ -76,23 +68,12 @@ public class @CubeAction : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ec98e787-d7d1-44f9-80bc-d1c3afc9f9f6"",
-                    ""path"": ""<Pointer>/press"",
-                    ""interactions"": ""Press"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""JumpStart"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""28fac478-c1cf-411d-b028-4fcb42e1c9f4"",
                     ""path"": ""<Pointer>/press"",
                     ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""JumpStop"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -151,8 +132,7 @@ public class @CubeAction : IInputActionCollection, IDisposable
         m_Cube = asset.FindActionMap("Cube", throwIfNotFound: true);
         m_Cube_Jump1 = m_Cube.FindAction("Jump1", throwIfNotFound: true);
         m_Cube_Jump2 = m_Cube.FindAction("Jump2", throwIfNotFound: true);
-        m_Cube_JumpStart = m_Cube.FindAction("JumpStart", throwIfNotFound: true);
-        m_Cube_JumpStop = m_Cube.FindAction("JumpStop", throwIfNotFound: true);
+        m_Cube_Jump = m_Cube.FindAction("Jump", throwIfNotFound: true);
         // Game
         m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
         m_Game_Pause = m_Game.FindAction("Pause", throwIfNotFound: true);
@@ -208,16 +188,14 @@ public class @CubeAction : IInputActionCollection, IDisposable
     private ICubeActions m_CubeActionsCallbackInterface;
     private readonly InputAction m_Cube_Jump1;
     private readonly InputAction m_Cube_Jump2;
-    private readonly InputAction m_Cube_JumpStart;
-    private readonly InputAction m_Cube_JumpStop;
+    private readonly InputAction m_Cube_Jump;
     public struct CubeActions
     {
         private @CubeAction m_Wrapper;
         public CubeActions(@CubeAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump1 => m_Wrapper.m_Cube_Jump1;
         public InputAction @Jump2 => m_Wrapper.m_Cube_Jump2;
-        public InputAction @JumpStart => m_Wrapper.m_Cube_JumpStart;
-        public InputAction @JumpStop => m_Wrapper.m_Cube_JumpStop;
+        public InputAction @Jump => m_Wrapper.m_Cube_Jump;
         public InputActionMap Get() { return m_Wrapper.m_Cube; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -233,12 +211,9 @@ public class @CubeAction : IInputActionCollection, IDisposable
                 @Jump2.started -= m_Wrapper.m_CubeActionsCallbackInterface.OnJump2;
                 @Jump2.performed -= m_Wrapper.m_CubeActionsCallbackInterface.OnJump2;
                 @Jump2.canceled -= m_Wrapper.m_CubeActionsCallbackInterface.OnJump2;
-                @JumpStart.started -= m_Wrapper.m_CubeActionsCallbackInterface.OnJumpStart;
-                @JumpStart.performed -= m_Wrapper.m_CubeActionsCallbackInterface.OnJumpStart;
-                @JumpStart.canceled -= m_Wrapper.m_CubeActionsCallbackInterface.OnJumpStart;
-                @JumpStop.started -= m_Wrapper.m_CubeActionsCallbackInterface.OnJumpStop;
-                @JumpStop.performed -= m_Wrapper.m_CubeActionsCallbackInterface.OnJumpStop;
-                @JumpStop.canceled -= m_Wrapper.m_CubeActionsCallbackInterface.OnJumpStop;
+                @Jump.started -= m_Wrapper.m_CubeActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_CubeActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_CubeActionsCallbackInterface.OnJump;
             }
             m_Wrapper.m_CubeActionsCallbackInterface = instance;
             if (instance != null)
@@ -249,12 +224,9 @@ public class @CubeAction : IInputActionCollection, IDisposable
                 @Jump2.started += instance.OnJump2;
                 @Jump2.performed += instance.OnJump2;
                 @Jump2.canceled += instance.OnJump2;
-                @JumpStart.started += instance.OnJumpStart;
-                @JumpStart.performed += instance.OnJumpStart;
-                @JumpStart.canceled += instance.OnJumpStart;
-                @JumpStop.started += instance.OnJumpStop;
-                @JumpStop.performed += instance.OnJumpStop;
-                @JumpStop.canceled += instance.OnJumpStop;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
         }
     }
@@ -304,8 +276,7 @@ public class @CubeAction : IInputActionCollection, IDisposable
     {
         void OnJump1(InputAction.CallbackContext context);
         void OnJump2(InputAction.CallbackContext context);
-        void OnJumpStart(InputAction.CallbackContext context);
-        void OnJumpStop(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
     public interface IGameActions
     {

@@ -22,15 +22,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "JumpStart",
-                    "type": "Button",
-                    "id": "dfd49699-343e-49be-b87d-8f0eb20d488c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "JumpStop",
+                    "name": "Jump",
                     "type": "Button",
                     "id": "97dcf5cf-e182-4e34-abd7-adc0c58edca4",
                     "expectedControlType": "Button",
@@ -63,23 +55,12 @@
                 },
                 {
                     "name": "",
-                    "id": "ec98e787-d7d1-44f9-80bc-d1c3afc9f9f6",
-                    "path": "<Pointer>/press",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": "",
-                    "action": "JumpStart",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "28fac478-c1cf-411d-b028-4fcb42e1c9f4",
                     "path": "<Pointer>/press",
                     "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "",
-                    "action": "JumpStop",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

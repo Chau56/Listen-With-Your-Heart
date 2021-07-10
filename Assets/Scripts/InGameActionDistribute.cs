@@ -59,13 +59,13 @@ namespace GameHardware
             };
             Jump2Start += () => Debug.Log($"{nameof(Jump2Start)}");
 
-            cube.JumpStart.performed += context =>
+            cube.Jump.started += context =>
             {
                 Debug.Log(context.control);
                 Jump(context.control.device, Jump1Start, Jump2Start);
             };
 
-            cube.JumpStop.performed += context =>
+            cube.Jump.performed += context =>
             {
                 Debug.Log(context.control);
                 Jump(context.control.device, Jump1Finished, Jump2Finished);

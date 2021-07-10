@@ -75,7 +75,7 @@ public class Distance : MonoBehaviour
             StopProgress();
             died = true;
         };
-        playerAnother.OnRevive += () =>
+        playerAnother.OnHitRevive += () =>
         {
             StartProgress();
             died = false;
