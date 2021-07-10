@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4025204682291365814}
   - component: {fileID: 814022146933916950}
-  - component: {fileID: 814022146933916951}
+  - component: {fileID: 4360568219490848507}
   - component: {fileID: 21301372159446188}
   m_Layer: 0
   m_Name: CubePassing
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &814022146933916951
+--- !u!114 &4360568219490848507
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,7 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 539048a0cfbb8f04484ebc67f535b104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isWinning: 0
 --- !u!61 &21301372159446188
 BoxCollider2D:
   m_ObjectHideFlags: 0

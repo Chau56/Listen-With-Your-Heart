@@ -3,17 +3,17 @@ using UnityEngine;
 [RequireComponent(typeof(DeathLogic))]
 public class DeathParticle : MonoBehaviour
 {
-    private DeathLogic Logic;
+    private DeathLogic logic;
     [SerializeField]
     private GameObject dieParticle;
 
     private void Start()
     {
-        Logic = GetComponent<DeathLogic>();
-        Logic.OnDied += StartParticle;
+        logic = GetComponent<DeathLogic>();
+        logic.OnDied += StartParticle;
     }
     private void StartParticle()
     {
-        Instantiate(dieParticle, transform);
+        Instantiate(dieParticle, transform.position, new Quaternion());
     }
 }

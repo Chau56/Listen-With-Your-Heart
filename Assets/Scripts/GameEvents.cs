@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameEvents : MonoBehaviour
 {
-    public event Action GameStart, GameEnd, GamePause, GameResume, Jump1Start, Jump2Start, Jump1Finished, Jump2Finished;
+    public event Action GameStart, GameFailed, GameWin, GamePause, GameResume, Jump1Start, Jump2Start, Jump1Finished, Jump2Finished;
     [SerializeField]
     private DeathLogic player1;
     private bool p1Dead;
@@ -13,6 +13,8 @@ public class GameEvents : MonoBehaviour
     private DeathLogic player2;
     private bool p2Dead;
     private bool gameEnd, gamePaused;
+    [SerializeField]
+    private CubeDetection endline;
     [SerializeField]
     [Tooltip("游戏延迟多长时间后才开始。单位秒")]
     private float delay = 1;
@@ -49,10 +51,12 @@ public class GameEvents : MonoBehaviour
     {
         player1.OnDied += CheckBlackFailed;
         player2.OnDied += CheckWhiteFailed;
-        GameEnd += RegisterGameEnd;
+        endline.OnHitEndline += () => GameWin();
+        GameFailed += RegisterGameFailed;
         GamePause += RegisterGamePaused;
         GameResume += RegisterGameResume;
         GameStart += RegisterGameStart;
+        GameWin += RegisterGameWin;
     }
 
     private void RegisterGameStart()
@@ -61,9 +65,16 @@ public class GameEvents : MonoBehaviour
         gameEnd = false;
     }
 
-    private void RegisterGameEnd()
+    private void RegisterGameFailed()
     {
-        Debug.Log("game end");
+        Debug.Log("game failed");
+        gameEnd = true;
+    }
+
+    private void RegisterGameWin()
+    {
+        Debug.Log("game win");
+        GamePause();
         gameEnd = true;
     }
 
@@ -162,7 +173,7 @@ public class GameEvents : MonoBehaviour
         {
             gameEnd = true;
             Debug.Log("Game failed.");
-            GameEnd();
+            GameFailed();
         }
     }
 

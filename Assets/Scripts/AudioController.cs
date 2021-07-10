@@ -48,7 +48,7 @@ public class AudioController : MonoBehaviour
 
     private void RegisterEvents()
     {
-        events.GameEnd += Stop;
+        events.GameFailed += Stop;
         events.GameResume += Unpause;
         events.GamePause += Pause;
         events.GameStart += Play;

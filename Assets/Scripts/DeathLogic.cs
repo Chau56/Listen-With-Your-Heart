@@ -19,10 +19,6 @@ public class DeathLogic : MonoBehaviour
     [Tooltip("tag相同的都会被视为尖刺。")]
     private GameObject spikes;
     private string spikesTag;
-    //[SerializeField]
-    //[Tooltip("tag相同的都会被视为墙。")]
-    //private GameObject walls;
-    //private string wallsTag;
     [SerializeField]
     [Tooltip("tag相同的都会被视为复活点。")]
     private GameObject revivePoint;
@@ -78,13 +74,13 @@ public class DeathLogic : MonoBehaviour
 
     private void Pause()
     {
-        Debug.Log("death pause");
+        Debug.Log("deathlogic pause");
         paused = true;
     }
 
     private void Resume()
     {
-        Debug.Log("death resume");
+        Debug.Log("deathlogic resume");
         paused = false;
     }
 
@@ -93,13 +89,6 @@ public class DeathLogic : MonoBehaviour
         Debug.Log($"{tag} invisible.");
         if (gameObject.activeInHierarchy) DiedCheck();
     }
-
-    //private bool IsDeathCollision(ContactPoint2D point)
-    //{
-    //    float positionY = transform.InverseTransformPoint(point.point).y;
-    //    Debug.Log($"{tag} death collision y {positionY}");
-    //    return positionY >= -0.49f && positionY <= 0.49f;
-    //}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

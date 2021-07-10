@@ -1,26 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class CubeDetection : MonoBehaviour
 {
-    [Tooltip("这是一个接口，判断是否过关")]
-    public bool isWinning;
+    public event Action OnHitEndline;
     
     // Start is called before the first frame update
-    public void Start()
+    private void Start()
     {
-        isWinning = false;
+        RegisterSelfEvents();
     }
-    public void OnTriggerEnter2D(Collider2D collision)
+
+    private void RegisterSelfEvents()
     {
-        if (collision.gameObject.CompareTag("White") || collision.gameObject.CompareTag("Black"))
-        {  //成功，接过关UI
-            //Debug.Log("iswinning:"+isWinning);
-            isWinning = true;
-            //Debug.Log("iswinning:"+isWinning);
-            
-        }
-        
+        OnHitEndline += () => { };
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log($"{collision.tag} hit end line");
+        OnHitEndline();
     }
 }

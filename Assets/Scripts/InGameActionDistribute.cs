@@ -81,6 +81,7 @@ namespace GameHardware
             };
 
         }
+        
         private void JumpFilter(InputControl control, Action action, PlayerEnum player)
         {
             Debug.Log($"jump filter {control}");
@@ -112,12 +113,13 @@ namespace GameHardware
                 return;
             }
         }
+        
         private void RegisterScreen()
         {
             screenHalfHeight = (float)Screen.height / 2;
             Debug.Log($"half screen {screenHalfHeight}");
         }
-        // Start is called before the first frame update
+
         private InGameActionDistribute()
         {
             inputs = new CubeAction();

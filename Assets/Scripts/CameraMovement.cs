@@ -11,7 +11,7 @@ public class CameraMovement : MonoBehaviour
     //private float speedPerFrame;
     private void Start()
     {
-        events.GameEnd += Stay;
+        events.GameFailed += Stay;
         events.GameStart += Move;
         events.GamePause += Stay;
         events.GameResume += Move;
