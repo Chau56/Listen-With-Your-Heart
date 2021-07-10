@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
 namespace GameHardware
@@ -36,90 +35,77 @@ namespace GameHardware
             };
             Resume += () => Debug.Log("hardware resumed");
 
-            cube.Jump1.performed += context =>
+            cube.Jump1.performed += _ =>
             {
-                JumpFilter(context.control, Jump1Finished, PlayerEnum.Black);
+                Jump1Finished();
             };
             Jump1Finished += () => Debug.Log($"{nameof(Jump1Finished)}");
 
-            cube.Jump1.started += context =>
+            cube.Jump1.started += _ =>
             {
-                JumpFilter(context.control, Jump1Start, PlayerEnum.Black);
+                Jump1Start();
             };
             Jump1Start += () => Debug.Log($"{nameof(Jump1Start)}");
 
-            cube.Jump2.performed += context =>
+            cube.Jump2.performed += _ =>
             {
-                JumpFilter(context.control, Jump2Finished, PlayerEnum.White);
+                Jump2Finished();
             };
             Jump2Finished += () => Debug.Log($"{nameof(Jump2Finished)}");
 
-            cube.Jump2.started += context =>
+            cube.Jump2.started += _ =>
             {
-                JumpFilter(context.control, Jump2Start, PlayerEnum.White);
+                Jump2Start();
             };
             Jump2Start += () => Debug.Log($"{nameof(Jump2Start)}");
 
-            cube.Jump.performed += context =>
+            cube.JumpStart.performed += context =>
             {
-                JumpFilter(context.control, Jump1Finished, PlayerEnum.Black);
+                Debug.Log(context.control);
+                Jump(context.control.device, Jump1Start, Jump2Start);
             };
 
-            cube.Jump.started += context =>
+            cube.JumpStop.performed += context =>
             {
-                JumpFilter(context.control, Jump1Start, PlayerEnum.Black);
+                Debug.Log(context.control);
+                Jump(context.control.device, Jump1Finished, Jump2Finished);
             };
-
-            cube.Jump.performed += context =>
-            {
-                JumpFilter(context.control, Jump2Finished, PlayerEnum.White);
-            };
-
-            cube.Jump.started += context =>
-            {
-                JumpFilter(context.control, Jump2Start, PlayerEnum.White);
-            };
-
         }
-        
-        private void JumpFilter(InputControl control, Action action, PlayerEnum player)
+
+        private void Jump(InputDevice device, Action player1, Action player2)
         {
-            Debug.Log($"jump filter {control}");
-            switch (control.device)
+            switch (device)
             {
-                case Keyboard _:
-                    action();
+                case Mouse mouse:
+                    CheckPosition(mouse.position.y.ReadValue(), player1, player2);
                     break;
                 case Touchscreen screen:
                     foreach (var item in screen.touches)
                     {
-                        var phase = item.phase.ReadValue();
-                        if (phase != TouchPhase.None) TouchCheck(item.position, action, player);
+                        if (item.phase.ReadValue() != TouchPhase.None) CheckPosition(item.position.y.ReadValue(), player1, player2);
                     }
-                    break;
-                case Mouse mouse:
-                    TouchCheck(mouse.position, action, player);
                     break;
             }
         }
 
-        private void TouchCheck(Vector2Control position, Action action, PlayerEnum player)
+        private void CheckPosition(float position, Action player1, Action player2)
         {
-            float y = position.y.ReadValue();
-            Debug.Log($"screen hit y {y}");
-            if (player == PlayerEnum.White && y > screenHalfHeight || player == PlayerEnum.Black && y < screenHalfHeight)
+            if (position < screenHalfHeight)
             {
-                action();
-                return;
+                player1();
+            }
+            else
+            {
+                player2();
             }
         }
-        
+
         private void RegisterScreen()
         {
             screenHalfHeight = (float)Screen.height / 2;
             Debug.Log($"half screen {screenHalfHeight}");
         }
-
+        // Start is called before the first frame update
         private InGameActionDistribute()
         {
             inputs = new CubeAction();

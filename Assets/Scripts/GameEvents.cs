@@ -2,27 +2,30 @@ using System;
 using System.Collections;
 using GameHardware;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameEvents : MonoBehaviour
 {
     public event Action GameStart, GameFailed, GameWin, GamePause, GameResume, Jump1Start, Jump2Start, Jump1Finished, Jump2Finished;
     [SerializeField]
     private DeathLogic player1;
-    private bool p1Dead;
+    private bool p1Dead, p1Jumped;
     [SerializeField]
     private DeathLogic player2;
-    private bool p2Dead;
-    private bool gameEnd, gamePaused;
+    private bool p2Dead, p2Jumped;
+    private bool gameNotEnd, gamePaused;
     [SerializeField]
     private CubeDetection endline;
     [SerializeField]
     [Tooltip("游戏延迟多长时间后才开始。单位秒")]
-    private float delay = 1;
+    private float startDelay = 1;
+    [SerializeField]
+    [Tooltip("游戏延迟多长时间后才结束。单位秒")]
+    private float endDelay = 1;
 
     // Start is called before the first frame update
     private void Start()
     {
-        gameEnd = true;
         RegisterSelfEvents();
         RegisterInputEvents();
         StartCoroutine(WaitToStart());
@@ -30,7 +33,7 @@ public class GameEvents : MonoBehaviour
 
     private IEnumerator WaitToStart()
     {
-        yield return new WaitForSecondsRealtime(delay);
+        yield return new WaitForSecondsRealtime(startDelay);
         BeforeStart();
         yield return new WaitForEndOfFrame();
         GameStart();
@@ -51,7 +54,7 @@ public class GameEvents : MonoBehaviour
     {
         player1.OnDied += CheckBlackFailed;
         player2.OnDied += CheckWhiteFailed;
-        endline.OnHitEndline += () => GameWin();
+        endline.OnHitEndline += HitEndline;
         GameFailed += RegisterGameFailed;
         GamePause += RegisterGamePaused;
         GameResume += RegisterGameResume;
@@ -59,23 +62,28 @@ public class GameEvents : MonoBehaviour
         GameWin += RegisterGameWin;
     }
 
+    private void HitEndline()
+    {
+        Debug.Log(nameof(HitEndline));
+        GameWin();
+    }
+
     private void RegisterGameStart()
     {
         Debug.Log("game start");
-        gameEnd = false;
+        gameNotEnd = true;
     }
 
     private void RegisterGameFailed()
     {
         Debug.Log("game failed");
-        gameEnd = true;
+        gameNotEnd = false;
     }
 
     private void RegisterGameWin()
     {
         Debug.Log("game win");
-        GamePause();
-        gameEnd = true;
+        gameNotEnd = false;
     }
 
     private void RegisterGamePaused()
@@ -98,9 +106,9 @@ public class GameEvents : MonoBehaviour
         input.Pause += InvokePause;
         input.Resume += InvokeResume;
         input.Jump1Start += InvokeJump1;
-        input.Jump1Finished += FinishJump1;
+        input.Jump1Finished += FinishJump;
         input.Jump2Start += InvokeJump2;
-        input.Jump2Finished += FinishJump2;
+        input.Jump2Finished += FinishJump;
     }
 
     private void RevokeInputEvents()
@@ -109,49 +117,54 @@ public class GameEvents : MonoBehaviour
         input.Pause -= InvokePause;
         input.Resume -= InvokeResume;
         input.Jump1Start -= InvokeJump1;
-        input.Jump1Finished -= FinishJump1;
+        input.Jump1Finished -= FinishJump;
         input.Jump2Start -= InvokeJump2;
-        input.Jump2Finished -= FinishJump2;
+        input.Jump2Finished -= FinishJump;
     }
     #endregion
-    private void DoOnNotFinished(Action action)
-    {
-        if (!gameEnd) action();
-    }
-    
-    private void DoOnNotPaused(Action action)
-    {
-        if (!(gamePaused || gameEnd)) action();
-    }
-
     private void InvokePause()
     {
-        DoOnNotFinished(GamePause);
+        if (gameNotEnd && !gamePaused) GamePause();
     }
 
     private void InvokeResume()
     {
-        DoOnNotFinished(GameResume);
+        if (gameNotEnd && gamePaused) GameResume();
     }
 
     private void InvokeJump1()
     {
-        DoOnNotPaused(Jump1Start);
+        if (!(p1Jumped || gamePaused || p1Dead) && gameNotEnd)
+        {
+            p1Jumped = true;
+            Jump1Start();
+        }
     }
 
     private void InvokeJump2()
     {
-        DoOnNotPaused(Jump2Start);
+        if (!(p2Jumped || gamePaused || p2Dead) && gameNotEnd)
+        {
+            p2Jumped = true;
+            Jump2Start();
+        }
     }
 
-    private void FinishJump1()
+    private void FinishJump()
     {
-        DoOnNotPaused(Jump1Finished);
-    }
-
-    private void FinishJump2()
-    {
-        DoOnNotPaused(Jump2Finished);
+        if (!gamePaused)
+        {
+            if (p1Jumped && !p1Dead)
+            {
+                p1Jumped = false;
+                Jump1Finished();
+            }
+            else if (p2Jumped && !p2Dead)
+            {
+                p2Jumped = false;
+                Jump2Finished();
+            }
+        }
     }
 
     private void CheckBlackFailed()
@@ -169,17 +182,26 @@ public class GameEvents : MonoBehaviour
     private void CheckFailed()
     {
         Debug.Log("check game failed");
-        if (p1Dead && p2Dead)
+        if (p1Dead && p2Dead && gameNotEnd && !gamePaused)
         {
-            gameEnd = true;
+            gameNotEnd = false;
             Debug.Log("Game failed.");
             GameFailed();
+            StartCoroutine(RestartScene());
         }
     }
 
     private void OnApplicationPause(bool pause)
     {
+        Debug.Log("app paused");
         if (pause) Time.timeScale = 0;
         else Time.timeScale = 1;
+    }
+
+    private IEnumerator RestartScene()
+    {
+        Debug.Log(nameof(RestartScene));
+        yield return new WaitForSecondsRealtime(endDelay);
+        SceneManager.LoadSceneAsync(0);
     }
 }

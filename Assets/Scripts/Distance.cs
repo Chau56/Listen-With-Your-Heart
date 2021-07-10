@@ -90,6 +90,7 @@ public class Distance : MonoBehaviour
             if (!died) StartProgress();
         };
         events.GameStart += StartProgress;
+        events.GameWin += StopProgress;
     }
 
     // Update is called once per frame
