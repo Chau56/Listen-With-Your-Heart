@@ -1,26 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(DeathLogic))]
 public class DeathParticle : MonoBehaviour
 {
     private DeathLogic Logic;
-    public GameObject dieParticle;
+    [SerializeField]
+    private GameObject dieParticle;
 
-    void Start()
+    private void Start()
     {
         Logic = GetComponent<DeathLogic>();
-        Logic.OnDied += particle;
+        Logic.OnDied += StartParticle;
     }
-    
-    void Update()
+    private void StartParticle()
     {
-        
-    }
-
-    private void particle()
-    {
-        Instantiate(dieParticle, transform.position, new Quaternion());
+        Instantiate(dieParticle, transform);
     }
 }

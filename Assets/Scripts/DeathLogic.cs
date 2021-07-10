@@ -78,11 +78,13 @@ public class DeathLogic : MonoBehaviour
 
     private void Pause()
     {
+        Debug.Log("death pause");
         paused = true;
     }
 
     private void Resume()
     {
+        Debug.Log("death resume");
         paused = false;
     }
 

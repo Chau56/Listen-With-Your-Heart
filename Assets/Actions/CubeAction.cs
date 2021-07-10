@@ -68,7 +68,7 @@ public class @CubeAction : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0f71b15c-aeb6-49ae-9d08-1407eab30d83"",
+                    ""id"": ""ec98e787-d7d1-44f9-80bc-d1c3afc9f9f6"",
                     ""path"": ""<Pointer>/press"",
                     ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",

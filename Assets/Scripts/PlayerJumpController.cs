@@ -49,21 +49,6 @@ public class PlayerJumpController : MonoBehaviour
         }
     }
 
-    //private void RevokeEvents()
-    //{
-    //    switch (player)
-    //    {
-    //        case PlayerEnum.Black:
-    //            events.Jump1Start -= JumpStart;
-    //            events.Jump1Finished -= JumpFinished;
-    //            break;
-    //        case PlayerEnum.White:
-    //            events.Jump2Start -= JumpStart;
-    //            events.Jump2Finished -= JumpFinished;
-    //            break;
-    //    }
-    //}
-
     private void JumpStart()
     {
         Debug.Log($"{tag} will jump.");
@@ -93,13 +78,11 @@ public class PlayerJumpController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)//检测碰撞当碰撞发生后重置canJump让物体重新能够有一次跳跃机会
     {
-        Debug.Log($"{tag} enter {collision.collider.tag}");
-        //if (collision.collider.CompareTag(groundTag))
         canJump = true;
     }
 
-    //private void OnDestroy()
-    //{
-    //    RevokeEvents();
-    //}
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        canJump = false;
+    }
 }

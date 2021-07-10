@@ -322,7 +322,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.32686377, y: 0.023614764, z: -10}
+  m_LocalPosition: {x: 3.2960606, y: 0.023072362, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1947590407}
@@ -352,10 +352,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2873059891893031830, guid: 902b31c82bf9b434fa9d4b10a492bac0, type: 3}
-      propertyPath: Block
-      value: 
-      objectReference: {fileID: 1060123694}
     - target: {fileID: 2873059891893031832, guid: 902b31c82bf9b434fa9d4b10a492bac0, type: 3}
       propertyPath: m_Name
       value: BlackRestartParticle
@@ -473,10 +469,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2950404726966871981, guid: 78e2763c3fe2d914a848f7368257bf6b, type: 3}
-      propertyPath: Block
-      value: 
-      objectReference: {fileID: 668955202}
     - target: {fileID: 2950404726966871983, guid: 78e2763c3fe2d914a848f7368257bf6b, type: 3}
       propertyPath: m_Name
       value: WhiteRestartParticle
@@ -544,7 +536,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1152810521}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.15587234, y: -0.9480933, z: -10}
+  m_LocalPosition: {x: 0.4645443, y: -0.9480933, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 515981392}
@@ -726,7 +718,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1: {fileID: 1060123701}
   player2: {fileID: 668955209}
-  delay: 1
+  delay: 0.85
 --- !u!114 &1584574703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8766,10 +8758,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlackBlock
       objectReference: {fileID: 0}
-    - target: {fileID: 6143841159879116262, guid: 33a50f26c234d5d49b5b1c7797659b37, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6143841159879116263, guid: 33a50f26c234d5d49b5b1c7797659b37, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -8818,14 +8806,6 @@ PrefabInstance:
       propertyPath: events
       value: 
       objectReference: {fileID: 1584574702}
-    - target: {fileID: 6143841159879116281, guid: 33a50f26c234d5d49b5b1c7797659b37, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 57458c22b265ae848b132dc499b5e21e, type: 2}
-    - target: {fileID: 6143841159879116282, guid: 33a50f26c234d5d49b5b1c7797659b37, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 57458c22b265ae848b132dc499b5e21e, type: 2}
     - target: {fileID: 6143841159879116284, guid: 33a50f26c234d5d49b5b1c7797659b37, type: 3}
       propertyPath: events
       value: 
@@ -8964,18 +8944,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: WhiteBlock
       objectReference: {fileID: 0}
-    - target: {fileID: 7685317719583735689, guid: ed1a8174f1d37944dad85deb0232e4f1, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7685317719583735693, guid: ed1a8174f1d37944dad85deb0232e4f1, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 57458c22b265ae848b132dc499b5e21e, type: 2}
-    - target: {fileID: 7685317719583735694, guid: ed1a8174f1d37944dad85deb0232e4f1, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 57458c22b265ae848b132dc499b5e21e, type: 2}
     - target: {fileID: 7685317719583735695, guid: ed1a8174f1d37944dad85deb0232e4f1, type: 3}
       propertyPath: events
       value: 

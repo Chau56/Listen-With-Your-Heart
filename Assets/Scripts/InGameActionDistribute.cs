@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
+using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
 namespace GameHardware
 {
@@ -91,7 +92,8 @@ namespace GameHardware
                 case Touchscreen screen:
                     foreach (var item in screen.touches)
                     {
-                        TouchCheck(item.position, action, player);
+                        var phase = item.phase.ReadValue();
+                        if (phase != TouchPhase.None) TouchCheck(item.position, action, player);
                     }
                     break;
                 case Mouse mouse:
@@ -100,7 +102,7 @@ namespace GameHardware
             }
         }
 
-        private void TouchCheck(Vector2Control position,Action action,PlayerEnum player)
+        private void TouchCheck(Vector2Control position, Action action, PlayerEnum player)
         {
             float y = position.y.ReadValue();
             Debug.Log($"screen hit y {y}");

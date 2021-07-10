@@ -29,7 +29,15 @@ public class GameEvents : MonoBehaviour
     private IEnumerator WaitToStart()
     {
         yield return new WaitForSecondsRealtime(delay);
+        BeforeStart();
+        yield return new WaitForEndOfFrame();
         GameStart();
+    }
+
+    private void BeforeStart()
+    {
+        player1.gameObject.SetActive(true);
+        player2.gameObject.SetActive(true);
     }
 
     private void OnDestroy()
