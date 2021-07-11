@@ -322,7 +322,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.2960482, y: 0.02151692, z: -10}
+  m_LocalPosition: {x: 3.3255873, y: 0.021508574, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1947590407}
@@ -536,7 +536,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1152810521}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.4645443, y: -0.9480933, z: -10}
+  m_LocalPosition: {x: 0.47071648, y: -0.9480933, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 515981392}
@@ -598,6 +598,10 @@ PrefabInstance:
       propertyPath: events
       value: 
       objectReference: {fileID: 1584574702}
+    - target: {fileID: 4274805097175808229, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
+      propertyPath: player
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4274805097175808229, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
       propertyPath: playerSelf
       value: 
@@ -708,6 +712,7 @@ GameObject:
   - component: {fileID: 1584574704}
   - component: {fileID: 1584574703}
   - component: {fileID: 1584574702}
+  - component: {fileID: 1584574706}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -730,8 +735,8 @@ MonoBehaviour:
   player1: {fileID: 1060123701}
   player2: {fileID: 668955209}
   endline: {fileID: 1413334139}
-  startDelay: 1
-  endDelay: 1
+  startDelay: 0.85
+  endDelay: 0.8
 --- !u!114 &1584574703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -788,6 +793,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1584574706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584574701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 17f6abc27f6c37549b5d706e32de6d1a, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: InGame
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1788482907
 GameObject:
   m_ObjectHideFlags: 0
@@ -26330,6 +26365,10 @@ PrefabInstance:
       propertyPath: events
       value: 
       objectReference: {fileID: 1584574702}
+    - target: {fileID: 7685317719583735682, guid: ed1a8174f1d37944dad85deb0232e4f1, type: 3}
+      propertyPath: player
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7685317719583735682, guid: ed1a8174f1d37944dad85deb0232e4f1, type: 3}
       propertyPath: revivePoint
       value: 

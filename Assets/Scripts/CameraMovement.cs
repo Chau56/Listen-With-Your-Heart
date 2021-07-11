@@ -15,6 +15,7 @@ public class CameraMovement : MonoBehaviour
         events.GameStart += Move;
         events.GamePause += Stay;
         events.GameResume += Move;
+        events.GameWin += Stay;
     }
     private void Stay()
     {

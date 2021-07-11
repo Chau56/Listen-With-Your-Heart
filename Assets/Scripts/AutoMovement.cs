@@ -19,7 +19,7 @@ public class AutoMovement : MonoBehaviour
     private void Impulse()
     {
         myRigidbody.AddForce(speed, ForceMode2D.Impulse);
-        Debug.Log($"{tag} velocity {myRigidbody.velocity}");
+        Debug.Log($"{tag} impulse velocity {myRigidbody.velocity}");
     }
     private void Resume()
     {

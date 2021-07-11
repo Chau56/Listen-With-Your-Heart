@@ -2,11 +2,19 @@
     "name": "CubeAction",
     "maps": [
         {
-            "name": "Cube",
+            "name": "InGame",
             "id": "f42b9f81-49b5-40e9-aa45-85f9d87ac984",
             "actions": [
                 {
-                    "name": "Jump1",
+                    "name": "Jump1Started",
+                    "type": "Button",
+                    "id": "6b468ac3-56f3-42bf-a52b-5d6dbf1da46f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Jump1Finished",
                     "type": "Button",
                     "id": "de9dc7d7-fa42-4be2-a409-e75a0a15cdb2",
                     "expectedControlType": "Button",
@@ -14,7 +22,15 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Jump2",
+                    "name": "Jump2Started",
+                    "type": "Button",
+                    "id": "e4e28f82-0e6f-42ff-a997-4ba63d6f82ca",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Jump2Finished",
                     "type": "Button",
                     "id": "d3b4a11c-16a6-4d01-b172-0a9afe7490e1",
                     "expectedControlType": "Button",
@@ -22,9 +38,25 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Jump",
+                    "name": "JumpStarted",
+                    "type": "Button",
+                    "id": "b22bfde8-2bfa-48bb-a9fb-f687ad8daf01",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "JumpFinished",
                     "type": "Button",
                     "id": "97dcf5cf-e182-4e34-abd7-adc0c58edca4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "2f8240a1-fa7c-4476-b3cc-5f64d7d3ad62",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -38,7 +70,7 @@
                     "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump1",
+                    "action": "Jump1Finished",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -49,50 +81,37 @@
                     "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump2",
+                    "action": "Jump2Finished",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "28fac478-c1cf-411d-b028-4fcb42e1c9f4",
-                    "path": "<Pointer>/press",
-                    "interactions": "Press(behavior=1)",
+                    "id": "eae3dc2b-3665-4177-bdc2-01eec2f633f7",
+                    "path": "<Keyboard>/f",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump",
+                    "action": "Jump1Started",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Game",
-            "id": "c1be2b32-0d33-48a6-a127-726524f9bbd7",
-            "actions": [
-                {
-                    "name": "Pause",
-                    "type": "Button",
-                    "id": "a2796d44-5601-4249-9ece-72bebd59a2ac",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
                 },
                 {
-                    "name": "Resume",
-                    "type": "Button",
-                    "id": "75acbacc-ed8f-484b-9145-dfab3dc2ce38",
-                    "expectedControlType": "Button",
+                    "name": "",
+                    "id": "d3a4eb2b-c6f0-4a0e-83fa-971e1ad0f1d7",
+                    "path": "<Keyboard>/j",
+                    "interactions": "Press",
                     "processors": "",
-                    "interactions": ""
-                }
-            ],
-            "bindings": [
+                    "groups": "",
+                    "action": "Jump2Started",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
                 {
                     "name": "",
-                    "id": "e8046819-5159-429c-ab76-ef6b0a7445d7",
+                    "id": "ec18057d-c96d-4db4-ac14-05d1e985234e",
                     "path": "<Keyboard>/p",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
@@ -101,12 +120,23 @@
                 },
                 {
                     "name": "",
-                    "id": "515a8339-6e1d-493f-ad2b-c5152a6127a9",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
+                    "id": "d438a819-6bdf-4ce0-bb78-b1f584e327af",
+                    "path": "<Pointer>/press",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
-                    "action": "Resume",
+                    "action": "JumpStarted",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "24070f0a-3ffd-4048-80a1-209c934e07f3",
+                    "path": "<Pointer>/press",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JumpFinished",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

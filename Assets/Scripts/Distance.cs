@@ -6,18 +6,14 @@ public class Distance : MonoBehaviour
 {
     private Text distance;
     [SerializeField]
-    [Tooltip("关联的cube")]
-    private DeathLogic playerSelf;
-    [SerializeField]
-    [Tooltip("另一个cube")]
-    private DeathLogic playerAnother;
+    [Tooltip("这是哪个玩家的距离指示器？")]
+    private PlayerEnum player;
     [SerializeField]
     [Tooltip("增长速度。每秒增长50次speed。")]
     private int speed = 1;
     [SerializeField]
     private GameEvents events;
-    private bool run;
-    private bool died;
+    private bool run, died;
     /// <summary>
     /// 向外暴露的距离值。
     /// </summary>
@@ -25,7 +21,7 @@ public class Distance : MonoBehaviour
     {
         get
         {
-            Debug.Log($"{playerSelf.tag} {nameof(DistanceValue)} get.");
+            Debug.Log($"{player} {nameof(DistanceValue)} get.");
             return value;
         }
     }
@@ -38,57 +34,62 @@ public class Distance : MonoBehaviour
     /// </summary>
     private void StartProgress()
     {
-        Debug.Log($"{playerSelf.tag} {nameof(StartProgress)}");
-        run = true;
+        if (!died)
+        {
+            Debug.Log($"{player} {nameof(StartProgress)}");
+            run = true;
+        }
     }
     /// <summary>
     /// 停止进度条。
     /// </summary>
     private void StopProgress()
     {
-        Debug.Log($"{playerSelf.tag} {nameof(StopProgress)}");
+        Debug.Log($"{player} {nameof(StopProgress)}");
         run = false;
+    }
+    private void Die()
+    {
+        died = true;
+        StopProgress();
+    }
+    private void Revive()
+    {
+        died = false;
+        StartProgress();
     }
     /// <summary>
     /// 重置进度条。
     /// </summary>
-    private void ResetProgress()
-    {
-        Debug.Log($"{playerSelf.tag} {nameof(ResetProgress)}");
-        value = 0;
-        distance.text = "0";
-    }
+    //private void ResetProgress()
+    //{
+    //    Debug.Log($"{player} {nameof(ResetProgress)}");
+    //    value = 0;
+    //    distance.text = "0";
+    //}
 
     // Start is called before the first frame update
     private void Start()
     {
-        run = false;
         distance = GetComponent<Text>();
-        RegisterSelfEvents();
-        RegisterInputEvents();
+        RegisterEvents();
     }
 
-    private void RegisterSelfEvents()
+    private void RegisterEvents()
     {
-        playerSelf.OnDied += () =>
+        switch (player)
         {
-            StopProgress();
-            died = true;
-        };
-        playerAnother.OnHitRevive += () =>
-        {
-            StartProgress();
-            died = false;
-        };
-    }
-
-    private void RegisterInputEvents()
-    {
+            case PlayerEnum.Black:
+                events.BlackDied += Die;
+                events.BlackWillRevive += Revive;
+                break;
+            case PlayerEnum.White:
+                events.WhiteDied += Die;
+                events.WhiteWillRevive += Revive;
+                break;
+        }
         events.GamePause += StopProgress;
-        events.GameResume += () =>
-        {
-            if (!died) StartProgress();
-        };
+        events.GameResume += StartProgress;
         events.GameStart += StartProgress;
         events.GameWin += StopProgress;
     }

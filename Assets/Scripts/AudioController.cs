@@ -23,6 +23,7 @@ public class AudioController : MonoBehaviour
     [Tooltip("最大音量。会覆盖AudioSource的音量。")]
     [Range(0, 1)]
     private float volume;
+    private int coroutining;
     /// <summary>
     /// 最大音量。
     /// </summary>
@@ -72,23 +73,27 @@ public class AudioController : MonoBehaviour
 
     private IEnumerator FadeOutEffect(bool stop)
     {
-        Debug.Log($"fadeout stop {stop}");
-        while (moveAS.volume > 0)
+        Debug.Log($"fadeout may stop {stop}");
+        coroutining += 1;
+        while (moveAS.volume > 0 && coroutining == 1)
         {
             moveAS.volume -= decline;
             yield return new WaitForSecondsRealtime(interval);
         }
+        coroutining -= 1;
         if (stop) moveAS.Stop();
         else moveAS.Pause();
     }
     private IEnumerator FadeInEffect(bool play)
     {
-        Debug.Log($"fadein play {play}");
-        while (moveAS.volume < Volume)
+        Debug.Log($"fadein may play {play}");
+        coroutining += 1;
+        while (moveAS.volume < Volume && coroutining == 1)
         {
             moveAS.volume += decline;
             yield return new WaitForSecondsRealtime(interval);
         }
+        coroutining -= 1;
         if (play) moveAS.Play();
         else moveAS.UnPause();
     }

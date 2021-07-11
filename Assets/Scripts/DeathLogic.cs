@@ -29,7 +29,7 @@ public class DeathLogic : MonoBehaviour
     [SerializeField]
     [Tooltip("这是哪个玩家？")]
     private PlayerEnum player;
-    private bool paused, notEnd, died;
+    private bool notEnd, died;
     // Start is called before the first frame update
     private void Start()
     {
@@ -37,22 +37,18 @@ public class DeathLogic : MonoBehaviour
         reviveTag = revivePoint.tag;
         rigidbody = GetComponent<Rigidbody2D>();
         RegisterSelfEvents();
-        RegisterEvents();
+        RegisterOtherEvents();
     }
 
     private void RegisterSelfEvents()
     {
-        OnDied += () =>
-            Debug.Log($"{tag} died.");
-        OnHitRevive += () =>
-            Debug.Log($"{tag} hit revivepoint.");
+        OnDied += () => Debug.Log($"{tag} died.");
+        OnHitRevive += () => Debug.Log($"{tag} hit revivepoint.");
     }
 
-    private void RegisterEvents()
+    private void RegisterOtherEvents()
     {
         events.GameStart += GameStart;
-        events.GamePause += Pause;
-        events.GameResume += Resume;
         events.GameFailed += GameEnd;
         events.GameWin += GameEnd;
         switch (player)
@@ -64,18 +60,6 @@ public class DeathLogic : MonoBehaviour
                 events.WhiteWillRevive += Revive;
                 break;
         }
-    }
-
-    private void Pause()
-    {
-        Debug.Log("deathlogic pause");
-        paused = true;
-    }
-
-    private void Resume()
-    {
-        Debug.Log("deathlogic resume");
-        paused = false;
     }
 
     private void GameStart()
@@ -92,8 +76,8 @@ public class DeathLogic : MonoBehaviour
     {
         if (CheckValid())
         {
-            gameObject.SetActive(false);
             died = true;
+            gameObject.SetActive(false);
             OnDied();
         }
     }
@@ -111,14 +95,14 @@ public class DeathLogic : MonoBehaviour
         Debug.Log("opposite hit revive");
         if (died)
         {
-            gameObject.SetActive(true);
             died = false;
+            gameObject.SetActive(true);
         }
     }
 
     private bool CheckValid()
     {
-        return !(paused || died) && notEnd;
+        return !died && notEnd;
     }
 
     private void OnBecameInvisible()

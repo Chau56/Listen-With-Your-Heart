@@ -5,7 +5,7 @@ using UnityEngine;
 public class EndlineDetection : MonoBehaviour
 {
     public event Action OnHitEndline;
-    
+
     // Start is called before the first frame update
     private void Start()
     {

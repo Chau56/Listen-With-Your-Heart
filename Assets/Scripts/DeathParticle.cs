@@ -14,6 +14,7 @@ public class DeathParticle : MonoBehaviour
     }
     private void StartParticle()
     {
+        Debug.Log(nameof(StartParticle));
         Instantiate(dieParticle, transform.position, new Quaternion());
     }
 }
