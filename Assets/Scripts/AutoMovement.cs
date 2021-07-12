@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -16,8 +17,9 @@ public class AutoMovement : MonoBehaviour
     /// <summary>
     /// Ê©¼ÓÂö³åÁ¦¡£
     /// </summary>
-    private void Impulse()
+    private IEnumerator Impulse()
     {
+        yield return new WaitForEndOfFrame();
         myRigidbody.AddForce(speed, ForceMode2D.Impulse);
         Debug.Log($"{tag} impulse velocity {myRigidbody.velocity}");
     }
@@ -52,7 +54,7 @@ public class AutoMovement : MonoBehaviour
 
     private void RegisterEvents()
     {
-        events.GameStart += Impulse;
+        events.GameStart += () => StartCoroutine(Impulse());
         events.GamePause += Pause;
         events.GameResume += Resume;
     }

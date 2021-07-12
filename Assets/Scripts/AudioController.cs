@@ -23,23 +23,22 @@ public class AudioController : MonoBehaviour
     [Tooltip("最大音量。会覆盖AudioSource的音量。")]
     [Range(0, 1)]
     private float volume;
-    private int coroutining;
     /// <summary>
     /// 最大音量。
     /// </summary>
-    public float Volume
-    {
-        get
-        {
-            return volume;
-        }
-        set
-        {
-            if (value < 0) volume = 0;
-            else if (value > 1) volume = 1;
-            else volume = value;
-        }
-    }
+    //public float Volume
+    //{
+    //    get
+    //    {
+    //        return volume;
+    //    }
+    //    set
+    //    {
+    //        if (value < 0) volume = 0;
+    //        else if (value > 1) volume = 1;
+    //        else volume = value;
+    //    }
+    //}
 
     private void Start()
     {
@@ -73,27 +72,27 @@ public class AudioController : MonoBehaviour
 
     private IEnumerator FadeOutEffect(bool stop)
     {
-        Debug.Log($"fadeout may stop {stop}");
-        coroutining += 1;
-        while (moveAS.volume > 0 && coroutining == 1)
+        Debug.Log($"music fadeout may stop {stop}");
+        float volume = moveAS.volume;
+        while (volume > 0)
         {
             moveAS.volume -= decline;
+            volume -= decline;
             yield return new WaitForSecondsRealtime(interval);
         }
-        coroutining -= 1;
         if (stop) moveAS.Stop();
         else moveAS.Pause();
     }
     private IEnumerator FadeInEffect(bool play)
     {
-        Debug.Log($"fadein may play {play}");
-        coroutining += 1;
-        while (moveAS.volume < Volume && coroutining == 1)
+        Debug.Log($"music fadein may play {play}");
+        float volume = moveAS.volume;
+        while (volume < this.volume)
         {
             moveAS.volume += decline;
+            volume += decline;
             yield return new WaitForSecondsRealtime(interval);
         }
-        coroutining -= 1;
         if (play) moveAS.Play();
         else moveAS.UnPause();
     }

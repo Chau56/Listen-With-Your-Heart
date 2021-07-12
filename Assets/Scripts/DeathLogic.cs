@@ -1,132 +1,99 @@
-using System;
 using UnityEngine;
 
 /// <summary>
 /// 把这东西挂到cube上。
 /// </summary>
-[RequireComponent(typeof(Collider2D), typeof(Rigidbody2D))]
-public class DeathLogic : MonoBehaviour
+[RequireComponent(typeof(Collider2D), typeof(SpriteRenderer), typeof(Joint2D))]
+public class DeathLogic : SwitchBehavior
 {
-    /// <summary>
-    /// 检测到死亡就会触发。
-    /// </summary>
-    public event Action OnDied;
-    /// <summary>
-    /// 这个方块碰到复活点就会触发，而不是复活方块时触发！
-    /// </summary>
-    public event Action OnHitRevive;
     [SerializeField]
     [Tooltip("tag相同的都会被视为尖刺。")]
     private GameObject spikes;
     private string spikesTag;
+    private new Collider2D collider;
+    private SpriteRenderer sprite;
+    private Joint2D joint;
     [SerializeField]
-    [Tooltip("tag相同的都会被视为复活点。")]
-    private GameObject revivePoint;
-    private string reviveTag;
-    private new Rigidbody2D rigidbody;
-    [SerializeField]
-    private GameEvents events;
-    [SerializeField]
-    [Tooltip("这是哪个玩家？")]
-    private PlayerEnum player;
-    private bool notEnd, died;
-    // Start is called before the first frame update
-    private void Start()
+    [Tooltip("复活时延")]
+    private float reviveDelay;
+    /// <summary>
+    /// 复活的理论位置
+    /// </summary>
+    private Vector2 theoreticalPosition;
+
+    private void Awake()
     {
         spikesTag = spikes.tag;
-        reviveTag = revivePoint.tag;
-        rigidbody = GetComponent<Rigidbody2D>();
-        RegisterSelfEvents();
+        collider = GetComponent<Collider2D>();
+        sprite = GetComponent<SpriteRenderer>();
+        joint = GetComponent<Joint2D>();
         RegisterOtherEvents();
     }
 
-    private void RegisterSelfEvents()
-    {
-        OnDied += () => Debug.Log($"{tag} died.");
-        OnHitRevive += () => Debug.Log($"{tag} hit revivepoint.");
-    }
 
     private void RegisterOtherEvents()
     {
-        events.GameStart += GameStart;
-        events.GameFailed += GameEnd;
-        events.GameWin += GameEnd;
-        switch (player)
+        Swicher(() =>
         {
-            case PlayerEnum.Black:
-                events.BlackWillRevive += Revive;
-                break;
-            case PlayerEnum.White:
-                events.WhiteWillRevive += Revive;
-                break;
-        }
+            events.BlackReviving += Revive;
+            events.BlackDying += Die;
+        }, () =>
+        {
+            events.WhiteReviving += Revive;
+            events.WhiteDying += Die;
+        });
+        events.GameStart += Revive;
     }
 
-    private void GameStart()
-    {
-        notEnd = true;
-    }
+    //private void GameStart()
+    //{
+    //    sprite.enabled = true;
+    //    collider.isTrigger = false;
+    //    joint.enabled = false;
+    //}
 
-    private void GameEnd()
+    private void Revive()
     {
-        notEnd = false;
+        sprite.enabled = true;
+        collider.isTrigger = false;
+        joint.enabled = false;
     }
 
     private void Die()
     {
-        if (CheckValid())
-        {
-            died = true;
-            gameObject.SetActive(false);
-            OnDied();
-        }
-    }
-
-    private void HitRevive()
-    {
-        if (CheckValid())
-        {
-            OnHitRevive();
-        }
-    }
-
-    private void Revive()
-    {
-        Debug.Log("opposite hit revive");
-        if (died)
-        {
-            died = false;
-            gameObject.SetActive(true);
-        }
-    }
-
-    private bool CheckValid()
-    {
-        return !died && notEnd;
+        sprite.enabled = false;
+        collider.isTrigger = true;
+        joint.enabled = true;
     }
 
     private void OnBecameInvisible()
     {
         Debug.Log($"{tag} invisible.");
-        Die();
+        Swicher(events.KillBlack, events.KillWhite);
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        DeathDetect(collision.gameObject.tag);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        TagSensor(collision.gameObject.tag);
-        SpeedSensor(rigidbody.velocity.x);
+        DeathDetect(collision.gameObject.tag);
+    }
+
+    private void DeathDetect(string tag)
+    {
+        TagSensor(tag);
+        SpeedSensor(collider.attachedRigidbody.velocity.x);
     }
 
     private void TagSensor(string tag)
     {
-        Debug.Log($"{this.tag} enter {tag}.");
+        Debug.Log($"{this.tag} enter or stay {tag}.");
         if (tag == spikesTag)
         {
-            Die();
-        }
-        else if (tag == reviveTag)
-        {
-            HitRevive();
+            Swicher(events.KillBlack, events.KillWhite);
         }
     }
 
@@ -135,14 +102,8 @@ public class DeathLogic : MonoBehaviour
         Debug.Log($"{tag} velocity {x}.");
         if (x < 1)
         {
-            Die();
+            Swicher(events.KillBlack, events.KillWhite);
         }
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        string tag = collision.collider.tag;
-        Debug.Log($"{this.tag} stay in {tag}.");
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -151,8 +112,4 @@ public class DeathLogic : MonoBehaviour
         Debug.Log($"{this.tag} exit {tag}.");
     }
 
-    private void OnApplicationQuit()
-    {
-        notEnd = false;
-    }
 }

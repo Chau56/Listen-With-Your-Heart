@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1072443065}
+  - component: {fileID: 840181192148814407}
   - component: {fileID: 1072443067}
   - component: {fileID: 1072443066}
   m_Layer: 0
@@ -32,6 +33,20 @@ Transform:
   m_Father: {fileID: 2073671508}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &840181192148814407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072443064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a461308849db8b45a682076b61313e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  events: {fileID: 0}
+  player: 0
 --- !u!198 &1072443067
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4813,6 +4828,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2073671508}
+  - component: {fileID: 2077558192825471550}
   - component: {fileID: 2073671509}
   m_Layer: 0
   m_Name: BlackTrail
@@ -4836,6 +4852,20 @@ Transform:
   m_Father: {fileID: 6143841159879116263}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2077558192825471550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073671507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c56c72c8c4819a47ba0ea506a307d0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  events: {fileID: 0}
+  player: 0
 --- !u!96 &2073671509
 TrailRenderer:
   serializedVersion: 2
@@ -4965,7 +4995,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6143841159879116263
 Transform:
   m_ObjectHideFlags: 0
@@ -5049,7 +5079,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 5
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -5091,9 +5121,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb2a02b322ca54a47a2ec0fd10c2479d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSpeed: {x: 0, y: 17}
-  player: 0
   events: {fileID: 0}
+  player: 0
+  jumpSpeed: {x: 0, y: 17}
 --- !u!114 &6143841159879116280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5107,7 +5137,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: {x: 8.5, y: 0}
-  threshold: 0.5
   events: {fileID: 0}
 --- !u!114 &6143841159879116285
 MonoBehaviour:
@@ -5121,9 +5150,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98421715d6cbd5d40ae77c697afc8815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  events: {fileID: 0}
+  player: 0
   spikes: {fileID: 5468869588327251839, guid: 87c8c3e121a31e246bf1ecaad2c66a48, type: 3}
   revivePoint: {fileID: 0}
-  events: {fileID: 0}
+  reviveDelay: 0.85
 --- !u!114 &1060123702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5136,4 +5167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e9100f19765c04dac5783c9d1d2ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  events: {fileID: 0}
+  player: 0
   dieParticle: {fileID: 1585340450844150313, guid: 6bf508f8204044f43829d07deb92bcee, type: 3}
+  reviveParticle: {fileID: 0}

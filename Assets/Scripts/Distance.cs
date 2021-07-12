@@ -2,17 +2,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Text))]
-public class Distance : MonoBehaviour
+public class Distance : SwitchBehavior
 {
     private Text distance;
     [SerializeField]
-    [Tooltip("这是哪个玩家的距离指示器？")]
-    private PlayerEnum player;
-    [SerializeField]
     [Tooltip("增长速度。每秒增长50次speed。")]
     private int speed = 1;
-    [SerializeField]
-    private GameEvents events;
     private bool run, died;
     /// <summary>
     /// 向外暴露的距离值。
@@ -77,17 +72,15 @@ public class Distance : MonoBehaviour
 
     private void RegisterEvents()
     {
-        switch (player)
+        Swicher(() =>
         {
-            case PlayerEnum.Black:
-                events.BlackDied += Die;
-                events.BlackWillRevive += Revive;
-                break;
-            case PlayerEnum.White:
-                events.WhiteDied += Die;
-                events.WhiteWillRevive += Revive;
-                break;
-        }
+            events.BlackDying += Die;
+            events.BlackReviving += Revive;
+        }, () =>
+        {
+            events.WhiteDying += Die;
+            events.WhiteReviving += Revive;
+        });
         events.GamePause += StopProgress;
         events.GameResume += StartProgress;
         events.GameStart += StartProgress;

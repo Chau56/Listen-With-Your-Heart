@@ -1,18 +1,13 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
-public class PlayerJumpController : MonoBehaviour
+public class PlayerJumpController : SwitchBehavior
 {
     [SerializeField]
     [Tooltip("跳跃速度。")]
     private Vector2 jumpSpeed = new Vector2(0, 17);
     private Rigidbody2D rigidBody;
-    [SerializeField]
-    [Tooltip("这是哪个玩家？")]
-    private PlayerEnum player;
     private bool jumpPressed;
-    [SerializeField]
-    private GameEvents events;
     /// <summary>
     /// 暴露的接口，指示是否在跳跃。
     /// </summary>
@@ -36,17 +31,15 @@ public class PlayerJumpController : MonoBehaviour
 
     private void RegisterEvents()
     {
-        switch (player)
+        Swicher(() =>
         {
-            case PlayerEnum.Black:
-                events.Jump1Start += JumpStart;
-                events.Jump1Finished += JumpFinished;
-                break;
-            case PlayerEnum.White:
-                events.Jump2Start += JumpStart;
-                events.Jump2Finished += JumpFinished;
-                break;
-        }
+            events.Jump1Start += JumpStart;
+            events.Jump1Finished += JumpFinished;
+        }, () =>
+        {
+            events.Jump2Start += JumpStart;
+            events.Jump2Finished += JumpFinished;
+        });
     }
 
     private void JumpStart()

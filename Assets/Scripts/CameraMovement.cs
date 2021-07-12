@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField]
@@ -8,9 +9,11 @@ public class CameraMovement : MonoBehaviour
     private bool moveable;
     [SerializeField]
     private GameEvents events;
+    private new Rigidbody2D rigidbody;
     //private float speedPerFrame;
     private void Start()
     {
+        rigidbody = GetComponent<Rigidbody2D>();
         events.GameFailed += Stay;
         events.GameStart += Move;
         events.GamePause += Stay;
@@ -29,6 +32,6 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if (moveable) transform.Translate(Vector3.right * speed / 50);
+        if (moveable) rigidbody.MovePosition(transform.position + Vector3.right * speed / 50);
     }
 }

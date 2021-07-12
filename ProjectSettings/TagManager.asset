@@ -9,6 +9,8 @@ TagManager:
   - Stair
   - White
   - Black
+  - Endline
+  - RevivePoint
   layers:
   - Default
   - TransparentFX

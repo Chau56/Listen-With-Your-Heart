@@ -1,20 +1,36 @@
 using UnityEngine;
 
-[RequireComponent(typeof(DeathLogic))]
-public class DeathParticle : MonoBehaviour
+public class DeathParticle : SwitchBehavior
 {
-    private DeathLogic logic;
     [SerializeField]
     private GameObject dieParticle;
+    [SerializeField]
+    private ParticleSystem reviveParticle;
 
     private void Start()
     {
-        logic = GetComponent<DeathLogic>();
-        logic.OnDied += StartParticle;
+        Swicher(() =>
+        {
+            events.BlackDying += Die;
+            events.BlackReviving += Revive;
+        }, () =>
+        {
+            events.WhiteDying += Die;
+            events.WhiteReviving += Revive;
+        });
     }
-    private void StartParticle()
+
+    private void Die()
     {
-        Debug.Log(nameof(StartParticle));
+        Debug.Log("die paiticle init");
+        reviveParticle.Stop();
+        reviveParticle.Clear();
         Instantiate(dieParticle, transform.position, new Quaternion());
+    }
+
+    private void Revive()
+    {
+        Debug.Log("revive particle init");
+        reviveParticle.Play();
     }
 }
