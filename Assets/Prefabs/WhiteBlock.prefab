@@ -5050,7 +5050,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 0bcd600bd8960ff43bcdd68d17e05d8b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5153,7 +5153,6 @@ MonoBehaviour:
   events: {fileID: 0}
   player: 1
   spikes: {fileID: 5468869588327251839, guid: 87c8c3e121a31e246bf1ecaad2c66a48, type: 3}
-  revivePoint: {fileID: 0}
   reviveDelay: 0.85
 --- !u!114 &668955210
 MonoBehaviour:
