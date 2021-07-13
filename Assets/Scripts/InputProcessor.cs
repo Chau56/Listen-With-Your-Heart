@@ -122,16 +122,7 @@ public class InputProcessor : MonoBehaviour
 
     private void OnApplicationPause(bool pause)
     {
-        if (!pause && paused)
-        {
-            paused = false;
-            events.ResumeGame();
-        }
-        else if (pause && !paused)
-        {
-            paused = true;
             events.PauseGame();
-        }
     }
 
 }
