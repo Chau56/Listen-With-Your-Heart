@@ -7,12 +7,12 @@ public class CameraMovement : MonoBehaviour
     private float speed = 8;
     //[SerializeField]
     private bool moveable;
-    [SerializeField]
     private GameEvents events;
     private new Rigidbody2D rigidbody;
     //private float speedPerFrame;
     private void Start()
     {
+        events = GameEvents.instance;
         rigidbody = GetComponent<Rigidbody2D>();
         events.GameFailed += Stay;
         events.GameStart += Move;

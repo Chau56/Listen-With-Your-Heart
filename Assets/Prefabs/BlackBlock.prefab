@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a461308849db8b45a682076b61313e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  events: {fileID: 0}
   player: 0
 --- !u!198 &1072443067
 ParticleSystem:
@@ -4864,7 +4863,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c56c72c8c4819a47ba0ea506a307d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  events: {fileID: 0}
   player: 0
 --- !u!96 &2073671509
 TrailRenderer:
@@ -4989,6 +4987,7 @@ GameObject:
   - component: {fileID: 6143841159879116280}
   - component: {fileID: 6143841159879116285}
   - component: {fileID: 1060123702}
+  - component: {fileID: 1060123703}
   m_Layer: 0
   m_Name: BlackBlock
   m_TagString: Black
@@ -5018,7 +5017,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6143841159879116262}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -5093,7 +5092,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -5121,7 +5120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb2a02b322ca54a47a2ec0fd10c2479d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  events: {fileID: 0}
   player: 0
   jumpSpeed: {x: 0, y: 17}
 --- !u!114 &6143841159879116280
@@ -5137,7 +5135,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: {x: 8.5, y: 0}
-  events: {fileID: 0}
 --- !u!114 &6143841159879116285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5150,10 +5147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98421715d6cbd5d40ae77c697afc8815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  events: {fileID: 0}
   player: 0
   spikes: {fileID: 5468869588327251839, guid: 87c8c3e121a31e246bf1ecaad2c66a48, type: 3}
-  revivePoint: {fileID: 0}
   reviveDelay: 0.85
 --- !u!114 &1060123702
 MonoBehaviour:
@@ -5167,7 +5162,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e9100f19765c04dac5783c9d1d2ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  events: {fileID: 0}
   player: 0
   dieParticle: {fileID: 1585340450844150313, guid: 6bf508f8204044f43829d07deb92bcee, type: 3}
   reviveParticle: {fileID: 0}
+--- !u!255 &1060123703
+FixedJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6143841159879116262}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_DampingRatio: 0
+  m_Frequency: 0

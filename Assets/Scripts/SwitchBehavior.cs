@@ -3,11 +3,15 @@ using UnityEngine;
 
 public abstract class SwitchBehavior : MonoBehaviour
 {
-    [SerializeField]
     protected GameEvents events;
     [SerializeField]
     [Tooltip("这是哪个玩家？")]
     protected PlayerEnum player;
+
+    protected SwitchBehavior()
+    {
+        events = GameEvents.instance;
+    }
 
     protected void Swicher(Action black, Action white)
     {

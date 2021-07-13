@@ -3,7 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class ReviveDetection : MonoBehaviour
 {
-    [SerializeField]
     private GameEvents events;
     [SerializeField]
     [Tooltip("tag相同的都会被视为black玩家。")]
@@ -17,6 +16,7 @@ public class ReviveDetection : MonoBehaviour
 
     private void Start()
     {
+        events = GameEvents.instance;
         whiteTag = white.tag;
         blackTag = black.tag;
     }

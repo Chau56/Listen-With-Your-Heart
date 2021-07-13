@@ -10,11 +10,11 @@ public class AnimatorLogic : MonoBehaviour
     [Tooltip("状态机里对应触发器名")]
     private string gameFailed = "GameFailed";
     private Animator animator;
-    [SerializeField]
     private GameEvents events;
 
     private void Start()
     {
+        events = GameEvents.instance;
         animator = GetComponent<Animator>();
         events.GameFailed += FadeOut;
         animator.SetTrigger(gameStart);

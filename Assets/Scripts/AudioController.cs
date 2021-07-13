@@ -9,7 +9,6 @@ using UnityEngine;
 public class AudioController : MonoBehaviour
 {
     private AudioSource moveAS;
-    [SerializeField]
     private GameEvents events;
     [SerializeField]
     [Tooltip("淡出音量减小值")]
@@ -42,6 +41,7 @@ public class AudioController : MonoBehaviour
 
     private void Start()
     {
+        events = GameEvents.instance;
         moveAS = GetComponent<AudioSource>();//初始化  
         RegisterEvents();
     }

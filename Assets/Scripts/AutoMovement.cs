@@ -11,7 +11,6 @@ public class AutoMovement : MonoBehaviour
     //[SerializeField]
     //[Tooltip("物体速度修正阈值。物体理论速度与实际速度差超过此值则修正。")]
     //private float threshold = 0.5f;
-    [SerializeField]
     private GameEvents events;
     private Vector2 velocityPaused;
     /// <summary>
@@ -48,6 +47,7 @@ public class AutoMovement : MonoBehaviour
 
     private void Start()
     {
+        events = GameEvents.instance;
         myRigidbody = GetComponent<Rigidbody2D>();
         RegisterEvents();
     }

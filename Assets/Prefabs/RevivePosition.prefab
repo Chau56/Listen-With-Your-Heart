@@ -142,7 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f6fd3560993d094890e4f4aab141c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  events: {fileID: 0}
   decline: 0.2
   interval: 0.01
   volume: 1
@@ -159,7 +158,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8.5
-  events: {fileID: 0}
 --- !u!50 &6020128563476178660
 Rigidbody2D:
   serializedVersion: 4

@@ -18,10 +18,7 @@ public class PlayerJumpController : SwitchBehavior
             return !canJump;
         }
     }
-    /// <summary>
-    /// 指示能否跳跃。
-    /// </summary>
-    private bool canJump;
+    private bool canJump, died;
 
     private void Start()
     {
@@ -35,10 +32,14 @@ public class PlayerJumpController : SwitchBehavior
         {
             events.Jump1Start += JumpStart;
             events.Jump1Finished += JumpFinished;
+            events.BlackDying += Die;
+            events.BlackReviving += Revive;
         }, () =>
         {
             events.Jump2Start += JumpStart;
             events.Jump2Finished += JumpFinished;
+            events.WhiteDying += Die;
+            events.WhiteReviving += Revive;
         });
     }
 
@@ -54,9 +55,20 @@ public class PlayerJumpController : SwitchBehavior
         jumpPressed = false;
     }
 
+    private void Die()
+    {
+        died = true;
+        canJump = false;
+    }
+
+    private void Revive()
+    {
+        died = false;
+    }
+
     private void Jump()
     {
-        if (canJump && jumpPressed)
+        if (canJump && jumpPressed && !died)
         {
             Debug.Log($"{tag} jumped.");
             rigidBody.AddForce(jumpSpeed, ForceMode2D.Impulse);
@@ -71,11 +83,11 @@ public class PlayerJumpController : SwitchBehavior
 
     private void OnCollisionEnter2D(Collision2D collision)//检测碰撞当碰撞发生后重置canJump让物体重新能够有一次跳跃机会
     {
-        canJump = true;
+        if (!died) canJump = true;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        canJump = false;
+        if (!died) canJump = false;
     }
 }
