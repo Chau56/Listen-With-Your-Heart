@@ -4,19 +4,11 @@ using UnityEngine.InputSystem;
 
 public class InputProcessor : MonoBehaviour
 {
-    [SerializeField]
-    [Tooltip("场景加载完成后过多久调用GameStart。单位毫秒")]
-    [Min(0)]
-    private int startDelay = 1;
-    [SerializeField]
-    [Tooltip("GameFailed多久后重加载场景。单位毫秒")]
-    [Min(0)]
-    private int endDelay = 1;
-
     private GameEvents events;
     private float halfScreen;
     private Pointer currentPointer;
     private float startPosition;
+    private bool paused;
 
     private void Start()
     {
@@ -25,18 +17,22 @@ public class InputProcessor : MonoBehaviour
         halfScreen = (float)Screen.height / 2;
         Debug.Log($"halfscreen {halfScreen}");
         RegisterEvents();
-        BeforeStart();
     }
 
     private void RegisterEvents()
     {
-        events.GameFailed += () => _ = events.RestartScene(endDelay);
+        events.GamePause += Pause;
+        events.GameResume += Resume;
     }
 
-    private void BeforeStart()
+    private void Pause()
     {
-        events.Gravity = Physics2D.gravity;
-        _ = events.WaitToStart(startDelay);
+        paused = true;
+    }
+
+    private void Resume()
+    {
+        paused = false;
     }
 
     private void OnJump1Started()
@@ -112,16 +108,30 @@ public class InputProcessor : MonoBehaviour
 
     private void OnPause()
     {
-        events.PauseGame();
+        if (paused)
+        {
+            paused = false;
+            events.ResumeGame();
+        }
+        else
+        {
+            paused = true;
+            events.PauseGame();
+        }
     }
 
     private void OnApplicationPause(bool pause)
     {
-
+        if (!pause && paused)
+        {
+            paused = false;
+            events.ResumeGame();
+        }
+        else if (pause && !paused)
+        {
+            paused = true;
+            events.PauseGame();
+        }
     }
 
-    private void OnApplicationQuit()
-    {
-        events.EndGame();
-    }
 }

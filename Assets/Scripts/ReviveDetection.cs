@@ -12,7 +12,6 @@ public class ReviveDetection : MonoBehaviour
     [Tooltip("tag相同的都会被视为white玩家。")]
     private GameObject white;
     private string whiteTag;
-    private bool used;
 
     private void Start()
     {
@@ -33,18 +32,13 @@ public class ReviveDetection : MonoBehaviour
 
     private void DetectPlayer(string tag)
     {
-        if (!used)
+        if (tag == whiteTag)
         {
-            if (tag == whiteTag)
-            {
-                events.ReviveBlack();
-                used = true;
-            }
-            else if (tag == blackTag)
-            {
-                events.ReviveWhite();
-                used = true;
-            }
+            events.ReviveBlack();
+        }
+        else if (tag == blackTag)
+        {
+            events.ReviveWhite();
         }
     }
 }

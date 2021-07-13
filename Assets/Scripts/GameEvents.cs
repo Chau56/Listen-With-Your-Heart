@@ -1,15 +1,15 @@
 using System;
-using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameEvents
 {
     public static GameEvents instance = new GameEvents();
     public event Action
-        GameStart, GameFailed, GameWin, GamePause, GameResume,
+        GameStart, GameFailed, GameWin, GamePause, GameResume, GameAbnormalEnd,
         Jump1Start, Jump2Start, Jump1Finished, Jump2Finished,
-        BlackReviving, WhiteReviving, BlackDying, WhiteDying;
+        BlackReviving, WhiteReviving, BlackDying, WhiteDying,
+        BlackProcessStart, WhiteProcessStart, BlackProcessEnd, WhiteProcessEnd;
+
     /// <summary>
     /// 黑色状态变量
     /// </summary>
@@ -22,13 +22,13 @@ public class GameEvents
     /// 游戏状态变量
     /// </summary>
     private bool gameNotEnd, gamePaused;
-    private Vector2 gravity;
 
     public void KillBlack()
     {
         if (!(p1Dead || gamePaused) && gameNotEnd)
         {
             p1Dead = true;
+            BlackProcessEnd();
             BlackDying();
             CheckGameFailed();
         }
@@ -39,6 +39,7 @@ public class GameEvents
         if (!(p2Dead || gamePaused) && gameNotEnd)
         {
             p2Dead = true;
+            WhiteProcessEnd();
             WhiteDying();
             CheckGameFailed();
         }
@@ -49,6 +50,7 @@ public class GameEvents
         if (gameNotEnd && !gamePaused)
         {
             gameNotEnd = false;
+            StopTwoProgress();
             GameWin();
         }
     }
@@ -58,6 +60,7 @@ public class GameEvents
         if (gameNotEnd && p1Dead && !gamePaused)
         {
             p1Dead = false;
+            BlackProcessStart();
             BlackReviving();
         }
     }
@@ -67,6 +70,7 @@ public class GameEvents
         if (gameNotEnd && p2Dead && !gamePaused)
         {
             p2Dead = false;
+            WhiteProcessStart();
             WhiteReviving();
         }
     }
@@ -111,29 +115,25 @@ public class GameEvents
         }
     }
 
-    public async Task WaitToStart(int startDelay)
+    public void StartGame()
     {
-        Debug.Log("wait to start");
-        Physics2D.gravity = Vector2.zero;
-        await Task.Delay(startDelay);
-        Physics2D.gravity = gravity;
         gameNotEnd = true;
         GameStart();
+        StartTwoProgress();
     }
 
-    public async Task RestartScene(int endDelay)
+    public void EndGame(bool win)
     {
-        Debug.Log("restart scene");
-        await Task.Delay(endDelay);
-        ClearEvents();
-        ClearState();
-        SceneManager.LoadSceneAsync(0);
+        gameNotEnd = false;
+        StopTwoProgress();
+        if (win) GameWin();
+        else GameFailed();
     }
 
-    public Vector2 Gravity
+    public void EndGame()
     {
-        get => gravity;
-        set => gravity = value;
+        gameNotEnd = false;
+        GameAbnormalEnd();
     }
 
     /// <summary>
@@ -146,7 +146,7 @@ public class GameEvents
             FinishJump1();
             FinishJump2();
             gamePaused = true;
-            Physics2D.gravity = Vector2.zero;
+            StopTwoProgress();
             GamePause();
         }
     }
@@ -156,14 +156,9 @@ public class GameEvents
         if (gameNotEnd && gamePaused)
         {
             gamePaused = false;
-            Physics2D.gravity = gravity;
+            StartTwoProgress();
             GameResume();
         }
-    }
-
-    public void EndGame()
-    {
-        gameNotEnd = false;
     }
     // Start is called before the first frame update
     private GameEvents()
@@ -171,24 +166,34 @@ public class GameEvents
         ClearEvents();
     }
 
-    private void ClearEvents()
+    public void ClearEvents()
     {
-        GameStart = () => Debug.Log("game start");
-        GameFailed = () => Debug.Log("game failed");
-        GameWin = () => Debug.Log("game win");
-        GamePause = () => Debug.Log("game paused");
-        GameResume = () => Debug.Log("game resumed");
-        Jump1Start = () => Debug.Log("jump1 start");
-        Jump2Start = () => Debug.Log("jump2 start");
-        Jump1Finished = () => Debug.Log("jump1 finished");
-        Jump2Finished = () => Debug.Log("jump2 finished");
-        BlackReviving = () => Debug.Log("black revive");
-        WhiteReviving = () => Debug.Log("white revive");
-        BlackDying = () => Debug.Log("black die");
-        WhiteDying = () => Debug.Log("white die");
+        BlackProcessStart =
+        BlackProcessEnd =
+        WhiteProcessStart =
+        WhiteProcessEnd =
+        GameStart =
+        GameFailed =
+        GameWin =
+        GameAbnormalEnd =
+        GamePause =
+        GameResume =
+        Jump1Start =
+        Jump2Start =
+        Jump1Finished =
+        Jump2Finished =
+        BlackReviving =
+        WhiteReviving =
+        BlackDying =
+        WhiteDying =
+        NullMethod;
     }
 
-    private void ClearState()
+    private void NullMethod()
+    {
+    }
+
+    public void ClearState()
     {
         p1Dead = p2Dead = p1Jumped = p2Jumped = gameNotEnd = gamePaused = false;
     }
@@ -202,4 +207,15 @@ public class GameEvents
         }
     }
 
+    private void StopTwoProgress()
+    {
+        if (!p1Dead) BlackProcessEnd();
+        if (!p2Dead) WhiteProcessEnd();
+    }
+
+    private void StartTwoProgress()
+    {
+        if (!p1Dead) BlackProcessStart();
+        if (!p2Dead) WhiteProcessStart();
+    }
 }

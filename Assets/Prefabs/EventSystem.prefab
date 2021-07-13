@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5753181014680178662}
   - component: {fileID: 5753181014680178683}
   - component: {fileID: 5753181014680178663}
+  - component: {fileID: 1516010484}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -118,5 +119,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03fde44f9136fec41943e9bb3bfb675a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1516010484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5753181014680178660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a240f406bda65ae42bc4357554477301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   startDelay: 850
-  endDelay: 800
+  endDelay: 850
+  menu: 0
+  game: 1
+  revivePoint: {fileID: 0}
+  endline: {fileID: 0}

@@ -8,18 +8,7 @@ public class Distance : SwitchBehavior
     [SerializeField]
     [Tooltip("增长速度。每秒增长50次speed。")]
     private int speed = 1;
-    private bool run, died;
-    /// <summary>
-    /// 向外暴露的距离值。
-    /// </summary>
-    public int DistanceValue
-    {
-        get
-        {
-            Debug.Log($"{player} {nameof(DistanceValue)} get.");
-            return value;
-        }
-    }
+    private bool run;
     /// <summary>
     /// 真正的值。
     /// </summary>
@@ -29,29 +18,14 @@ public class Distance : SwitchBehavior
     /// </summary>
     private void StartProgress()
     {
-        if (!died)
-        {
-            Debug.Log($"{player} {nameof(StartProgress)}");
-            run = true;
-        }
+        run = true;
     }
     /// <summary>
     /// 停止进度条。
     /// </summary>
     private void StopProgress()
     {
-        Debug.Log($"{player} {nameof(StopProgress)}");
         run = false;
-    }
-    private void Die()
-    {
-        died = true;
-        StopProgress();
-    }
-    private void Revive()
-    {
-        died = false;
-        StartProgress();
     }
     /// <summary>
     /// 重置进度条。
@@ -74,17 +48,13 @@ public class Distance : SwitchBehavior
     {
         Swicher(() =>
         {
-            events.BlackDying += Die;
-            events.BlackReviving += Revive;
+            events.BlackProcessStart += StartProgress;
+            events.BlackProcessEnd += StopProgress;
         }, () =>
         {
-            events.WhiteDying += Die;
-            events.WhiteReviving += Revive;
+            events.WhiteProcessStart += StartProgress;
+            events.WhiteProcessEnd += StopProgress;
         });
-        events.GamePause += StopProgress;
-        events.GameResume += StartProgress;
-        events.GameStart += StartProgress;
-        events.GameWin += StopProgress;
     }
 
     // Update is called once per frame

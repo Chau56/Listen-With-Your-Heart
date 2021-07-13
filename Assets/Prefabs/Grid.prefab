@@ -6727,7 +6727,7 @@ GameObject:
   - component: {fileID: 1795819228263558887}
   - component: {fileID: 693172020}
   - component: {fileID: 693172019}
-  - component: {fileID: 693172018}
+  - component: {fileID: 496909828122957436}
   m_Layer: 0
   m_Name: Spike
   m_TagString: Spike
@@ -8256,7 +8256,7 @@ CompositeCollider2D:
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
-  - m_Collider: {fileID: 693172018}
+  - m_Collider: {fileID: 496909828122957436}
     m_ColliderPaths:
     - - X: 656527808
         Y: 50000000
@@ -9825,7 +9825,7 @@ CompositeCollider2D:
       - {x: 79.52784, y: -6.638889}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
---- !u!19719996 &693172018
+--- !u!19719996 &496909828122957436
 TilemapCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9840,4 +9840,4 @@ TilemapCollider2D:
   m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
-  m_ExtrusionFactor: 0.1
+  m_ExtrusionFactor: 0.00001

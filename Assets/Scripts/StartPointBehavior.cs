@@ -11,7 +11,18 @@ public class StartPointBehavior : MonoBehaviour
 
     private void RegisterEvnets()
     {
-        events.GamePause += () => gameObject.SetActive(false);
-        events.GameResume += () => gameObject.SetActive(true);
+        events.GamePause += Deactivate;
+        events.GameResume += Activate;
+        events.GameAbnormalEnd += Activate;
+    }
+
+    private void Activate()
+    {
+        gameObject.SetActive(true);
+    }
+
+    private void Deactivate()
+    {
+        gameObject.SetActive(false);
     }
 }

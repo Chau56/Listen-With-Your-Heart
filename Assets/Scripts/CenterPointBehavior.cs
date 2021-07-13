@@ -12,7 +12,18 @@ public class CenterPointBehavior : MonoBehaviour
 
     private void RegisterEvents()
     {
-        events.GamePause += () => gameObject.SetActive(true);
-        events.GameResume += () => gameObject.SetActive(false);
+        events.GamePause += Activate;
+        events.GameResume += Deactivate;
+        events.GameAbnormalEnd += Deactivate;
+    }
+
+    private void Activate()
+    {
+        gameObject.SetActive(true);
+    }
+
+    private void Deactivate()
+    {
+        gameObject.SetActive(false);
     }
 }

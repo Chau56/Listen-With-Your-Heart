@@ -17,6 +17,7 @@ public class AnimatorLogic : MonoBehaviour
         events = GameEvents.instance;
         animator = GetComponent<Animator>();
         events.GameFailed += FadeOut;
+        events.GameAbnormalEnd += FadeOut;
         animator.SetTrigger(gameStart);
     }
 

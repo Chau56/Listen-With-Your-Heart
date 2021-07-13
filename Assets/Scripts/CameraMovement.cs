@@ -1,37 +1,45 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class CameraMovement : MonoBehaviour
 {
-    [SerializeField]
-    private float speed = 8;
-    //[SerializeField]
-    private bool moveable;
     private GameEvents events;
     private new Rigidbody2D rigidbody;
-    //private float speedPerFrame;
+    [SerializeField]
+    [Tooltip("物体移动力")]
+    private Vector2 force = new Vector2(8.5f, 0);
+    private Vector2 velocityPaused;
+    /// <summary>
+    /// 施加脉冲力。
+    /// </summary>
+    private IEnumerator Impulse()
+    {
+        yield return new WaitForEndOfFrame();
+        rigidbody.AddForce(force, ForceMode2D.Impulse);
+        Debug.Log($"{tag} impulse velocity {rigidbody.velocity}");
+    }
+    private void Resume()
+    {
+        rigidbody.velocity = velocityPaused;
+    }
+    /// <summary>
+    /// 速度归零。
+    /// </summary>
+    private void Pause()
+    {
+        velocityPaused = rigidbody.velocity;
+        rigidbody.velocity = Vector2.zero;
+    }
     private void Start()
     {
         events = GameEvents.instance;
         rigidbody = GetComponent<Rigidbody2D>();
-        events.GameFailed += Stay;
-        events.GameStart += Move;
-        events.GamePause += Stay;
-        events.GameResume += Move;
-        events.GameWin += Stay;
-    }
-    private void Stay()
-    {
-        moveable = false;
-    }
-    private void Move()
-    {
-        moveable = true;
+        events.GameFailed += Pause;
+        events.GameStart += () => StartCoroutine(Impulse());
+        events.GamePause += Pause;
+        events.GameResume += Resume;
+        events.GameWin += Pause;
     }
 
-    // Update is called once per frame
-    private void FixedUpdate()
-    {
-        if (moveable) rigidbody.MovePosition(transform.position + Vector3.right * speed / 50);
-    }
 }

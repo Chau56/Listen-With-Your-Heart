@@ -13,15 +13,8 @@ public class DeathLogic : SwitchBehavior
     private new Collider2D collider;
     private SpriteRenderer sprite;
     private Joint2D joint;
-    [SerializeField]
-    [Tooltip("复活时延")]
-    private float reviveDelay;
-    /// <summary>
-    /// 复活的理论位置
-    /// </summary>
-    private Vector2 theoreticalPosition;
 
-    private void Awake()
+    private void Start()
     {
         spikesTag = spikes.tag;
         collider = GetComponent<Collider2D>();
@@ -44,13 +37,6 @@ public class DeathLogic : SwitchBehavior
         });
         events.GameStart += Revive;
     }
-
-    //private void GameStart()
-    //{
-    //    sprite.enabled = true;
-    //    collider.isTrigger = false;
-    //    joint.enabled = false;
-    //}
 
     private void Revive()
     {
