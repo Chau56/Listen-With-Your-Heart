@@ -219,11 +219,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16a871e4eb888a41bfdaafd76166681, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSpeed: {x: 0, y: -17}
-  speed: {x: 8.5, y: 0}
-  redrawPosion: {x: -18, y: 5, z: 0}
-  RedrawPrefab: {fileID: 31412473}
   randomProbability: 0.03
+  jumpTime: 0.001
 --- !u!1 &77273667
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,8 +257,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -150.9, y: -0.0000034571}
-  m_SizeDelta: {x: 49.7146, y: 49.7111}
+  m_AnchoredPosition: {x: -245.19353, y: -0.0000034571}
+  m_SizeDelta: {x: 80.78, y: 80.7743}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &77273669
 MonoBehaviour:
@@ -545,8 +542,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 141.3, y: 0.0000025034}
-  m_SizeDelta: {x: 50.3542, y: 44.631}
+  m_AnchoredPosition: {x: 250, y: 0.0000025034}
+  m_SizeDelta: {x: 81.8192, y: 72.5198}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &402342761
 MonoBehaviour:
@@ -812,11 +809,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16a871e4eb888a41bfdaafd76166681, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSpeed: {x: 0, y: 17}
-  speed: {x: 8.5, y: 0}
-  redrawPosion: {x: -18, y: -5, z: 0}
-  RedrawPrefab: {fileID: 655034239}
   randomProbability: 0.03
+  jumpTime: 0.001
 --- !u!1 &720858422
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,7 +1060,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 141.8879, y: 129.5032}
+  m_SizeDelta: {x: 230.55, y: 210.4264}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1122389452
 MonoBehaviour:
@@ -3189,7 +3183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
