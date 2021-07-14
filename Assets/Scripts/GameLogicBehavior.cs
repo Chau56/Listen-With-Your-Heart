@@ -15,10 +15,7 @@ public class GameLogicBehavior : MonoBehaviour
     [SerializeField]
     [Tooltip("菜单界面索引")]
     private int menu = 0;
-    [SerializeField]
-    [Tooltip("游戏界面索引")]
-    private int game = 1;
-    private bool restartPressed;
+    private bool restartNotPressed;
     private bool menuPressed;
     //[SerializeField]
     //private Transform revivePoint;
@@ -38,6 +35,12 @@ public class GameLogicBehavior : MonoBehaviour
         StartGame();
     }
 
+    private async Task ResetRestart()
+    {
+        await Task.Delay(startDelay + 10);
+        restartNotPressed = true;
+    }
+
     //public int Progress
     //{
     //    get
@@ -48,11 +51,10 @@ public class GameLogicBehavior : MonoBehaviour
 
     public void Restart()
     {
-        if (!restartPressed)
+        if (restartNotPressed)
         {
-            restartPressed = true;
-            events.EndGame();
-            RestartGame();
+            restartNotPressed = false;
+            _ = RestartGame();
         }
     }
 
@@ -71,17 +73,23 @@ public class GameLogicBehavior : MonoBehaviour
         }
     }
 
+    public void Pause()
+    {
+        events.PauseGame();
+    }
+
     private void RegisterEvents()
     {
-        events.GameFailed += RestartGame;
+        events.GameFailed += Restart;
         events.GamePause += PauseGravity;
         events.GameResume += ResumeGravity;
         events.GameAwake += ResumeGravity;
     }
 
-    private void RestartGame()
+    private async Task RestartGame()
     {
-        _ = events.StartGame(startDelay, endDelay);
+        await events.StartGame(startDelay, endDelay);
+        restartNotPressed = true;
     }
 
     private void AddDebugEvents()
@@ -105,6 +113,7 @@ public class GameLogicBehavior : MonoBehaviour
     private void StartGame()
     {
         _ = events.StartGame(startDelay, 10);
+        _ = ResetRestart();
     }
 
 
@@ -128,9 +137,8 @@ public class GameLogicBehavior : MonoBehaviour
         SceneManager.LoadSceneAsync(index);
     }
 
-    private void OnApplicationQuit()
+    private void OnApplicationPause(bool pause)
     {
-        //events.EndGame();
+        events.PauseGame();
     }
-
 }

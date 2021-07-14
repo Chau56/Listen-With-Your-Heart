@@ -37,7 +37,7 @@ public class DeathLogic : SwitchBehavior
         });
         events.GameAwake += Die;
         events.GameStart += Revive;
-        events.GameEnd += Die;
+        events.GameAbnormalEnd += Die;
     }
 
     private void Revive()

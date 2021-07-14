@@ -19,7 +19,7 @@ public class TrailController : SwitchBehavior
             events.WhiteReviving += Revive;
         });
         events.GameStart += Revive;
-        events.GameEnd += Die;
+        events.GameAbnormalEnd += Die;
     }
 
     private void Die()

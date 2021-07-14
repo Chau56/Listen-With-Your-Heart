@@ -134,6 +134,3 @@ MonoBehaviour:
   startDelay: 850
   endDelay: 850
   menu: 0
-  game: 1
-  revivePoint: {fileID: 0}
-  endline: {fileID: 0}

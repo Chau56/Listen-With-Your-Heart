@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -15,11 +14,11 @@ public class AudioController : MonoBehaviour
     [SerializeField]
     [Tooltip("淡出音量减小值")]
     [Min(1e-5f)]
-    private float decline = 0.1f;
+    private float decline = 0.01f;
     [SerializeField]
     [Tooltip("淡出音量减小时间间隔，单位毫秒")]
     [Min(0)]
-    private int interval = 100;
+    private int interval = 10;
     [SerializeField]
     [Tooltip("最大音量。会覆盖AudioSource的音量。")]
     [Range(0, 1)]

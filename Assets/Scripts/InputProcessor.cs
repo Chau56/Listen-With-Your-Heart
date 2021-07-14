@@ -2,21 +2,20 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(GameLogicBehavior))]
 public class InputProcessor : MonoBehaviour
 {
     private GameEvents events;
     private float halfScreen;
     private Pointer currentPointer;
-
-    public InputProcessor()
-    {
-        events = GameEvents.instance;
-    }
+    private GameLogicBehavior behavior;
 
     private void Start()
     {
+        events = GameEvents.instance;
         currentPointer = Pointer.current;
         halfScreen = (float)Screen.height / 2;
+        behavior = GetComponent<GameLogicBehavior>();
         Debug.Log($"halfscreen {halfScreen}");
     }
 
@@ -100,12 +99,7 @@ public class InputProcessor : MonoBehaviour
 
     private void OnRestartGame()
     {
-        _ = events.StartGame(850, 950);
-    }
-
-    private void OnApplicationPause(bool pause)
-    {
-        events.PauseGame();
+        behavior.Restart();
     }
 
 }

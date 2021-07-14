@@ -42,6 +42,6 @@ public class AutoMovement : SwitchBehavior
         events.GameStart += () => StartCoroutine(Impulse());
         events.GamePause += Pause;
         events.GameResume += Resume;
-        events.GameEnd += Pause;
+        events.GameAbnormalEnd += Pause;
     }
 }

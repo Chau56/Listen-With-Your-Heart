@@ -19,6 +19,7 @@ public class DeathParticle : SwitchBehavior
             events.WhiteReviving += Revive;
         });
         events.GameAwake += Revive;
+        events.GameAbnormalEnd += Die;
     }
 
     private void Die()
