@@ -32,6 +32,9 @@ public class ButtonControl : MonoBehaviour
     }
     private IEnumerator LoadNextSceneAsync()//异步加载场景1等待动画播放完后激活场景
     {
+        var events = GameEvents.instance;
+        events.ClearEvents();
+        events.ClearState();
         AsyncOperation async = SceneManager.LoadSceneAsync(1);
         async.allowSceneActivation = false;
 
