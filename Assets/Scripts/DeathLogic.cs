@@ -20,11 +20,11 @@ public class DeathLogic : SwitchBehavior
         collider = GetComponent<Collider2D>();
         sprite = GetComponent<SpriteRenderer>();
         joint = GetComponent<Joint2D>();
-        RegisterOtherEvents();
+        RegisterEvents();
     }
 
 
-    private void RegisterOtherEvents()
+    private void RegisterEvents()
     {
         Swicher(() =>
         {
@@ -35,7 +35,9 @@ public class DeathLogic : SwitchBehavior
             events.WhiteReviving += Revive;
             events.WhiteDying += Die;
         });
+        events.GameAwake += Die;
         events.GameStart += Revive;
+        events.GameEnd += Die;
     }
 
     private void Revive()
@@ -52,11 +54,24 @@ public class DeathLogic : SwitchBehavior
         joint.enabled = true;
     }
 
-    private void OnBecameInvisible()
+    private void KillBlack()
     {
-        Debug.Log($"{tag} invisible.");
-        Swicher(events.KillBlack, events.KillWhite);
+        events.KillBlack();
     }
+    private void KillWhite()
+    {
+        events.KillWhite();
+    }
+
+    private void Kill()
+    {
+        Swicher(KillBlack, KillWhite);
+    }
+
+    //private void OnBecameInvisible()
+    //{
+    //    Debug.Log($"{tag} invisible.");
+    //}
 
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -65,7 +80,9 @@ public class DeathLogic : SwitchBehavior
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        DeathDetect(collision.gameObject.tag);
+        string ctag = collision.gameObject.tag;
+        Debug.Log($"{tag} enter {ctag}, velocity {collider.attachedRigidbody.velocity}");
+        DeathDetect(ctag);
     }
 
     private void DeathDetect(string tag)
@@ -76,19 +93,17 @@ public class DeathLogic : SwitchBehavior
 
     private void TagSensor(string tag)
     {
-        Debug.Log($"{this.tag} enter or stay {tag}.");
         if (tag == spikesTag)
         {
-            Swicher(events.KillBlack, events.KillWhite);
+            Kill();
         }
     }
 
     private void SpeedSensor(float x)
     {
-        Debug.Log($"{tag} velocity {x}.");
         if (x < 1)
         {
-            Swicher(events.KillBlack, events.KillWhite);
+            Kill();
         }
     }
 

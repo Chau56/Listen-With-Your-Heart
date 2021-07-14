@@ -6,6 +6,9 @@ public class PlayerJumpController : SwitchBehavior
     [SerializeField]
     [Tooltip("跳跃速度。")]
     private Vector2 jumpSpeed = new Vector2(0, 17);
+    [SerializeField]
+    private GameObject revivePosition;
+    private string reviveTag;
     private Rigidbody2D rigidBody;
     private bool jumpPressed;
     /// <summary>
@@ -18,10 +21,11 @@ public class PlayerJumpController : SwitchBehavior
             return !canJump;
         }
     }
-    private bool canJump, died;
+    private bool canJump;
 
     private void Start()
     {
+        reviveTag = revivePosition.tag;
         rigidBody = GetComponent<Rigidbody2D>();
         RegisterEvents();
     }
@@ -32,14 +36,10 @@ public class PlayerJumpController : SwitchBehavior
         {
             events.Jump1Start += JumpStart;
             events.Jump1Finished += JumpFinished;
-            events.BlackDying += Die;
-            events.BlackReviving += Revive;
         }, () =>
         {
             events.Jump2Start += JumpStart;
             events.Jump2Finished += JumpFinished;
-            events.WhiteDying += Die;
-            events.WhiteReviving += Revive;
         });
     }
 
@@ -55,20 +55,9 @@ public class PlayerJumpController : SwitchBehavior
         jumpPressed = false;
     }
 
-    private void Die()
-    {
-        died = true;
-        canJump = false;
-    }
-
-    private void Revive()
-    {
-        died = false;
-    }
-
     private void Jump()
     {
-        if (canJump && jumpPressed && !died)
+        if (canJump && jumpPressed)
         {
             Debug.Log($"{tag} jumped.");
             rigidBody.AddForce(jumpSpeed, ForceMode2D.Impulse);
@@ -83,11 +72,16 @@ public class PlayerJumpController : SwitchBehavior
 
     private void OnCollisionEnter2D(Collision2D collision)//检测碰撞当碰撞发生后重置canJump让物体重新能够有一次跳跃机会
     {
-        if (!died) canJump = true;
+        canJump = true;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (!died) canJump = false;
+        canJump = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag(reviveTag)) canJump = false;
     }
 }

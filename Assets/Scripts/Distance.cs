@@ -30,12 +30,12 @@ public class Distance : SwitchBehavior
     /// <summary>
     /// 重置进度条。
     /// </summary>
-    //private void ResetProgress()
-    //{
-    //    Debug.Log($"{player} {nameof(ResetProgress)}");
-    //    value = 0;
-    //    distance.text = "0";
-    //}
+    private void ResetProgress()
+    {
+        Debug.Log($"{player} {nameof(ResetProgress)}");
+        value = 0;
+        distance.text = "0";
+    }
 
     // Start is called before the first frame update
     private void Start()
@@ -55,6 +55,7 @@ public class Distance : SwitchBehavior
             events.WhiteProcessStart += StartProgress;
             events.WhiteProcessEnd += StopProgress;
         });
+        events.GameAwake += ResetProgress;
     }
 
     // Update is called once per frame

@@ -10,7 +10,7 @@ public class ProgressCalculate : SwitchBehavior
     private Transform endline;
     [SerializeField]
     private Text percent;
-    private float startPosition;
+    private float trueStartPosition, startPosition;
     private float currentLen;
     private float totalLen;
     private Slider slider;
@@ -18,7 +18,8 @@ public class ProgressCalculate : SwitchBehavior
     private void Start()
     {
         slider = GetComponent<Slider>();
-        startPosition = revivePoint.position.x;
+        trueStartPosition = revivePoint.position.x;
+        startPosition = trueStartPosition;
         totalLen = endline.position.x - startPosition;
         Swicher(() =>
         {
@@ -28,6 +29,7 @@ public class ProgressCalculate : SwitchBehavior
              events.WhiteProcessEnd += Add;
          });
         events.GamePause += Show;
+        events.GameAwake += ResetProgress;
     }
 
     private void Add()
@@ -41,5 +43,11 @@ public class ProgressCalculate : SwitchBehavior
         int value = (int)(currentLen / totalLen * 100);
         slider.value = value;
         percent.text = $"{value}%";
+    }
+
+    private void ResetProgress()
+    {
+        currentLen = 0;
+        startPosition = trueStartPosition;
     }
 }

@@ -20,31 +20,31 @@ public class GameLogicBehavior : MonoBehaviour
     private int game = 1;
     private bool restartPressed;
     private bool menuPressed;
-    [SerializeField]
-    private Transform revivePoint;
-    [SerializeField]
-    private Transform endline;
-    private float startPosition;
-    private float totalLen;
+    //[SerializeField]
+    //private Transform revivePoint;
+    //[SerializeField]
+    //private Transform endline;
+    //private float startPosition;
+    //private float totalLen;
 
     private void Start()
     {
         events = GameEvents.instance;
         gravity = Physics2D.gravity;
-        startPosition = revivePoint.position.x;
-        totalLen = endline.position.x - startPosition;
+        //startPosition = revivePoint.position.x;
+        //totalLen = endline.position.x - startPosition;
         RegisterEvents();
         AddDebugEvents();
-        _ = WaitToStart();
+        StartGame();
     }
 
-    public int Progress
-    {
-        get
-        {
-            return Mathf.FloorToInt((revivePoint.position.x - startPosition) / totalLen);
-        }
-    }
+    //public int Progress
+    //{
+    //    get
+    //    {
+    //        return Mathf.FloorToInt((revivePoint.position.x - startPosition) / totalLen);
+    //    }
+    //}
 
     public void Restart()
     {
@@ -74,22 +74,14 @@ public class GameLogicBehavior : MonoBehaviour
     private void RegisterEvents()
     {
         events.GameFailed += RestartGame;
-        events.GameFailed += Clear;
-        events.GameWin += Clear;
-        events.GameAbnormalEnd += Clear;
         events.GamePause += PauseGravity;
         events.GameResume += ResumeGravity;
-    }
-
-    private void Clear()
-    {
-        events.ClearEvents();
-        events.ClearState();
+        events.GameAwake += ResumeGravity;
     }
 
     private void RestartGame()
     {
-        _ = LoadScene(game, endDelay);
+        _ = events.StartGame(startDelay, endDelay);
     }
 
     private void AddDebugEvents()
@@ -97,6 +89,7 @@ public class GameLogicBehavior : MonoBehaviour
         events.GameStart += () => Debug.Log("game start");
         events.GameFailed += () => Debug.Log("game failed");
         events.GameWin += () => Debug.Log("game win");
+        events.GameEnd += () => Debug.Log("game end");
         events.GamePause += () => Debug.Log("game paused");
         events.GameResume += () => Debug.Log("game resumed");
         events.Jump1Start += () => Debug.Log("jump1 start");
@@ -109,13 +102,9 @@ public class GameLogicBehavior : MonoBehaviour
         events.WhiteDying += () => Debug.Log("white die");
     }
 
-    private async Task WaitToStart()
+    private void StartGame()
     {
-        Debug.Log("wait to start");
-        Physics2D.gravity = Vector2.zero;
-        await Task.Delay(startDelay);
-        Physics2D.gravity = gravity;
-        events.StartGame();
+        _ = events.StartGame(startDelay, 10);
     }
 
 
@@ -132,6 +121,8 @@ public class GameLogicBehavior : MonoBehaviour
     private async Task LoadScene(int index, int delay)
     {
         await Task.Delay(delay);
+        events.ClearEvents();
+        events.ClearState();
         Physics2D.gravity = gravity;
         Debug.Log($"load scene {index}");
         SceneManager.LoadSceneAsync(index);
@@ -139,7 +130,7 @@ public class GameLogicBehavior : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        events.EndGame(false);
+        //events.EndGame();
     }
 
 }

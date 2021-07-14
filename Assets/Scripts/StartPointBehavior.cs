@@ -13,7 +13,7 @@ public class StartPointBehavior : MonoBehaviour
     {
         events.GamePause += Deactivate;
         events.GameResume += Activate;
-        events.GameAbnormalEnd += Activate;
+        events.GameEnd += Activate;
     }
 
     private void Activate()

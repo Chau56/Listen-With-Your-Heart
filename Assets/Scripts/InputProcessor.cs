@@ -7,32 +7,17 @@ public class InputProcessor : MonoBehaviour
     private GameEvents events;
     private float halfScreen;
     private Pointer currentPointer;
-    private float startPosition;
-    private bool paused;
+
+    public InputProcessor()
+    {
+        events = GameEvents.instance;
+    }
 
     private void Start()
     {
-        events = GameEvents.instance;
         currentPointer = Pointer.current;
         halfScreen = (float)Screen.height / 2;
         Debug.Log($"halfscreen {halfScreen}");
-        RegisterEvents();
-    }
-
-    private void RegisterEvents()
-    {
-        events.GamePause += Pause;
-        events.GameResume += Resume;
-    }
-
-    private void Pause()
-    {
-        paused = true;
-    }
-
-    private void Resume()
-    {
-        paused = false;
     }
 
     private void OnJump1Started()
@@ -55,8 +40,9 @@ public class InputProcessor : MonoBehaviour
         events.FinishJump2();
     }
 
-    private void SwichPointer(bool start, Action black, Action white)
+    private void SwichPointer(Func<bool> black, Func<bool> white)
     {
+        float y;
         switch (currentPointer)
         {
             case Touchscreen screen:
@@ -64,65 +50,62 @@ public class InputProcessor : MonoBehaviour
                 {
                     if (item.phase.ReadValue() != UnityEngine.InputSystem.TouchPhase.None)
                     {
-                        startPosition = item.startPosition.y.ReadValue();
-                        CheckPosition(black, white);
+                        y = item.startPosition.y.ReadValue();
+                        CheckPosition(y, black, white);
                     }
                 }
                 break;
             default:
-                if (start)
-                {
-                    startPosition = currentPointer.position.y.ReadValue();
-                    CheckPosition(black, white);
-                }
-                else
-                {
-                    CheckPosition(black, white);
-                }
+                y = currentPointer.position.y.ReadValue();
+                CheckPosition(y, black, white);
                 break;
         }
     }
 
-    private void CheckPosition(Action black, Action white)
+    private void CheckPosition(float y, Func<bool> black, Func<bool> white)
     {
-        Debug.Log($"jump start {startPosition}");
-        if (startPosition < halfScreen)
+        Debug.Log($"jump start {y}");
+        if (y < halfScreen)
         {
-            black();
+            if (!black()) white();
         }
         else
         {
-            white();
+            if (!white()) black();
         }
     }
 
     private void OnJumpStarted()
     {
-        SwichPointer(true, events.StartJump1, events.StartJump2);
+        SwichPointer(events.StartJump1, events.StartJump2);
     }
 
     private void OnJumpFinished()
     {
-        SwichPointer(false, events.FinishJump1, events.FinishJump2);
+        SwichPointer(events.FinishJump1, events.FinishJump2);
     }
 
     private void OnPause()
     {
-        if (paused)
+        if (!events.PauseGame())
         {
-            paused = false;
             events.ResumeGame();
         }
-        else
-        {
-            paused = true;
-            events.PauseGame();
-        }
+    }
+
+    private void OnEndGame()
+    {
+        events.EndGame();
+    }
+
+    private void OnRestartGame()
+    {
+        _ = events.StartGame(850, 950);
     }
 
     private void OnApplicationPause(bool pause)
     {
-            events.PauseGame();
+        events.PauseGame();
     }
 
 }

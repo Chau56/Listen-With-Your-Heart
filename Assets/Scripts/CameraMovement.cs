@@ -8,38 +8,37 @@ public class CameraMovement : MonoBehaviour
     private new Rigidbody2D rigidbody;
     [SerializeField]
     [Tooltip("物体移动力")]
-    private Vector2 force = new Vector2(8.5f, 0);
-    private Vector2 velocityPaused;
+    private Vector2 velocity = new Vector2(8.5f, 0);
+    private Vector2 startPosition;
     /// <summary>
     /// 施加脉冲力。
     /// </summary>
-    private IEnumerator Impulse()
+    private void Run()
     {
-        yield return new WaitForEndOfFrame();
-        rigidbody.AddForce(force, ForceMode2D.Impulse);
-        Debug.Log($"{tag} impulse velocity {rigidbody.velocity}");
-    }
-    private void Resume()
-    {
-        rigidbody.velocity = velocityPaused;
+        rigidbody.velocity = velocity;
     }
     /// <summary>
     /// 速度归零。
     /// </summary>
-    private void Pause()
+    private void Stop()
     {
-        velocityPaused = rigidbody.velocity;
         rigidbody.velocity = Vector2.zero;
+    }
+
+    private void Reset()
+    {
+        rigidbody.MovePosition(startPosition);
     }
     private void Start()
     {
+        startPosition = transform.position;
         events = GameEvents.instance;
         rigidbody = GetComponent<Rigidbody2D>();
-        events.GameFailed += Pause;
-        events.GameStart += () => StartCoroutine(Impulse());
-        events.GamePause += Pause;
-        events.GameResume += Resume;
-        events.GameWin += Pause;
+        events.GameAwake += Reset;
+        events.GameStart += Run;
+        events.GamePause += Stop;
+        events.GameResume += Run;
+        events.GameEnd += Stop;
     }
 
 }

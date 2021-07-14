@@ -14,7 +14,7 @@ public class CenterPointBehavior : MonoBehaviour
     {
         events.GamePause += Activate;
         events.GameResume += Deactivate;
-        events.GameAbnormalEnd += Deactivate;
+        events.GameEnd += Deactivate;
     }
 
     private void Activate()

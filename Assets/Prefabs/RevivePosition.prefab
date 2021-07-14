@@ -46,7 +46,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 17aea3e3a267c514d94934913dae65b6, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -142,8 +142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f6fd3560993d094890e4f4aab141c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decline: 0.2
-  interval: 0.01
+  decline: 0.01
+  interval: 10
   volume: 1
 --- !u!114 &5043393563783621443
 MonoBehaviour:
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300dcad1b2dc6334b98adf0ee617df24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: {x: 8500000, y: 0}
+  velocity: {x: 8.5, y: 0}
 --- !u!50 &6020128563476178660
 Rigidbody2D:
   serializedVersion: 4

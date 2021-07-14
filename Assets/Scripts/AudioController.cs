@@ -52,7 +52,7 @@ public class AudioController : MonoBehaviour
 
     private void RegisterEvents()
     {
-        events.GameFailed += Stop;
+        events.GameEnd += Stop;
         events.GameResume += Unpause;
         events.GamePause += Pause;
         events.GameStart += Play;
@@ -64,8 +64,7 @@ public class AudioController : MonoBehaviour
     }
     private void Pause()
     {
-        CancelSource();
-        _ = FadeOutEffect(false, source.Token);
+        moveAS.Pause();
     }
     private void Play()
     {
@@ -74,8 +73,7 @@ public class AudioController : MonoBehaviour
     }
     private void Unpause()
     {
-        CancelSource();
-        _ = FadeInEffect(false, source.Token);
+        moveAS.UnPause();
     }
     private void Stop()
     {
@@ -95,6 +93,7 @@ public class AudioController : MonoBehaviour
         if (stop) moveAS.Stop();
         else moveAS.Pause();
     }
+
     private async Task FadeInEffect(bool play, CancellationToken token)
     {
         Debug.Log($"music fadein may play {play}");

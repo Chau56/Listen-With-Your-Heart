@@ -13,7 +13,7 @@ public class PauseBackground : MonoBehaviour
         image = GetComponent<Image>();
         events.GamePause += Pause;
         events.GameResume += Resume;
-        events.GameAbnormalEnd += Resume;
+        events.GameEnd += Resume;
         Resume();
     }
 

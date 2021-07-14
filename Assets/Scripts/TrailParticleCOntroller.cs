@@ -18,6 +18,8 @@ public class TrailParticleCOntroller : SwitchBehavior
             events.WhiteDying += Die;
             events.WhiteReviving += Revive;
         });
+        events.GameStart += Revive;
+        events.GameEnd += Die;
     }
 
     private void Die()

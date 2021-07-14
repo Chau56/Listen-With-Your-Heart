@@ -16,4 +16,10 @@ public class EndlineDetection : MonoBehaviour
         Debug.Log($"{collision.tag} hit end line");
         events.HitEndline();
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Debug.Log($"{collision.tag} stay end line");
+        events.HitEndline();
+    }
 }
