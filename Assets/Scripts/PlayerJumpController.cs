@@ -28,6 +28,7 @@ public class PlayerJumpController : SwitchBehavior
 
     private void RegisterEvents()
     {
+        events.GameStart += Revive;
         Swicher(() =>
         {
             events.Jump1Start += JumpStart;

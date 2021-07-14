@@ -11,6 +11,7 @@ TagManager:
   - Black
   - Endline
   - RevivePoint
+  - cubeRedraw
   layers:
   - Default
   - TransparentFX

@@ -52,11 +52,11 @@ public class DeathLogic : SwitchBehavior
         joint.enabled = true;
     }
 
-    private void OnBecameInvisible()
-    {
-        Debug.Log($"{tag} invisible.");
-        Swicher(events.KillBlack, events.KillWhite);
-    }
+    //private void OnBecameInvisible()
+    //{
+    //    Debug.Log($"{tag} invisible.");
+    //    Swicher(events.KillBlack, events.KillWhite);
+    //}
 
     private void OnCollisionStay2D(Collision2D collision)
     {

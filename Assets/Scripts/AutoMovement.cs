@@ -12,9 +12,9 @@ public class AutoMovement : SwitchBehavior
     /// <summary>
     /// Ê©¼ÓÂö³åÁ¦¡£
     /// </summary>
-    private IEnumerator Impulse()
+    private void Impulse()
     {
-        yield return new WaitForEndOfFrame();
+        //yield return new WaitForEndOfFrame();
         myRigidbody.AddForce(speed, ForceMode2D.Impulse);
         Debug.Log($"{tag} impulse velocity {myRigidbody.velocity}");
     }
@@ -39,7 +39,7 @@ public class AutoMovement : SwitchBehavior
 
     private void RegisterEvents()
     {
-        events.GameStart += () => StartCoroutine(Impulse());
+        events.GameStart += Impulse;
         events.GamePause += Pause;
         events.GameResume += Resume;
     }

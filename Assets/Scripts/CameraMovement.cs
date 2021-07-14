@@ -8,7 +8,7 @@ public class CameraMovement : MonoBehaviour
     private new Rigidbody2D rigidbody;
     [SerializeField]
     [Tooltip("物体移动力")]
-    private Vector2 force = new Vector2(8.5f, 0);
+    private Vector2 velocity = new Vector2(8.5f, 0);
     private Vector2 velocityPaused;
     /// <summary>
     /// 施加脉冲力。
@@ -16,7 +16,7 @@ public class CameraMovement : MonoBehaviour
     private IEnumerator Impulse()
     {
         yield return new WaitForEndOfFrame();
-        rigidbody.AddForce(force, ForceMode2D.Impulse);
+        rigidbody.velocity = velocity;
         Debug.Log($"{tag} impulse velocity {rigidbody.velocity}");
     }
     private void Resume()
