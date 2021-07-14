@@ -68,6 +68,7 @@ public class GameLogicBehavior : MonoBehaviour
             menuPressed = true;
             events.EndGame();
             _ = LoadScene(menu, endDelay);
+            
         }
     }
 
