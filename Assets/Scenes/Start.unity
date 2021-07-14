@@ -219,8 +219,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16a871e4eb888a41bfdaafd76166681, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomProbability: 0.03
-  jumpTime: 0.001
+  jumpSpeed: {x: 0, y: -17}
+  speed: {x: 8.5, y: 0}
+  redrawPosion: {x: -16, y: 5, z: 0}
+  RedrawPrefab: {fileID: 31412473}
+  randomProbability: 0.001
 --- !u!1 &77273667
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,8 +812,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16a871e4eb888a41bfdaafd76166681, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomProbability: 0.03
-  jumpTime: 0.001
+  jumpSpeed: {x: 0, y: 17}
+  speed: {x: 8.5, y: 0}
+  redrawPosion: {x: -16, y: -5, z: 0}
+  RedrawPrefab: {fileID: 655034239}
+  randomProbability: 0.001
 --- !u!1 &720858422
 GameObject:
   m_ObjectHideFlags: 0
@@ -1113,6 +1119,7 @@ GameObject:
   - component: {fileID: 1179404745}
   - component: {fileID: 1179404748}
   - component: {fileID: 1179404747}
+  - component: {fileID: 1179404749}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: Road
@@ -3028,7 +3035,7 @@ TilemapCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
@@ -3053,6 +3060,54 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!66 &1179404749
+CompositeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179404743}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_GeometryType: 0
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths:
+  - m_Collider: {fileID: 1179404747}
+    m_ColliderPaths:
+    - - X: 220000000
+        Y: 70000000
+      - X: -220000000
+        Y: 70000000
+      - X: -220000000
+        Y: 55833336
+      - X: 220000000
+        Y: 55833336
+    - - X: 220000000
+        Y: -56388888
+      - X: -220000000
+        Y: -56388888
+      - X: -220000000
+        Y: -70000000
+      - X: 220000000
+        Y: -70000000
+  m_CompositePaths:
+    m_Paths:
+    - - {x: 21.999971, y: 5.5833335}
+      - {x: 21.999971, y: 7}
+      - {x: -22, y: 6.9999704}
+      - {x: -21.999971, y: 5.5833335}
+    - - {x: 21.999971, y: -7}
+      - {x: 21.999971, y: -5.638889}
+      - {x: -22, y: -5.638918}
+      - {x: -21.999971, y: -7}
+  m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.00005
 --- !u!1 &1253623046
 GameObject:
   m_ObjectHideFlags: 0
@@ -3338,7 +3393,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7685317719583735688, guid: ed1a8174f1d37944dad85deb0232e4f1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18
+      value: -16
       objectReference: {fileID: 0}
     - target: {fileID: 7685317719583735688, guid: ed1a8174f1d37944dad85deb0232e4f1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3380,8 +3435,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: WhiteBlock
       objectReference: {fileID: 0}
+    - target: {fileID: 7685317719583735692, guid: ed1a8174f1d37944dad85deb0232e4f1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7685317719583735693, guid: ed1a8174f1d37944dad85deb0232e4f1, type: 3}
       propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7685317719583735694, guid: ed1a8174f1d37944dad85deb0232e4f1, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -3408,7 +3471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6143841159879116263, guid: 33a50f26c234d5d49b5b1c7797659b37, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18
+      value: -16
       objectReference: {fileID: 0}
     - target: {fileID: 6143841159879116263, guid: 33a50f26c234d5d49b5b1c7797659b37, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3452,6 +3515,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6143841159879116282, guid: 33a50f26c234d5d49b5b1c7797659b37, type: 3}
       propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143841159879116283, guid: 33a50f26c234d5d49b5b1c7797659b37, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
