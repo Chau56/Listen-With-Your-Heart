@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 1
-  soundValue: 1
+  soundValue: 0.5
   AudioClip: {fileID: 8300000, guid: 217fc5c620ce35f4d8b9d51c954ffe44, type: 3}
 --- !u!1 &741716150
 GameObject:
@@ -564,7 +564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 0
-  soundValue: 0.2
+  soundValue: 0.8
   AudioClip: {fileID: 8300000, guid: 2e69cd3c063bd4842b97ba5c932b6198, type: 3}
 --- !u!1 &1063435360
 GameObject:
@@ -850,11 +850,11 @@ PrefabInstance:
       objectReference: {fileID: 1788482908}
     - target: {fileID: 1326342483, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.47
       objectReference: {fileID: 0}
     - target: {fileID: 1326342483, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1435604783, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -866,11 +866,11 @@ PrefabInstance:
       objectReference: {fileID: 877015645}
     - target: {fileID: 1493531673, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.47
       objectReference: {fileID: 0}
     - target: {fileID: 1493531673, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1516578094, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -890,6 +890,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1705950882, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1706767245, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2021936952, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
