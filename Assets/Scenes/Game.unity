@@ -832,6 +832,10 @@ PrefabInstance:
       propertyPath: revivePoint
       value: 
       objectReference: {fileID: 1788482908}
+    - target: {fileID: 153327887, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 553215134, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
