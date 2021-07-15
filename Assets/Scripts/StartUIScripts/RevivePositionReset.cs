@@ -1,3 +1,4 @@
+using System.Threading;
 using UnityEngine;
 
 public class RevivePositionReset : MonoBehaviour
@@ -6,16 +7,22 @@ public class RevivePositionReset : MonoBehaviour
     [SerializeField]
     [Tooltip("多长时间后复活，单位毫秒")]
     private int reviveTime;
+    public CancellationTokenSource Source
+    {
+        get;
+        private set;
+    }
 
     private void Start()
     {
+        Source = new CancellationTokenSource();
         events = GameEvents.instance;
         events.GameEnd += Restart;
-        _ = events.StartGame(reviveTime, 10);
+        Restart();
     }
 
     private void Restart()
     {
-        _ = events.StartGame(reviveTime, 10);
+        _ = events.StartGame(reviveTime, 10, Source.Token);
     }
 }

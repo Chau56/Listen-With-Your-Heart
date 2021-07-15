@@ -8,7 +8,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField]
     [Tooltip("物体移动力")]
     private Vector2 velocity = new Vector2(8.5f, 0);
-    private Vector2 startPosition;
+    private Vector3 startPosition;
     /// <summary>
     /// 施加脉冲力。
     /// </summary>
@@ -26,7 +26,7 @@ public class CameraMovement : MonoBehaviour
 
     private void Reset()
     {
-        rigidbody.MovePosition(startPosition);
+        transform.position = startPosition;
     }
     private void Start()
     {

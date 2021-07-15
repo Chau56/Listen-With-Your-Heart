@@ -3,12 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class AnimatorLogic : MonoBehaviour
 {
-    [SerializeField]
-    [Tooltip("状态机里对应触发器名")]
-    private string gameStart = "GameStart";
-    [SerializeField]
-    [Tooltip("状态机里对应触发器名")]
-    private string gameFailed = "GameFailed";
     private Animator animator;
     private GameEvents events;
 
@@ -28,11 +22,11 @@ public class AnimatorLogic : MonoBehaviour
 
     private void Fadein()
     {
-        animator.SetTrigger(gameStart);
+        animator.SetBool("GameEnd", false);
     }
 
     private void FadeOut()
     {
-        animator.SetTrigger(gameFailed);
+        animator.SetBool("GameEnd", true);
     }
 }

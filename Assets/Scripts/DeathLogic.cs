@@ -13,6 +13,8 @@ public class DeathLogic : SwitchBehavior
     private new Collider2D collider;
     private SpriteRenderer sprite;
     private Joint2D joint;
+    [SerializeField]
+    private Transform revivePosition;
 
     private void Start()
     {
@@ -51,6 +53,7 @@ public class DeathLogic : SwitchBehavior
     {
         sprite.enabled = false;
         collider.isTrigger = true;
+        transform.position = revivePosition.position;
         joint.enabled = true;
     }
 

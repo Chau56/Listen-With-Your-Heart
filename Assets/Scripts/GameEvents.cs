@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ public class GameEvents
         Jump1Start, Jump2Start, Jump1Finished, Jump2Finished,
         BlackReviving, WhiteReviving, BlackDying, WhiteDying,
         BlackProcessStart, WhiteProcessStart, BlackProcessEnd, WhiteProcessEnd;
-
+    private bool behold;
     /// <summary>
     /// 黑色状态变量
     /// </summary>
@@ -140,17 +141,30 @@ public class GameEvents
     /// <summary>
     /// 可以在未结束时强制启动游戏, 这将结束游戏
     /// </summary>
-    /// <param name="delay">秒延迟</param>
-    public async Task StartGame(int startDelay, int endDelay)
+    /// <param name="delay">毫秒延迟</param>
+    public async Task StartGame(int startDelay, int endDelay, CancellationToken token = default)
     {
-        EndGame();
-        await Task.Delay(endDelay);
-        ClearState();
-        GameAwake();
-        await Task.Delay(startDelay);
-        gameNotEnd = true;
-        GameStart();
-        StartTwoProgress();
+        if (behold) return;
+        Debug.Log($"game events start game {behold}");
+        behold = true;
+        try
+        {
+            EndGame();
+            await Task.Delay(endDelay, token);
+            ClearState();
+            GameAwake();
+            await Task.Delay(startDelay, token);
+            gameNotEnd = true;
+            GameStart();
+            StartTwoProgress();
+            behold = false;
+            //startMutex.ReleaseMutex();
+        }
+        catch (TaskCanceledException)
+        {
+            behold = false;
+            //startMutex.ReleaseMutex();
+        }
     }
 
     public bool EndGame(bool win)
@@ -166,7 +180,10 @@ public class GameEvents
 
     public bool EndGame()
     {
-        if (!gameNotEnd) return false;
+        if (!gameNotEnd)
+        {
+            return false;
+        }
         StopTwoProgress();
         gameNotEnd = false;
         GameAbnormalEnd();

@@ -1,29 +1,27 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-[RequireComponent(typeof(Image))]
+[RequireComponent(typeof(Animator))]
 public class PauseBackground : MonoBehaviour
 {
     private GameEvents events;
-    private Image image;
+    private Animator anima;
     // Start is called before the first frame update
     private void Start()
     {
         events = GameEvents.instance;
-        image = GetComponent<Image>();
+        anima = GetComponent<Animator>();
         events.GamePause += Pause;
         events.GameResume += Resume;
         events.GameEnd += Resume;
-        Resume();
     }
 
     private void Pause()
     {
-        image.enabled = true;
+        anima.SetBool("Pause", true);
     }
 
     private void Resume()
     {
-        image.enabled = false;
+        anima.SetBool("Pause", false);
     }
 }

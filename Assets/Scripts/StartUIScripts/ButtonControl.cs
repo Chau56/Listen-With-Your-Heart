@@ -9,6 +9,8 @@ public class ButtonControl : MonoBehaviour
     [SerializeField]
     [Tooltip("延迟转场。单位毫秒")]
     private int delay = 1000;
+    [SerializeField]
+    private RevivePositionReset reset;
 
     private void Start()
     {
@@ -27,12 +29,13 @@ public class ButtonControl : MonoBehaviour
 
     public void SwitchScene()//开始游戏按钮调用的方法
     {
-        animator.SetTrigger("GameFailed");
+        animator.SetBool("GameEnd", true);
         Debug.Log("切换场景已执行");
         _ = LoadNextSceneAsync();
     }
     private async Task LoadNextSceneAsync()//异步加载场景1等待动画播放完后激活场景
     {
+        reset.Source.Cancel();
         await Task.Delay(delay);
         var events = GameEvents.instance;
         events.ClearEvents();

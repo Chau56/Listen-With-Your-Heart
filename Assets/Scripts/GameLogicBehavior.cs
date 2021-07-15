@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,8 +16,7 @@ public class GameLogicBehavior : MonoBehaviour
     [SerializeField]
     [Tooltip("菜单界面索引")]
     private int menu = 0;
-    private bool restartNotPressed;
-    private bool menuPressed;
+    private bool behold;
     //[SerializeField]
     //private Transform revivePoint;
     //[SerializeField]
@@ -24,21 +24,19 @@ public class GameLogicBehavior : MonoBehaviour
     //private float startPosition;
     //private float totalLen;
 
-    private void Start()
+    public GameLogicBehavior()
     {
         events = GameEvents.instance;
+    }
+
+    private void Start()
+    {
         gravity = Physics2D.gravity;
         //startPosition = revivePoint.position.x;
         //totalLen = endline.position.x - startPosition;
         RegisterEvents();
         AddDebugEvents();
         StartGame();
-    }
-
-    private async Task ResetRestart()
-    {
-        await Task.Delay(startDelay + 10);
-        restartNotPressed = true;
     }
 
     //public int Progress
@@ -51,11 +49,7 @@ public class GameLogicBehavior : MonoBehaviour
 
     public void Restart()
     {
-        if (restartNotPressed)
-        {
-            restartNotPressed = false;
-            _ = RestartGame();
-        }
+        _ = events.StartGame(startDelay, endDelay);
     }
 
     public void Resume()
@@ -65,12 +59,8 @@ public class GameLogicBehavior : MonoBehaviour
 
     public void LoadMenu()
     {
-        if (!menuPressed)
-        {
-            menuPressed = true;
-            events.EndGame();
-            _ = LoadScene(menu, endDelay);
-        }
+        events.EndGame();
+        _ = LoadScene(menu, endDelay);
     }
 
     public void Pause()
@@ -84,12 +74,6 @@ public class GameLogicBehavior : MonoBehaviour
         events.GamePause += PauseGravity;
         events.GameResume += ResumeGravity;
         events.GameAwake += ResumeGravity;
-    }
-
-    private async Task RestartGame()
-    {
-        await events.StartGame(startDelay, endDelay);
-        restartNotPressed = true;
     }
 
     private void AddDebugEvents()
@@ -113,7 +97,6 @@ public class GameLogicBehavior : MonoBehaviour
     private void StartGame()
     {
         _ = events.StartGame(startDelay, 10);
-        _ = ResetRestart();
     }
 
 
@@ -129,12 +112,15 @@ public class GameLogicBehavior : MonoBehaviour
 
     private async Task LoadScene(int index, int delay)
     {
+        if (behold) return;
+        behold = true;
         await Task.Delay(delay);
         events.ClearEvents();
         events.ClearState();
         Physics2D.gravity = gravity;
         Debug.Log($"load scene {index}");
         SceneManager.LoadSceneAsync(index);
+        behold = false;
     }
 
     private void OnApplicationPause(bool pause)
