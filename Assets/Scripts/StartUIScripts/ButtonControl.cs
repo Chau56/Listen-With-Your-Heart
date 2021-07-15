@@ -12,6 +12,7 @@ public class ButtonControl : MonoBehaviour
 
     private void Start()
     {
+        
         animator = GetComponent<Animator>();
         //button1 = GameObject.Find("Start");
         //button2 = GameObject.Find("Exit");
@@ -55,4 +56,5 @@ public class ButtonControl : MonoBehaviour
         Debug.Log("游戏退出已执行");
         Application.Quit();
     }
+
 }
