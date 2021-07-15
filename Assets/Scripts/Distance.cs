@@ -9,10 +9,30 @@ public class Distance : SwitchBehavior
     [Tooltip("增长速度。每秒增长50次speed。")]
     private int speed = 1;
     private bool run;
+    private int bonusStart;
+
+    public int Bonus
+    {
+        get; private set;
+    }
+
+    public void StartBonus()
+    {
+        bonusStart = Value;
+    }
+
+    public void EndBonus()
+    {
+        Bonus += Value - bonusStart;
+    }
     /// <summary>
-    /// 真正的值。
+    /// 不含Bonus的距离。
     /// </summary>
-    private int value;
+    public int Value
+    {
+        get;
+        private set;
+    }
     /// <summary>
     /// 激活进度条。
     /// </summary>
@@ -33,7 +53,8 @@ public class Distance : SwitchBehavior
     private void ResetProgress()
     {
         Debug.Log($"{player} {nameof(ResetProgress)}");
-        value = 0;
+        Value = 0;
+        Bonus = 0;
         distance.text = "0";
     }
 
@@ -63,8 +84,8 @@ public class Distance : SwitchBehavior
     {
         if (run)
         {
-            value += speed;
-            distance.text = value.ToString();
+            Value += speed;
+            distance.text = Value.ToString();
         }
     }
 }

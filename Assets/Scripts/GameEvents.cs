@@ -11,6 +11,14 @@ public class GameEvents
         Jump1Start, Jump2Start, Jump1Finished, Jump2Finished,
         BlackReviving, WhiteReviving, BlackDying, WhiteDying,
         BlackProcessStart, WhiteProcessStart, BlackProcessEnd, WhiteProcessEnd;
+    public int BlackRevive
+    {
+        get; private set;
+    }
+    public int WhiteRevive
+    {
+        get; private set;
+    }
     private bool behold;
     /// <summary>
     /// ºÚÉ«×´Ì¬±äÁ¿
@@ -73,6 +81,7 @@ public class GameEvents
             p1Dead = false;
             BlackProcessStart();
             BlackReviving();
+            BlackRevive += 1;
             return true;
         }
         return false;
@@ -85,6 +94,7 @@ public class GameEvents
             p2Dead = false;
             WhiteProcessStart();
             WhiteReviving();
+            WhiteRevive += 1;
             return true;
         }
         return false;
@@ -257,6 +267,7 @@ public class GameEvents
     public void ClearState()
     {
         p1Dead = p2Dead = p1Jumped = p2Jumped = gameNotEnd = gamePaused = false;
+        BlackRevive = WhiteRevive = 0;
     }
 
     private void CheckGameFailed()

@@ -15,6 +15,14 @@ public class ProgressCalculate : SwitchBehavior
     private float totalLen;
     private Slider slider;
 
+    public int Percent
+    {
+        get
+        {
+            return Mathf.RoundToInt(currentLen / totalLen * 100);
+        }
+    }
+
     private void Start()
     {
         slider = GetComponent<Slider>();
@@ -40,9 +48,8 @@ public class ProgressCalculate : SwitchBehavior
 
     private void Show()
     {
-        int value = (int)(currentLen / totalLen * 100);
-        slider.value = value;
-        percent.text = $"{value}%";
+        slider.value = Percent;
+        percent.text = $"{Percent}%";
     }
 
     private void ResetProgress()

@@ -12,7 +12,8 @@ public class PauseBackground : MonoBehaviour
         anima = GetComponent<Animator>();
         events.GamePause += Pause;
         events.GameResume += Resume;
-        events.GameEnd += Resume;
+        events.GameAwake += Resume;
+        events.GameWin += Pause;
     }
 
     private void Pause()
