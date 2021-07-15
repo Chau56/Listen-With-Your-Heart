@@ -248,7 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: 1
   soundValue: 1
-  AudioClip: {fileID: 8300000, guid: b2fa30225820ac34db28da9d2bba6137, type: 3}
+  AudioClip: {fileID: 8300000, guid: 217fc5c620ce35f4d8b9d51c954ffe44, type: 3}
 --- !u!1 &741716150
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,7 +564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 0
-  soundValue: 1
+  soundValue: 0.2
   AudioClip: {fileID: 8300000, guid: 2e69cd3c063bd4842b97ba5c932b6198, type: 3}
 --- !u!1 &1063435360
 GameObject:
