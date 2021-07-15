@@ -23,13 +23,9 @@ public class GameLogicBehavior : MonoBehaviour
     //private float startPosition;
     //private float totalLen;
 
-    public GameLogicBehavior()
-    {
-        events = GameEvents.instance;
-    }
-
     private void Start()
     {
+        events = GameEvents.instance;
         gravity = Physics2D.gravity;
         //startPosition = revivePoint.position.x;
         //totalLen = endline.position.x - startPosition;
@@ -124,6 +120,6 @@ public class GameLogicBehavior : MonoBehaviour
 
     private void OnApplicationPause(bool pause)
     {
-        events.PauseGame();
+        events?.PauseGame();
     }
 }

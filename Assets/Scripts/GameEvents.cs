@@ -170,7 +170,7 @@ public class GameEvents
             behold = false;
             //startMutex.ReleaseMutex();
         }
-        catch (TaskCanceledException)
+        catch (Exception e) when(e is TaskCanceledException || e is AggregateException)
         {
             behold = false;
             //startMutex.ReleaseMutex();
