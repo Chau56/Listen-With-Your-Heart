@@ -429,9 +429,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whitePerfectCollision: {fileID: 464194076440667692}
   blackPerfectCollision: {fileID: 4846317380503630242}
-  myTransform: {fileID: 1060123706}
-  whiteBlock: {fileID: 668955202}
-  blackBlock: {fileID: 1060123694}
+  whiteBlock: {fileID: 668955207}
+  blackBlock: {fileID: 1060123699}
 --- !u!50 &1060123699 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 6143841159879116282, guid: 33a50f26c234d5d49b5b1c7797659b37, type: 3}
@@ -7641,11 +7640,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2503245905842365649, guid: 1573ebc9c4a86f44bb43a6fcff77ac9e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.3249874
+      value: 3.3170042
       objectReference: {fileID: 0}
     - target: {fileID: 2503245905842365649, guid: 1573ebc9c4a86f44bb43a6fcff77ac9e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.019478261
+      value: 0.019492567
       objectReference: {fileID: 0}
     - target: {fileID: 2503245905842365649, guid: 1573ebc9c4a86f44bb43a6fcff77ac9e, type: 3}
       propertyPath: m_LocalPosition.z
