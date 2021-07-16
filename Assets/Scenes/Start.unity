@@ -802,7 +802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09fd2ad5af76bec42997f3c831fadaaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: e8dc75e2f7c66d24d8020b315236ff05, type: 3}
+  audioClip: {fileID: 8300000, guid: 49fffbc84d659804398916d5e40f631d, type: 3}
   soundVolume: 1
 --- !u!82 &402342765
 AudioSource:
