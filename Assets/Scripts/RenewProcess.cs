@@ -19,7 +19,7 @@ public class RenewProcess : MonoBehaviour
     private void RegisterEvents()
     {
         var events = GameEvents.instance;
-        events.GameWin += Renew;
+        events.GameEnd += Renew;
     }
     private void Renew()
     {
