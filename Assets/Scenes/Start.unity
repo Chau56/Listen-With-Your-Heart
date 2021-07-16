@@ -373,7 +373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09fd2ad5af76bec42997f3c831fadaaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioClip: {fileID: 8300000, guid: cc0943fc59b336140bb0b11241311614, type: 3}
+  audioClip: {fileID: 8300000, guid: cc0943fc59b336140bb0b11241311614, type: 3}
   soundVolume: 1
 --- !u!82 &77273673
 AudioSource:
@@ -802,7 +802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09fd2ad5af76bec42997f3c831fadaaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioClip: {fileID: 8300000, guid: e8dc75e2f7c66d24d8020b315236ff05, type: 3}
+  audioClip: {fileID: 8300000, guid: e8dc75e2f7c66d24d8020b315236ff05, type: 3}
   soundVolume: 1
 --- !u!82 &402342765
 AudioSource:

@@ -1017,6 +1017,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7572411570266737766, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8178163373469988590, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
       propertyPath: m_Constraints
       value: 4
@@ -1166,7 +1170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09fd2ad5af76bec42997f3c831fadaaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: e8dc75e2f7c66d24d8020b315236ff05, type: 3}
   soundVolume: 1
 --- !u!95 &1435604788
 Animator:
@@ -1199,7 +1203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09fd2ad5af76bec42997f3c831fadaaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: cc0943fc59b336140bb0b11241311614, type: 3}
   soundVolume: 1
 --- !u!82 &1435604790
 AudioSource:
@@ -1405,7 +1409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09fd2ad5af76bec42997f3c831fadaaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: e8dc75e2f7c66d24d8020b315236ff05, type: 3}
   soundVolume: 1
 --- !u!114 &1435604793
 MonoBehaviour:
@@ -1419,7 +1423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09fd2ad5af76bec42997f3c831fadaaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: cc0943fc59b336140bb0b11241311614, type: 3}
   soundVolume: 1
 --- !u!82 &1435604794
 AudioSource:
@@ -1625,7 +1629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09fd2ad5af76bec42997f3c831fadaaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioClip: {fileID: 8300000, guid: cc0943fc59b336140bb0b11241311614, type: 3}
+  audioClip: {fileID: 0}
   soundVolume: 1
 --- !u!114 &1435604797
 MonoBehaviour:
@@ -1639,7 +1643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09fd2ad5af76bec42997f3c831fadaaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioClip: {fileID: 8300000, guid: e8dc75e2f7c66d24d8020b315236ff05, type: 3}
+  audioClip: {fileID: 8300000, guid: e8dc75e2f7c66d24d8020b315236ff05, type: 3}
   soundVolume: 1
 --- !u!82 &1435604798
 AudioSource:
@@ -1845,7 +1849,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09fd2ad5af76bec42997f3c831fadaaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioClip: {fileID: 8300000, guid: e8dc75e2f7c66d24d8020b315236ff05, type: 3}
+  audioClip: {fileID: 8300000, guid: e8dc75e2f7c66d24d8020b315236ff05, type: 3}
   soundVolume: 1
 --- !u!1001 &1519689112
 PrefabInstance:
@@ -32220,11 +32224,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2503245905842365649, guid: 1573ebc9c4a86f44bb43a6fcff77ac9e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.27000332
+      value: 0.32499123
       objectReference: {fileID: 0}
     - target: {fileID: 2503245905842365649, guid: 1573ebc9c4a86f44bb43a6fcff77ac9e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.019431531
+      value: 0.019413888
       objectReference: {fileID: 0}
     - target: {fileID: 2503245905842365649, guid: 1573ebc9c4a86f44bb43a6fcff77ac9e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -32275,6 +32279,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 850437964815864435, guid: 154bdb1144b2c0e4f98a76762fa49e24, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 17b4db826392982439fcaffe41a1ef76, type: 3}
     - target: {fileID: 3137735626309331952, guid: 154bdb1144b2c0e4f98a76762fa49e24, type: 3}
       propertyPath: m_Name
       value: VirtualCamera
@@ -37226,6 +37234,10 @@ PrefabInstance:
       propertyPath: m_Time
       value: 0.35
       objectReference: {fileID: 0}
+    - target: {fileID: 1470014172693773282, guid: 33a50f26c234d5d49b5b1c7797659b37, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6143841159879116262, guid: 33a50f26c234d5d49b5b1c7797659b37, type: 3}
       propertyPath: m_Name
       value: BlackBlock
@@ -37387,6 +37399,10 @@ PrefabInstance:
       propertyPath: m_Parameters.colorGradient.m_NumColorKeys
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 956898418359952512, guid: ed1a8174f1d37944dad85deb0232e4f1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7685317719583735681, guid: ed1a8174f1d37944dad85deb0232e4f1, type: 3}
       propertyPath: revivePosition
       value: 
@@ -37445,7 +37461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7685317719583735692, guid: ed1a8174f1d37944dad85deb0232e4f1, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7685317719583735694, guid: ed1a8174f1d37944dad85deb0232e4f1, type: 3}
       propertyPath: m_IsTrigger
