@@ -10,6 +10,7 @@ public class GameEvents
         GameAwake, GameStart, GameFailed, GameWin, GamePause, GameResume, GameEnd, GameAbnormalEnd,
         Jump1Start, Jump2Start, Jump1Finished, Jump2Finished,
         BlackReviving, WhiteReviving, BlackDying, WhiteDying,
+        BlackWillDie, WhiteWillDie,
         BlackProcessStart, WhiteProcessStart, BlackProcessEnd, WhiteProcessEnd;
     public int BlackRevive
     {
@@ -40,6 +41,7 @@ public class GameEvents
             FinishJump1();
             p1Dead = true;
             BlackProcessEnd();
+            BlackWillDie();
             BlackDying();
             CheckGameFailed();
             return true;
@@ -54,6 +56,7 @@ public class GameEvents
             FinishJump2();
             p2Dead = true;
             WhiteProcessEnd();
+            WhiteWillDie();
             WhiteDying();
             CheckGameFailed();
             return true;
@@ -172,7 +175,7 @@ public class GameEvents
             behold = false;
             //startMutex.ReleaseMutex();
         }
-        catch (Exception e) when(e is TaskCanceledException || e is AggregateException)
+        catch (Exception e) when (e is TaskCanceledException || e is AggregateException)
         {
             behold = false;
             //startMutex.ReleaseMutex();
@@ -239,6 +242,8 @@ public class GameEvents
 
     public void ClearEvents()
     {
+        BlackWillDie =
+        WhiteWillDie =
         GameBeforeAwake =
         GameAbnormalEnd =
         GameAwake =

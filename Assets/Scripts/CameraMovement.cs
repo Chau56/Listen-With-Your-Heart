@@ -33,7 +33,7 @@ public class CameraMovement : MonoBehaviour
         startPosition = transform.position;
         events = GameEvents.instance;
         rigidbody = GetComponent<Rigidbody2D>();
-        events.GameAwake += Reset;
+        events.GameBeforeAwake += Reset;
         events.GameStart += Run;
         events.GamePause += Stop;
         events.GameResume += Run;

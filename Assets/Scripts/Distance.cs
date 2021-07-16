@@ -76,7 +76,7 @@ public class Distance : SwitchBehavior
             events.WhiteProcessStart += StartProgress;
             events.WhiteProcessEnd += StopProgress;
         });
-        events.GameAwake += ResetProgress;
+        events.GameBeforeAwake += ResetProgress;
     }
 
     // Update is called once per frame

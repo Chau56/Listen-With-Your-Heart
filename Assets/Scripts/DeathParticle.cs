@@ -11,11 +11,11 @@ public class DeathParticle : SwitchBehavior
     {
         Swicher(() =>
         {
-            events.BlackDying += Die;
+            events.BlackWillDie += Die;
             events.BlackReviving += Revive;
         }, () =>
         {
-            events.WhiteDying += Die;
+            events.WhiteWillDie += Die;
             events.WhiteReviving += Revive;
         });
         events.GameAwake += Revive;
