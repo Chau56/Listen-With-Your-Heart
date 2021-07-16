@@ -23,6 +23,6 @@ public class RevivePositionReset : MonoBehaviour
 
     private void Restart()
     {
-        _ = events.StartGame(reviveTime, 10, Source.Token);
+        _ = events.StartGame(0, reviveTime, 10, Source.Token);
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameEvents
 {
     public static GameEvents instance = new GameEvents();
-    public event Action
+    public event Action GameBeforeAwake,
         GameAwake, GameStart, GameFailed, GameWin, GamePause, GameResume, GameEnd, GameAbnormalEnd,
         Jump1Start, Jump2Start, Jump1Finished, Jump2Finished,
         BlackReviving, WhiteReviving, BlackDying, WhiteDying,
@@ -152,7 +152,7 @@ public class GameEvents
     /// 可以在未结束时强制启动游戏, 这将结束游戏
     /// </summary>
     /// <param name="delay">毫秒延迟</param>
-    public async Task StartGame(int startDelay, int endDelay, CancellationToken token = default)
+    public async Task StartGame(int beforeStartDelay, int startDelay, int endDelay, CancellationToken token = default)
     {
         if (behold) return;
         Debug.Log($"game events start game {behold}");
@@ -162,6 +162,8 @@ public class GameEvents
             EndGame();
             await Task.Delay(endDelay, token);
             ClearState();
+            GameBeforeAwake();
+            await Task.Delay(beforeStartDelay, token);
             GameAwake();
             await Task.Delay(startDelay, token);
             gameNotEnd = true;
@@ -237,6 +239,7 @@ public class GameEvents
 
     public void ClearEvents()
     {
+        GameBeforeAwake =
         GameAbnormalEnd =
         GameAwake =
         BlackProcessStart =

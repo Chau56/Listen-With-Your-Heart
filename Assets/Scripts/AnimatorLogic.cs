@@ -15,7 +15,7 @@ public class AnimatorLogic : MonoBehaviour
 
     private void RegisterEvents()
     {
-        events.GameAwake += Fadein;
+        events.GameBeforeAwake += Fadein;
         events.GameFailed += FadeOut;
         events.GameAbnormalEnd += FadeOut;
     }

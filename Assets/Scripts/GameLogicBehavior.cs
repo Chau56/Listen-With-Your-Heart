@@ -7,6 +7,9 @@ public class GameLogicBehavior : MonoBehaviour
     private GameEvents events;
     private Vector2 gravity;
     [SerializeField]
+    [Tooltip("唤醒游戏前的延迟。单位毫秒")]
+    private int beforeStartDelay = 850;
+    [SerializeField]
     [Tooltip("开始游戏前的延迟。单位毫秒")]
     private int startDelay = 850;
     [SerializeField]
@@ -44,7 +47,7 @@ public class GameLogicBehavior : MonoBehaviour
 
     public void Restart()
     {
-        _ = events.StartGame(startDelay, endDelay);
+        _ = events.StartGame(beforeStartDelay, startDelay, endDelay);
     }
 
     public void Resume()
@@ -73,6 +76,8 @@ public class GameLogicBehavior : MonoBehaviour
 
     private void AddDebugEvents()
     {
+        events.GameBeforeAwake += () => Debug.Log("game before awake");
+        events.GameAwake += () => Debug.Log("game awake");
         events.GameStart += () => Debug.Log("game start");
         events.GameFailed += () => Debug.Log("game failed");
         events.GameWin += () => Debug.Log("game win");
@@ -91,7 +96,7 @@ public class GameLogicBehavior : MonoBehaviour
 
     private void StartGame()
     {
-        _ = events.StartGame(startDelay, 10);
+        _ = events.StartGame(beforeStartDelay, startDelay, 10);
     }
 
 
