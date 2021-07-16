@@ -523,7 +523,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1125012126
 Transform:
   m_ObjectHideFlags: 0
@@ -860,7 +860,7 @@ PrefabInstance:
     - target: {fileID: 1624495329, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
       propertyPath: revivePoint
       value: 
-      objectReference: {fileID: 1788482908}
+      objectReference: {fileID: 1614604771}
     - target: {fileID: 1705950882, guid: a37975dcb1145bf4095f08daec00ab1c, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -7641,11 +7641,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2503245905842365649, guid: 1573ebc9c4a86f44bb43a6fcff77ac9e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.32498074
+      value: 3.3170042
       objectReference: {fileID: 0}
     - target: {fileID: 2503245905842365649, guid: 1573ebc9c4a86f44bb43a6fcff77ac9e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.019478261
+      value: 0.019492567
       objectReference: {fileID: 0}
     - target: {fileID: 2503245905842365649, guid: 1573ebc9c4a86f44bb43a6fcff77ac9e, type: 3}
       propertyPath: m_LocalPosition.z

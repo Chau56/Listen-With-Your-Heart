@@ -31,23 +31,26 @@ public class ProgressCalculate : SwitchBehavior
         totalLen = endline.position.x - startPosition;
         Swicher(() =>
         {
-            events.BlackProcessEnd += Add;
+            events.BlackDying += Show;
+            events.BlackReviving += SetStartPosition;
         }, () =>
          {
-             events.WhiteProcessEnd += Add;
+             events.WhiteDying += Show;
+             events.WhiteReviving += SetStartPosition;
          });
         events.GamePause += Show;
         events.GameAwake += ResetProgress;
     }
 
-    private void Add()
+    private void SetStartPosition()
     {
-        currentLen += revivePoint.position.x - startPosition;
         startPosition = revivePoint.position.x;
     }
 
     private void Show()
     {
+        currentLen += revivePoint.position.x - startPosition;
+        SetStartPosition();
         slider.value = Percent;
         percent.text = $"{Percent}%";
     }
