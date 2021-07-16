@@ -77,7 +77,8 @@ public class InputProcessor : MonoBehaviour
 
     private void OnJumpStarted()
     {
-        startPosition = currentPointer.position.y.ReadValue();
+        if (!(currentPointer is Touchscreen))
+            startPosition = currentPointer.position.y.ReadValue();
         SwichPointer(events.StartJump1, events.StartJump2);
     }
 
