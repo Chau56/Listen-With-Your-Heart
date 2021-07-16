@@ -17,7 +17,7 @@ public class PerfectCollisionParticle : MonoBehaviour
         float blackY = blackBlock.GetComponent<Rigidbody2D>().velocity.y;
 
         //if (collision.gameObject.CompareTag("White") && blackX == whiteX)         //由于运动过程会产生前后位移差，故不能直接判断是否完全相等（Bug13导致的）
-        if (collision.gameObject.CompareTag("White") && Mathf.Abs(blackX - whiteX) < 0.01)
+        if (collision.gameObject.CompareTag("White") && Mathf.Abs(blackX - whiteX) < 0.3)
         {
             //两方块旋转交换位置
             changePosition(pos);
