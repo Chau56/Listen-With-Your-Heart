@@ -31200,7 +31200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2503245905842365649, guid: 1573ebc9c4a86f44bb43a6fcff77ac9e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.8327675
+      value: 0.32499123
       objectReference: {fileID: 0}
     - target: {fileID: 2503245905842365649, guid: 1573ebc9c4a86f44bb43a6fcff77ac9e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -31249,6 +31249,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 850437964815864435, guid: 154bdb1144b2c0e4f98a76762fa49e24, type: 3}
       propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 850437964815864435, guid: 154bdb1144b2c0e4f98a76762fa49e24, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3137735626309331952, guid: 154bdb1144b2c0e4f98a76762fa49e24, type: 3}
@@ -36273,7 +36277,7 @@ PrefabInstance:
       objectReference: {fileID: 334412232}
     - target: {fileID: 668955211, guid: ed1a8174f1d37944dad85deb0232e4f1, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 668955211, guid: ed1a8174f1d37944dad85deb0232e4f1, type: 3}
       propertyPath: m_ConnectedRigidBody
@@ -36421,7 +36425,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7685317719583735692, guid: ed1a8174f1d37944dad85deb0232e4f1, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7685317719583735694, guid: ed1a8174f1d37944dad85deb0232e4f1, type: 3}
       propertyPath: m_IsTrigger
