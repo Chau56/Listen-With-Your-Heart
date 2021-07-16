@@ -9,6 +9,7 @@ public class InputProcessor : MonoBehaviour
     private float halfScreen;
     private Pointer currentPointer;
     private GameLogicBehavior behavior;
+    private float startPosition;
 
     private void Start()
     {
@@ -55,7 +56,7 @@ public class InputProcessor : MonoBehaviour
                 }
                 break;
             default:
-                y = currentPointer.position.y.ReadValue();
+                y = startPosition;
                 CheckPosition(y, black, white);
                 break;
         }
@@ -66,16 +67,17 @@ public class InputProcessor : MonoBehaviour
         Debug.Log($"jump start {y}");
         if (y < halfScreen)
         {
-            if (!black()) white();
+            black();
         }
         else
         {
-            if (!white()) black();
+            white();
         }
     }
 
     private void OnJumpStarted()
     {
+        startPosition = currentPointer.position.y.ReadValue();
         SwichPointer(events.StartJump1, events.StartJump2);
     }
 
