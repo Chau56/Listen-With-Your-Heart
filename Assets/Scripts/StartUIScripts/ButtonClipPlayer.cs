@@ -2,23 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class ButtonClipPlayer : MonoBehaviour
 {
-    private AudioSource AudioSource;
+    private AudioSource audioSource;
     [SerializeField]
     [Tooltip("要播放的音效")]
-    private AudioClip AudioClip;
+    private AudioClip audioClip;
     [SerializeField]
     [Tooltip("音效音量大小")]
     private float soundVolume=1.0f;
-    void Start()
+
+    private void Start()
     {
-        AudioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void ButtonClipPlay()
     {
-        AudioSource.PlayOneShot(AudioClip, soundVolume);
+        audioSource.PlayOneShot(audioClip, soundVolume);
     }
         
 }
