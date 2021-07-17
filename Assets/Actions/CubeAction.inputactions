@@ -92,6 +92,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Tap",
+                    "type": "Button",
+                    "id": "d219bbae-71eb-45d9-8c1c-09b26320a159",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -209,10 +217,21 @@
                     "name": "",
                     "id": "c6008008-33fd-4fd2-b82b-b5d5a5d0535d",
                     "path": "<Touchscreen>/press",
-                    "interactions": "Press(behavior=1)",
+                    "interactions": "SlowTap",
                     "processors": "",
                     "groups": "",
                     "action": "JumpTouchFinish",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "979068ad-cc45-4ff4-804d-0aeeaee54315",
+                    "path": "<Touchscreen>/press",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Tap",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

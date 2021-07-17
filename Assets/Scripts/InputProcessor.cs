@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
@@ -71,13 +72,25 @@ public class InputProcessor : MonoBehaviour
     {
         foreach (var item in currentScreen.touches)
         {
-            float y = item.startPosition.y.ReadValue();
+            float y = item.position.y.ReadValue();
             if (item.phase.ReadValue() != TouchPhase.None)
             {
                 CheckPosition(y, black, white);
             }
         }
 
+    }
+
+    private IEnumerator Tap()
+    {
+        TouchFilter(events.StartJump1, events.StartJump2);
+        yield return new WaitForFixedUpdate();
+        TouchFilter(events.FinishJump1, events.FinishJump2);
+    }
+
+    private void OnTap()
+    {
+        StartCoroutine(Tap());
     }
 
     private void OnJumpTouchStart()
