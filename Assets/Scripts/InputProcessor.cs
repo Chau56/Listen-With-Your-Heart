@@ -75,9 +75,12 @@ public class InputProcessor : MonoBehaviour
             switch (item.phase.ReadValue())
             {
                 case TouchPhase.Began:
+                case TouchPhase.Moved:
+                case TouchPhase.Stationary:
                     CheckPosition(y, events.StartJump1, events.StartJump2);
                     break;
-                case TouchPhase.Ended | TouchPhase.Canceled:
+                case TouchPhase.Ended:
+                case TouchPhase.Canceled:
                     CheckPosition(y, events.FinishJump1, events.FinishJump2);
                     break;
             }
