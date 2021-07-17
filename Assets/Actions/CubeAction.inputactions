@@ -76,6 +76,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "JumpTouch",
+                    "type": "Button",
+                    "id": "8161e7fa-8180-40ce-9a5d-8b4784172aac",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -137,7 +145,7 @@
                 {
                     "name": "",
                     "id": "d438a819-6bdf-4ce0-bb78-b1f584e327af",
-                    "path": "<Pointer>/press",
+                    "path": "<Mouse>/press",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
@@ -148,7 +156,7 @@
                 {
                     "name": "",
                     "id": "24070f0a-3ffd-4048-80a1-209c934e07f3",
-                    "path": "<Pointer>/press",
+                    "path": "<Mouse>/press",
                     "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "",
@@ -175,6 +183,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "RestartGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a62882ea-0484-4886-91ae-fc8c221b3bfe",
+                    "path": "<Touchscreen>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JumpTouch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

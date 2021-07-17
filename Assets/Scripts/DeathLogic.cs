@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -38,8 +39,14 @@ public class DeathLogic : SwitchBehavior
             events.WhiteDying += Die;
         });
         events.GameAwake += Die;
-        events.GameStart += Revive;
+        events.GameStart += () => StartCoroutine(WaitCamera());
         events.GameAbnormalEnd += Die;
+    }
+
+    private IEnumerator WaitCamera()
+    {
+        yield return new WaitForFixedUpdate();
+        Revive();
     }
 
     private void Revive()
