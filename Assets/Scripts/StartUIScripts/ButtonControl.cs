@@ -14,7 +14,7 @@ public class ButtonControl : MonoBehaviour
 
     private void Start()
     {
-        
+
         animator = GetComponent<Animator>();
         //button1 = GameObject.Find("Start");
         //button2 = GameObject.Find("Exit");

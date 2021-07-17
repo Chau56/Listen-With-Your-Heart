@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -11,7 +9,7 @@ public class ButtonClipPlayer : MonoBehaviour
     private AudioClip audioClip;
     [SerializeField]
     [Tooltip("音效音量大小")]
-    private float soundVolume=1.0f;
+    private float soundVolume = 1.0f;
 
     private void Start()
     {
@@ -20,7 +18,8 @@ public class ButtonClipPlayer : MonoBehaviour
 
     public void ButtonClipPlay()
     {
-        audioSource.PlayOneShot(audioClip, soundVolume);
+        if (audioClip != null)
+            audioSource.PlayOneShot(audioClip, soundVolume);
     }
-        
+
 }
