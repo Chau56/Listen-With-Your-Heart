@@ -34,11 +34,19 @@ public class ReviveDetection : MonoBehaviour
     {
         if (tag == whiteTag)
         {
+            Disappear();
             events.ReviveBlack();
         }
         else if (tag == blackTag)
         {
+            Disappear();
             events.ReviveWhite();
         }
     }
+
+    private void Disappear()
+    {
+        GetComponent<SpriteRenderer>().enabled = false;
+    }
+
 }
