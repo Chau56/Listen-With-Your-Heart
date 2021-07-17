@@ -190,7 +190,7 @@
                     "name": "",
                     "id": "a62882ea-0484-4886-91ae-fc8c221b3bfe",
                     "path": "<Touchscreen>/press",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "",
                     "action": "JumpTouch",
