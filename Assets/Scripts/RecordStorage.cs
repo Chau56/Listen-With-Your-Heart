@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -11,41 +11,29 @@ public class RecordStorage : SwitchBehavior
     private Distance D1;
     [SerializeField]
     private Distance D2;
-    [Tooltip("´æ´¢·ÖÊýÖµ")]
+    [Tooltip("åˆ†æ•°å€¼")]
     private int scoreValue;
-    [Tooltip("´æ´¢½ø¶È")]
+    [Tooltip("é€šå…³æ—¶çš„å…³å¡å®Œæˆåº¦")]
     private int endRateValue;
+    [Tooltip("å¤±è´¥æ—¶å…³å¡è¿›åº¦")]
     private int failRateValue;
-    [Tooltip("»ñÈ¡Á½Àà½ø¶ÈÌõÃ¿Àà½ø¶ÈÌõÖÐ×î´óµÄvalue")]
+    [Tooltip("å­˜å–ä¸¤ç±»sliderå„ç±»æ‰€æ‹¥æœ‰Valueå±žæ€§çš„æœ€å¤§å€¼")]
     private float[] trueRate = new float[2];
-    [SerializeField]
-    private Transform revivePoint;
-    [SerializeField]
-    private Transform endline;
-    private float trueStartPosition, startPosition;
-    private float currentLen;
-    private float totalLen;
-    public int Percent
-    {
-        get
-        {
-            return Mathf.RoundToInt(currentLen / totalLen * 100);
-        }
-    }
+
     public void getEndScore()
-    { //Í¨¹ØµÄ·ÖÊý,Áô×÷·½·¨½Ó¿Ú
+    { //èŽ·å–é€šå…³åˆ†æ•°
         scoreValue = D1.Bonus + D1.Value + D2.Value + D2.Bonus;
     }
     public void getEndRate()
     {
-        endRateValue = Mathf.RoundToInt(trueRate[1] * 100);
+        endRateValue = Mathf.RoundToInt(trueRate[1]);
 
     }
     public void getFailRate()
     {
         if (!GameEvents.instance.EndGame())
         {
-            failRateValue = Percent;
+            failRateValue = Mathf.RoundToInt(trueRate[0]);
 
         }
     }
@@ -53,11 +41,11 @@ public class RecordStorage : SwitchBehavior
     {
         if (!CheckFailRate(failrate))
         {
-            PlayerPrefs.SetInt("FailedRate", failrate);//´æ´¢Ê§°ÜÊ±µÄ¹Ø¿¨½ø¶È
+            PlayerPrefs.SetInt("FailedRate", failrate);//å¤±è´¥
         }
         if (!CheckScore(score) || !CheckFinishRate(endrate))
         {
-            PlayerPrefs.SetInt("Score", score); //´æ´¢Í¨¹ØÊ±·ÖÊýºÍÍê³É¶È
+            PlayerPrefs.SetInt("Score", score); //é€šå…³
             PlayerPrefs.SetInt("FinishRate", endrate);
         }
     }
@@ -97,28 +85,12 @@ public class RecordStorage : SwitchBehavior
         }
         return true;
     }
-    private void Add()
-    {
-        currentLen += revivePoint.position.x - startPosition;
-        startPosition = revivePoint.position.x;
-    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
-        trueRate[0] = sliders[0].value > sliders[1].value ? sliders[0].value : sliders[1].value;
-        trueRate[1] = sliders[2].value > sliders[3].value ? sliders[2].value : sliders[3].value;
-        trueStartPosition = revivePoint.position.x;
-        startPosition = trueStartPosition;
-        totalLen = endline.position.x - startPosition;
-        Swicher(() =>
-        {
-            events.BlackProcessEnd += Add;
-        }, () =>
-        {
-            events.WhiteProcessEnd += Add;
-        });
-
+        PlayerPrefs.DeleteAll();
+        GameEvents.instance.GameWin += getEndRate;
         GameEvents.instance.GameFailed += getFailRate;
         GameEvents.instance.GameStart += debugTest;
     }
@@ -131,6 +103,8 @@ public class RecordStorage : SwitchBehavior
     // Update is called once per frame
     void Update()
     {
+        trueRate[0] = sliders[0].value > sliders[1].value ? sliders[0].value : sliders[1].value;
+        trueRate[1] = sliders[2].value > sliders[3].value ? sliders[2].value : sliders[3].value;
         getEndScore();
         getEndRate();
         store(scoreValue, endRateValue, failRateValue);
