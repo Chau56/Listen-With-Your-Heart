@@ -9,15 +9,18 @@ public class AutoMovement : SwitchBehavior
     [Tooltip("物体移动速度")]
     private Vector2 speed = new Vector2(8.5f, 0);
     private Vector2 velocityPaused;
+    [SerializeField]
+    private bool shouldImpulse;
     /// <summary>
     /// 施加脉冲力。
     /// </summary>
-    //private IEnumerator Impulse()
-    //{
-    //    yield return new WaitForFixedUpdate();
-    //    myRigidbody.AddForce(speed, ForceMode2D.Impulse);
-    //    Debug.Log($"{tag} impulse velocity {myRigidbody.velocity}");
-    //}
+    private IEnumerator Impulse()
+    {
+        if (!shouldImpulse) yield break;
+        yield return new WaitForFixedUpdate();
+        myRigidbody.AddForce(speed, ForceMode2D.Impulse);
+        Debug.Log($"{tag} impulse velocity {myRigidbody.velocity}");
+    }
     private void Resume()
     {
         myRigidbody.velocity = velocityPaused;
@@ -39,7 +42,7 @@ public class AutoMovement : SwitchBehavior
 
     private void RegisterEvents()
     {
-        //events.GameStart += () => StartCoroutine(Impulse());
+        events.GameStart += () => StartCoroutine(Impulse());
         events.GamePause += Pause;
         events.GameResume += Resume;
         events.GameAbnormalEnd += Pause;

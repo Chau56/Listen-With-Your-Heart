@@ -13851,6 +13851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: 0
   speed: {x: 8.5, y: 0}
+  shouldImpulse: 1
 --- !u!61 &6143841160680086651
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14102,3 +14103,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: 1
   speed: {x: 8.5, y: 0}
+  shouldImpulse: 1
