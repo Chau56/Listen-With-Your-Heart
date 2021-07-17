@@ -67,24 +67,27 @@ public class InputProcessor : MonoBehaviour
         CheckPosition(startPosition, events.FinishJump1, events.FinishJump2);
     }
 
-    private void OnJumpTouch()
+    private void TouchFilter(Func<bool> black, Func<bool> white)
     {
         foreach (var item in currentScreen.touches)
         {
             float y = item.startPosition.y.ReadValue();
-            switch (item.phase.ReadValue())
+            if (item.phase.ReadValue() != TouchPhase.None)
             {
-                case TouchPhase.Began:
-                case TouchPhase.Moved:
-                case TouchPhase.Stationary:
-                    CheckPosition(y, events.StartJump1, events.StartJump2);
-                    break;
-                case TouchPhase.Ended:
-                case TouchPhase.Canceled:
-                    CheckPosition(y, events.FinishJump1, events.FinishJump2);
-                    break;
+                CheckPosition(y, black, white);
             }
         }
+
+    }
+
+    private void OnJumpTouchStart()
+    {
+        TouchFilter(events.StartJump1, events.StartJump2);
+    }
+
+    private void OnJumpTouchFinish()
+    {
+        TouchFilter(events.FinishJump1, events.FinishJump2);
     }
 
     private void OnPause()
