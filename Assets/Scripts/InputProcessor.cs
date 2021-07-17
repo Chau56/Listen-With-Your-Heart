@@ -9,7 +9,7 @@ public class InputProcessor : MonoBehaviour
 {
     private GameEvents events;
     private float halfScreen;
-    private Mouse currentPointer;
+    private Pointer currentPointer;
     private Touchscreen currentScreen;
     private GameLogicBehavior behavior;
     private float startPosition;
@@ -17,7 +17,7 @@ public class InputProcessor : MonoBehaviour
     private void Start()
     {
         events = GameEvents.instance;
-        currentPointer = Mouse.current;
+        currentPointer = Pointer.current;
         currentScreen = Touchscreen.current;
         halfScreen = (float)Screen.height / 2;
         behavior = GetComponent<GameLogicBehavior>();
