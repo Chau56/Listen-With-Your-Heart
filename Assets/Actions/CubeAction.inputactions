@@ -78,9 +78,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "JumpTouch",
+                    "name": "JumpTouchStart",
                     "type": "Button",
                     "id": "8161e7fa-8180-40ce-9a5d-8b4784172aac",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "JumpTouchFinish",
+                    "type": "Button",
+                    "id": "6b20cbbb-ddbd-4815-9a08-264529a1f3cf",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -190,10 +198,21 @@
                     "name": "",
                     "id": "a62882ea-0484-4886-91ae-fc8c221b3bfe",
                     "path": "<Touchscreen>/press",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
-                    "action": "JumpTouch",
+                    "action": "JumpTouchStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c6008008-33fd-4fd2-b82b-b5d5a5d0535d",
+                    "path": "<Touchscreen>/press",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JumpTouchFinish",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
