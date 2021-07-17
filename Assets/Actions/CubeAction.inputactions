@@ -76,30 +76,6 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
-                },
-                {
-                    "name": "JumpTouchStart",
-                    "type": "Button",
-                    "id": "8161e7fa-8180-40ce-9a5d-8b4784172aac",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "JumpTouchFinish",
-                    "type": "Button",
-                    "id": "6b20cbbb-ddbd-4815-9a08-264529a1f3cf",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Tap",
-                    "type": "Button",
-                    "id": "d219bbae-71eb-45d9-8c1c-09b26320a159",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -161,7 +137,7 @@
                 {
                     "name": "",
                     "id": "d438a819-6bdf-4ce0-bb78-b1f584e327af",
-                    "path": "<Mouse>/press",
+                    "path": "<Pointer>/press",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
@@ -172,7 +148,7 @@
                 {
                     "name": "",
                     "id": "24070f0a-3ffd-4048-80a1-209c934e07f3",
-                    "path": "<Mouse>/press",
+                    "path": "<Pointer>/press",
                     "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "",
@@ -199,39 +175,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "RestartGame",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a62882ea-0484-4886-91ae-fc8c221b3bfe",
-                    "path": "<Touchscreen>/press",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": "",
-                    "action": "JumpTouchStart",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c6008008-33fd-4fd2-b82b-b5d5a5d0535d",
-                    "path": "<Touchscreen>/press",
-                    "interactions": "SlowTap",
-                    "processors": "",
-                    "groups": "",
-                    "action": "JumpTouchFinish",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "979068ad-cc45-4ff4-804d-0aeeaee54315",
-                    "path": "<Touchscreen>/press",
-                    "interactions": "Tap",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Tap",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

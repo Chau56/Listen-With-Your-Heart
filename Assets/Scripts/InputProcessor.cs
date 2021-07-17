@@ -78,7 +78,6 @@ public class InputProcessor : MonoBehaviour
                 CheckPosition(y, black, white);
             }
         }
-
     }
 
     private IEnumerator Tap()
