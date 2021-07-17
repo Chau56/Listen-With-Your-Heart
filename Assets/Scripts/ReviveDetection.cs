@@ -12,12 +12,15 @@ public class ReviveDetection : MonoBehaviour
     [Tooltip("tag相同的都会被视为white玩家。")]
     private GameObject white;
     private string whiteTag;
+    private SpriteRenderer sprite;
 
     private void Start()
     {
         events = GameEvents.instance;
+        sprite = GetComponent<SpriteRenderer>();
         whiteTag = white.tag;
         blackTag = black.tag;
+        events.GameAwake += Appear;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -46,7 +49,11 @@ public class ReviveDetection : MonoBehaviour
 
     private void Disappear()
     {
-        GetComponent<SpriteRenderer>().enabled = false;
+        sprite.enabled = false;
     }
 
+    private void Appear()
+    {
+        sprite.enabled = true;
+    }
 }
