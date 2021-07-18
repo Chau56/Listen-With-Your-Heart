@@ -1,3 +1,11 @@
+///<summary>
+///作者：张翔宇
+///创建日期：2021-7-16
+///更新者：周权
+///最新修改日期：2021-7-17
+///</summary>
+
+
 ﻿using UnityEngine;
 using UnityEngine.UI;
 public class RecordStorage : SwitchBehavior
