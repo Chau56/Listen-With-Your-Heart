@@ -1,3 +1,10 @@
+///<summary>
+///作者：周权
+///创建日期：2021-7-12
+///最新修改日期：2021-7-14
+///</summary>
+
+
 using UnityEngine;
 
 public class StartPointBehavior : MonoBehaviour
