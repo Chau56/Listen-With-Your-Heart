@@ -1,3 +1,11 @@
+///<summary>
+///作者：周权
+///创建日期：2021-7-8
+///更新者：张子龙
+///最新修改日期：2021-7-16
+///</summary>
+
+
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -6,18 +14,18 @@ public class CameraMovement : MonoBehaviour
     private GameEvents events;
     private new Rigidbody2D rigidbody;
     [SerializeField]
-    [Tooltip("�����ƶ���")]
+    [Tooltip("物体移动力")]
     private Vector2 velocity = new Vector2(8.5f, 0);
     private Vector3 startPosition;
     /// <summary>
-    /// ʩ����������
+    /// 施加脉冲力。
     /// </summary>
     private void Run()
     {
         rigidbody.velocity = velocity;
     }
     /// <summary>
-    /// �ٶȹ��㡣
+    /// 速度归零。
     /// </summary>
     private void Stop()
     {
