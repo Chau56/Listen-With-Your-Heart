@@ -1,3 +1,10 @@
+///<summary>
+///作者：周权
+///创建日期：2021-7-12
+///最新修改日期：2021-7-15
+///</summary>
+
+
 using UnityEngine;
 
 [RequireComponent(typeof(TrailRenderer), typeof(ParticleSystem))]
