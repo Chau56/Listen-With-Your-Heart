@@ -1,3 +1,11 @@
+///<summary>
+///ä½œè€…ï¼šå¼ ç¿”å®‡
+///åˆ›å»ºæ—¥æœŸï¼š2021-7-13
+///æ›´æ–°è€…ï¼šå‘¨æƒ
+///æœ€æ–°ä¿®æ”¹æ—¥æœŸï¼š2021-7-16
+///</summary>
+
+
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,16 +15,16 @@ public class GameLogicBehavior : MonoBehaviour
     private GameEvents events;
     private Vector2 gravity;
     [SerializeField]
-    [Tooltip("»½ĞÑÓÎÏ·Ç°µÄÑÓ³Ù¡£µ¥Î»ºÁÃë")]
+    [Tooltip("å”¤é†’æ¸¸æˆå‰çš„å»¶è¿Ÿã€‚å•ä½æ¯«ç§’")]
     private int beforeStartDelay = 850;
     [SerializeField]
-    [Tooltip("¿ªÊ¼ÓÎÏ·Ç°µÄÑÓ³Ù¡£µ¥Î»ºÁÃë")]
+    [Tooltip("å¼€å§‹æ¸¸æˆå‰çš„å»¶è¿Ÿã€‚å•ä½æ¯«ç§’")]
     private int startDelay = 850;
     [SerializeField]
-    [Tooltip("ÓÎÏ·½áÊøºóµÄÑÓ³Ù¡£µ¥Î»ºÁÃë")]
+    [Tooltip("æ¸¸æˆç»“æŸåçš„å»¶è¿Ÿã€‚å•ä½æ¯«ç§’")]
     private int endDelay = 850;
     [SerializeField]
-    [Tooltip("²Ëµ¥½çÃæË÷Òı")]
+    [Tooltip("èœå•ç•Œé¢ç´¢å¼•")]
     private int menu = 0;
     private bool behold;
     //[SerializeField]
