@@ -1,3 +1,11 @@
+///<summary>
+///ä½œè€…ï¼šå‘¨æ¾„é‘«
+///åˆ›å»ºæ—¥æœŸï¼š2021-7-15
+///æ›´æ–°è€…ï¼šå‘¨æƒ
+///æœ€æ–°ä¿®æ”¹æ—¥æœŸï¼š2021-7-17
+///</summary>
+
+
 using UnityEngine;
 
 public class BlackPerfectCollisionParticle : MonoBehaviour
@@ -18,14 +26,14 @@ public class BlackPerfectCollisionParticle : MonoBehaviour
         float whiteY = whiteBlock.velocity.y;
         float blackY = blackBlock.velocity.y;
 
-        //if (collision.gameObject.CompareTag("White") && blackX == whiteX)         //ÓÉÓÚÔË¶¯¹ı³Ì»á²úÉúÇ°ºóÎ»ÒÆ²î£¬¹Ê²»ÄÜÖ±½ÓÅĞ¶ÏÊÇ·ñÍêÈ«ÏàµÈ£¨Bug13µ¼ÖÂµÄ£©
+        //if (collision.gameObject.CompareTag("White") && blackX == whiteX)         //ç”±äºè¿åŠ¨è¿‡ç¨‹ä¼šäº§ç”Ÿå‰åä½ç§»å·®ï¼Œæ•…ä¸èƒ½ç›´æ¥åˆ¤æ–­æ˜¯å¦å®Œå…¨ç›¸ç­‰ï¼ˆBug13å¯¼è‡´çš„ï¼‰
         //if (collision.gameObject.CompareTag("White") && Mathf.Abs((whiteY + blackY) / 2 - halfScreen) <= halfScreen * 0.01)
         if (collision.gameObject.CompareTag("White"))
         {
-            //Á½·½¿éĞı×ª½»»»Î»ÖÃ
+            //ä¸¤æ–¹å—æ—‹è½¬äº¤æ¢ä½ç½®
             changePosition();
 
-            //ÍêÃÀÅö×²Ê±´¥·¢Á£×ÓÌØĞ§
+            //å®Œç¾ç¢°æ’æ—¶è§¦å‘ç²’å­ç‰¹æ•ˆ
             perfectParticle(whiteY, blackY);
         }
         else
@@ -38,11 +46,11 @@ public class BlackPerfectCollisionParticle : MonoBehaviour
     private void changePosition()
     {
 
-        //½»»»Î»ÖÃ
+        //äº¤æ¢ä½ç½®
         var pos = whiteBlock.transform.position;
         whiteBlock.transform.position = blackBlock.transform.position;
         blackBlock.transform.position = pos;
-        //½«·½¿éÊúÖ±·½ÏòËÙ¶ÈÇåÁã
+        //å°†æ–¹å—ç«–ç›´æ–¹å‘é€Ÿåº¦æ¸…é›¶
         ClearY(blackBlock);
         ClearY(whiteBlock);
 
@@ -55,7 +63,7 @@ public class BlackPerfectCollisionParticle : MonoBehaviour
 
     private void perfectParticle(float whiteY, float blackY)
     {
-        //´Ó×Ô¼ºÇøÓò´¥·¢ÍêÃÀÅö×²Ê±²¥·ÅÁ£×ÓÌØĞ§£¬·´Ö®²»´¥·¢
+        //ä»è‡ªå·±åŒºåŸŸè§¦å‘å®Œç¾ç¢°æ’æ—¶æ’­æ”¾ç²’å­ç‰¹æ•ˆï¼Œåä¹‹ä¸è§¦å‘
         whitePerfectCollision.Play();
         blackPerfectCollision.Play();
     }
