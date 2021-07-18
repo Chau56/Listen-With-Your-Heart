@@ -1,3 +1,11 @@
+///<summary>
+///ä½œè€…ï¼šå¼ å­é¾™
+///åˆ›å»ºæ—¥æœŸï¼š2021-7-14
+///æ›´æ–°è€…ï¼šå‘¨æƒ
+///æœ€æ–°ä¿®æ”¹æ—¥æœŸï¼š2021-7-14
+///</summary>
+
+
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -7,11 +15,11 @@ public class AutoJump : MonoBehaviour
 {
     private GameEvents events;
     [SerializeField]
-    [Tooltip("Ëæ»úÌøÔ¾¸ÅÂÊ")]
-    private float randomProbability = 0.01f;//Ëæ¼´ÌøÔ¾¸ÅÂÊ
+    [Tooltip("éšæœºè·³è·ƒæ¦‚ç‡")]
+    private float randomProbability = 0.01f;//éšå³è·³è·ƒæ¦‚ç‡
     [SerializeField]
-    [Tooltip("Ëæ»úÌøÔ¾Ê±¼ä£¬µ¥Î»ºÁÃë")]
-    private int randomTime = 1000;//Ëæ¼´ÌøÔ¾¸ÅÂÊ
+    [Tooltip("éšæœºè·³è·ƒæ—¶é—´ï¼Œå•ä½æ¯«ç§’")]
+    private int randomTime = 1000;//éšå³è·³è·ƒæ¦‚ç‡
 
     private void Start()
     {
