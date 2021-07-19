@@ -1,3 +1,11 @@
+///<summary>
+///ä½œè€…ï¼šå¼ å­é¾™
+///åˆ›å»ºæ—¥æœŸï¼š2021-7-14
+///æ›´æ–°è€…ï¼šå‘¨æƒ
+///æœ€æ–°ä¿®æ”¹æ—¥æœŸï¼š2021-7-17
+///</summary>
+
+
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,7 +15,7 @@ public class ButtonControl : MonoBehaviour
 {
     private Animator animator;
     [SerializeField]
-    [Tooltip("ÑÓ³Ù×ª³¡¡£µ¥Î»ºÁÃë")]
+    [Tooltip("å»¶è¿Ÿè½¬åœºã€‚å•ä½æ¯«ç§’")]
     private int delay = 1000;
     [SerializeField]
     private RevivePositionReset reset;
@@ -21,20 +29,20 @@ public class ButtonControl : MonoBehaviour
 
     }
 
-    //private void DelayButtonFalse()//Ê¹°´Å¥ÔÚ¶¯»­²¥·ÅÖĞÏûÊ§
+    //private void DelayButtonFalse()//ä½¿æŒ‰é’®åœ¨åŠ¨ç”»æ’­æ”¾ä¸­æ¶ˆå¤±
     //{
 
     //    button1.SetActive(false);
     //    button2.SetActive(false);
     //}
 
-    public void SwitchScene()//¿ªÊ¼ÓÎÏ·°´Å¥µ÷ÓÃµÄ·½·¨
+    public void SwitchScene()//å¼€å§‹æ¸¸æˆæŒ‰é’®è°ƒç”¨çš„æ–¹æ³•
     {
         animator.SetBool("GameEnd", true);
-        Debug.Log("ÇĞ»»³¡¾°ÒÑÖ´ĞĞ");
+        Debug.Log("åˆ‡æ¢åœºæ™¯å·²æ‰§è¡Œ");
         _ = LoadNextSceneAsync();
     }
-    private async Task LoadNextSceneAsync()//Òì²½¼ÓÔØ³¡¾°1µÈ´ı¶¯»­²¥·ÅÍêºó¼¤»î³¡¾°
+    private async Task LoadNextSceneAsync()//å¼‚æ­¥åŠ è½½åœºæ™¯1ç­‰å¾…åŠ¨ç”»æ’­æ”¾å®Œåæ¿€æ´»åœºæ™¯
     {
         reset.Source.Cancel();
         await Task.Delay(delay);
@@ -54,9 +62,9 @@ public class ButtonControl : MonoBehaviour
         //    yield return null;
         //}
     }
-    public void ExitGame()//ÍË³öÓÎÏ·°´Å¥µ÷ÓÃµÄ·½·¨
+    public void ExitGame()//é€€å‡ºæ¸¸æˆæŒ‰é’®è°ƒç”¨çš„æ–¹æ³•
     {
-        Debug.Log("ÓÎÏ·ÍË³öÒÑÖ´ĞĞ");
+        Debug.Log("æ¸¸æˆé€€å‡ºå·²æ‰§è¡Œ");
         Application.Quit();
     }
 

@@ -1,9 +1,17 @@
+///<summary>
+///作者：张子龙
+///创建日期：2021-7-15
+///更新者：周权
+///最新修改日期：2021-7-15
+///</summary>
+
+
 using UnityEngine;
 
 public class AudioClipPlay : SwitchBehavior
 {
     [SerializeField]
-    [Tooltip("��Ч������С")]
+    [Tooltip("音效声音大小")]
     private float soundValue = 1.0f;
     private AudioSource AudioSource;
     [SerializeField]
@@ -41,7 +49,7 @@ public class AudioClipPlay : SwitchBehavior
         {
             if (AudioSource.isPlaying)
                 AudioSource.Stop();
-            Debug.Log("��Ч�Ѳ���");
+            Debug.Log("音效已播放");
 
             AudioSource.PlayOneShot(AudioClip, soundValue);
 
@@ -51,7 +59,7 @@ public class AudioClipPlay : SwitchBehavior
         {
             if (AudioSource.isPlaying)
                 AudioSource.Stop();
-            Debug.Log("��Ч�Ѳ���");
+            Debug.Log("音效已播放");
             AudioSource.PlayOneShot(AudioClip, soundValue);
         }
 

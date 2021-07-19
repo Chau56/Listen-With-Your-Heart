@@ -1,3 +1,11 @@
+///<summary>
+///作者：周澄鑫
+///创建日期：2021-7-9
+///更新者：周权
+///最新修改日期：2021-7-16
+///</summary>
+
+
 using UnityEngine;
 
 public class DeathParticle : SwitchBehavior

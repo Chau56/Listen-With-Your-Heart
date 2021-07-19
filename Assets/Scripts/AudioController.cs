@@ -1,10 +1,18 @@
+///<summary>
+///ä½œè€…ï¼šå¼ ç¿”å®‡
+///åˆ›å»ºæ—¥æœŸï¼š2021-7-6
+///æ›´æ–°è€…ï¼šå‘¨æƒã€æ–½æ¬£æ€¡
+///æœ€æ–°ä¿®æ”¹æ—¥æœŸï¼š2021-7-14
+///</summary>
+
+
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 /// <summary>
-///ÔÚ¹¦ÄÜ01 - 1µÄ»ù´¡ÉÏ£¬canMove = true·½¿é¿ªÊ¼ÒÆ¶¯µÄÊ±ºò£¬²¥·ÅBGM
-/// ÒôÀÖ½Ú×à¡¢ËÙ¶È¡¢ÒôÁ¿ÔÚ·½¿éÒÆ¶¯¹ı³Ì²»¸Ä±ä
-/// Ô¤ÁôÒ»¸öboolÖµ½Ó¿Ú(isplaying)£¬µ±isPlaying = falseµÄÊ±ºòBGMÒôÁ¿½¥½¥¼õĞ¡(ÒªÍ£ÏÂÀ´)£¬ÒôÁ¿Îª0Ê±ÔİÍ£²¥·Å
+///åœ¨åŠŸèƒ½01 - 1çš„åŸºç¡€ä¸Šï¼ŒcanMove = trueæ–¹å—å¼€å§‹ç§»åŠ¨çš„æ—¶å€™ï¼Œæ’­æ”¾BGM
+/// éŸ³ä¹èŠ‚å¥ã€é€Ÿåº¦ã€éŸ³é‡åœ¨æ–¹å—ç§»åŠ¨è¿‡ç¨‹ä¸æ”¹å˜
+/// é¢„ç•™ä¸€ä¸ªboolå€¼æ¥å£(isplaying)ï¼Œå½“isPlaying = falseçš„æ—¶å€™BGMéŸ³é‡æ¸æ¸å‡å°(è¦åœä¸‹æ¥)ï¼ŒéŸ³é‡ä¸º0æ—¶æš‚åœæ’­æ”¾
 /// </summary>
 [RequireComponent(typeof(AudioSource))]
 public class AudioController : MonoBehaviour
@@ -12,20 +20,20 @@ public class AudioController : MonoBehaviour
     private AudioSource moveAS;
     private GameEvents events;
     [SerializeField]
-    [Tooltip("µ­³öÒôÁ¿¼õĞ¡Öµ")]
+    [Tooltip("æ·¡å‡ºéŸ³é‡å‡å°å€¼")]
     [Min(1e-5f)]
     private float decline = 0.01f;
     [SerializeField]
-    [Tooltip("µ­³öÒôÁ¿¼õĞ¡Ê±¼ä¼ä¸ô£¬µ¥Î»ºÁÃë")]
+    [Tooltip("æ·¡å‡ºéŸ³é‡å‡å°æ—¶é—´é—´éš”ï¼Œå•ä½æ¯«ç§’")]
     [Min(0)]
     private int interval = 10;
     [SerializeField]
-    [Tooltip("×î´óÒôÁ¿¡£»á¸²¸ÇAudioSourceµÄÒôÁ¿¡£")]
+    [Tooltip("æœ€å¤§éŸ³é‡ã€‚ä¼šè¦†ç›–AudioSourceçš„éŸ³é‡ã€‚")]
     [Range(0, 1)]
     private float volume;
     private CancellationTokenSource source;
     /// <summary>
-    /// ×î´óÒôÁ¿¡£
+    /// æœ€å¤§éŸ³é‡ã€‚
     /// </summary>
     //public float Volume
     //{
@@ -44,7 +52,7 @@ public class AudioController : MonoBehaviour
     private void Start()
     {
         events = GameEvents.instance;
-        moveAS = GetComponent<AudioSource>();//³õÊ¼»¯  
+        moveAS = GetComponent<AudioSource>();//åˆå§‹åŒ–  
         source = new CancellationTokenSource();
         RegisterEvents();
     }

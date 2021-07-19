@@ -1,3 +1,10 @@
+///<summary>
+///ä½œè€…ï¼šå‘¨æƒ
+///åˆ›å»ºæ—¥æœŸï¼š2021-7-6
+///æœ€æ–°ä¿®æ”¹æ—¥æœŸï¼š2021-7-16
+///</summary>
+
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,7 +13,7 @@ public class Distance : SwitchBehavior
 {
     private Text distance;
     [SerializeField]
-    [Tooltip("Ôö³¤ËÙ¶È¡£Ã¿ÃëÔö³¤50´Îspeed¡£")]
+    [Tooltip("å¢é•¿é€Ÿåº¦ã€‚æ¯ç§’å¢é•¿50æ¬¡speedã€‚")]
     private int speed = 1;
     private bool run;
     private int bonusStart;
@@ -26,7 +33,7 @@ public class Distance : SwitchBehavior
         Bonus += Value - bonusStart;
     }
     /// <summary>
-    /// ²»º¬BonusµÄ¾àÀë¡£
+    /// ä¸å«Bonusçš„è·ç¦»ã€‚
     /// </summary>
     public int Value
     {
@@ -34,21 +41,21 @@ public class Distance : SwitchBehavior
         private set;
     }
     /// <summary>
-    /// ¼¤»î½ø¶ÈÌõ¡£
+    /// æ¿€æ´»è¿›åº¦æ¡ã€‚
     /// </summary>
     private void StartProgress()
     {
         run = true;
     }
     /// <summary>
-    /// Í£Ö¹½ø¶ÈÌõ¡£
+    /// åœæ­¢è¿›åº¦æ¡ã€‚
     /// </summary>
     private void StopProgress()
     {
         run = false;
     }
     /// <summary>
-    /// ÖØÖÃ½ø¶ÈÌõ¡£
+    /// é‡ç½®è¿›åº¦æ¡ã€‚
     /// </summary>
     private void ResetProgress()
     {

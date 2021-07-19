@@ -1,10 +1,18 @@
+///<summary>
+///ä½œè€…ï¼šå¼ å­é¾™
+///åˆ›å»ºæ—¥æœŸï¼š2021-7-7
+///æ›´æ–°è€…ï¼šå‘¨æƒã€æ–½æ¬£æ€¡
+///æœ€æ–°ä¿®æ”¹æ—¥æœŸï¼š2021-7-14
+///</summary>
+
+
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class PlayerJumpController : SwitchBehavior
 {
     [SerializeField]
-    [Tooltip("ÌøÔ¾ËÙ¶È¡£")]
+    [Tooltip("è·³è·ƒé€Ÿåº¦ã€‚")]
     private Vector2 jumpSpeed = new Vector2(0, 17);
     [SerializeField]
     private GameObject revivePosition;
@@ -12,7 +20,7 @@ public class PlayerJumpController : SwitchBehavior
     private Rigidbody2D rigidBody;
     private bool jumpPressed;
     /// <summary>
-    /// ±©Â¶µÄ½Ó¿Ú£¬Ö¸Ê¾ÊÇ·ñÔÚÌøÔ¾¡£
+    /// æš´éœ²çš„æ¥å£ï¼ŒæŒ‡ç¤ºæ˜¯å¦åœ¨è·³è·ƒã€‚
     /// </summary>
     public bool IsJumping
     {
@@ -70,7 +78,7 @@ public class PlayerJumpController : SwitchBehavior
         Jump();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)//¼ì²âÅö×²µ±Åö×²·¢ÉúºóÖØÖÃcanJumpÈÃÎïÌåÖØĞÂÄÜ¹»ÓĞÒ»´ÎÌøÔ¾»ú»á
+    private void OnCollisionEnter2D(Collision2D collision)//æ£€æµ‹ç¢°æ’å½“ç¢°æ’å‘ç”Ÿåé‡ç½®canJumpè®©ç‰©ä½“é‡æ–°èƒ½å¤Ÿæœ‰ä¸€æ¬¡è·³è·ƒæœºä¼š
     {
         canJump = true;
     }

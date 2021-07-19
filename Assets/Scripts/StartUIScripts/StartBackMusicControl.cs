@@ -1,3 +1,11 @@
+///<summary>
+///ä½œè€…ï¼šå¼ å­é¾™
+///åˆ›å»ºæ—¥æœŸï¼š2021-7-15
+///æ›´æ–°è€…ï¼šå‘¨æƒ
+///æœ€æ–°ä¿®æ”¹æ—¥æœŸï¼š2021-7-17
+///</summary>
+
+
 using System.Collections;
 using UnityEngine;
 
@@ -5,10 +13,10 @@ public class StartBackMusicControl : MonoBehaviour
 {
     private AudioSource audioSource;
     [SerializeField]
-    [Tooltip("ÒôÀÖµ­³ö×ÜÊ±¼ä")]
+    [Tooltip("éŸ³ä¹æ·¡å‡ºæ€»æ—¶é—´")]
     private float fadeTime = 1.0f;
     [SerializeField]
-    [Tooltip("ÒôÀÖ×î´óÒôÁ¿£¨ÔÚsourceÖĞ¸ü¸ÄºóÔÚÕâÀï¸ü¸Ä£¬ÕâÀïÊÇÒôÁ¿½¥±ä×î´óÖµ£©")]
+    [Tooltip("éŸ³ä¹æœ€å¤§éŸ³é‡ï¼ˆåœ¨sourceä¸­æ›´æ”¹ååœ¨è¿™é‡Œæ›´æ”¹ï¼Œè¿™é‡Œæ˜¯éŸ³é‡æ¸å˜æœ€å¤§å€¼ï¼‰")]
     private float maxMusicVolume = 1.0f;
     private void Start()
     {
@@ -17,7 +25,7 @@ public class StartBackMusicControl : MonoBehaviour
 
     public void MusicFadeOut()
     {
-        Debug.Log("ÒôÆµ¼õÈõÒÑÖ´ĞĞ");
+        Debug.Log("éŸ³é¢‘å‡å¼±å·²æ‰§è¡Œ");
         StartCoroutine(MusicFade());
     }
 

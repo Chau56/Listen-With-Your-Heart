@@ -1,14 +1,21 @@
+///<summary>
+///作者：周权
+///创建日期：2021-7-7
+///最新修改日期：2021-7-17
+///</summary>
+
+
 using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// ���ⶫ���ҵ�cube�ϡ�
+/// 把这东西挂到cube上。
 /// </summary>
 [RequireComponent(typeof(Collider2D), typeof(SpriteRenderer), typeof(Joint2D))]
 public class DeathLogic : SwitchBehavior
 {
     [SerializeField]
-    [Tooltip("tag��ͬ�Ķ��ᱻ��Ϊ��̡�")]
+    [Tooltip("tag相同的都会被视为尖刺。")]
     private GameObject spikes;
     private string spikesTag;
     private new Collider2D collider;

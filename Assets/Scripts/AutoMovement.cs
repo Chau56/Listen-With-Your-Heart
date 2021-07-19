@@ -1,3 +1,10 @@
+///<summary>
+///作者：周澄鑫
+///创建日期：2021-7-6
+///更新者：周权、施欣怡
+///最新修改日期：2021-7-17
+///</summary>
+
 using System.Collections;
 using UnityEngine;
 
@@ -6,13 +13,13 @@ public class AutoMovement : SwitchBehavior
 {
     private Rigidbody2D myRigidbody;
     [SerializeField]
-    [Tooltip("�����ƶ��ٶ�")]
+    [Tooltip("物体移动速度")]
     private Vector2 speed = new Vector2(8.5f, 0);
     private Vector2 velocityPaused;
     [SerializeField]
     private bool shouldImpulse;
     /// <summary>
-    /// ʩ����������
+    /// 施加脉冲力。
     /// </summary>
     private IEnumerator Impulse()
     {
@@ -26,7 +33,7 @@ public class AutoMovement : SwitchBehavior
         myRigidbody.velocity = velocityPaused;
     }
     /// <summary>
-    /// �ٶȹ��㡣
+    /// 速度归零。
     /// </summary>
     private void Pause()
     {

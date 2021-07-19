@@ -1,3 +1,10 @@
+///<summary>
+///ä½œè€…ï¼šå‘¨æƒ
+///åˆ›å»ºæ—¥æœŸï¼š2021-7-8
+///æœ€æ–°ä¿®æ”¹æ—¥æœŸï¼š2021-7-16
+///</summary>
+
+
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,15 +29,15 @@ public class GameEvents
     }
     private bool behold;
     /// <summary>
-    /// ºÚÉ«×´Ì¬±äÁ¿
+    /// é»‘è‰²çŠ¶æ€å˜é‡
     /// </summary>
     private bool p1Dead, p1Jumped;
     /// <summary>
-    /// °×É«×´Ì¬±äÁ¿
+    /// ç™½è‰²çŠ¶æ€å˜é‡
     /// </summary>
     private bool p2Dead, p2Jumped;
     /// <summary>
-    /// ÓÎÏ·×´Ì¬±äÁ¿
+    /// æ¸¸æˆçŠ¶æ€å˜é‡
     /// </summary>
     private bool gameNotEnd, gamePaused;
 
@@ -152,9 +159,9 @@ public class GameEvents
     }
 
     /// <summary>
-    /// ¿ÉÒÔÔÚÎ´½áÊøÊ±Ç¿ÖÆÆô¶¯ÓÎÏ·, Õâ½«½áÊøÓÎÏ·
+    /// å¯ä»¥åœ¨æœªç»“æŸæ—¶å¼ºåˆ¶å¯åŠ¨æ¸¸æˆ, è¿™å°†ç»“æŸæ¸¸æˆ
     /// </summary>
-    /// <param name="delay">ºÁÃëÑÓ³Ù</param>
+    /// <param name="delay">æ¯«ç§’å»¶è¿Ÿ</param>
     public async Task StartGame(int beforeStartDelay, int startDelay, int endDelay, CancellationToken token = default)
     {
         if (behold) return;
@@ -207,7 +214,7 @@ public class GameEvents
     }
 
     /// <summary>
-    /// pause»áÁ¢¼´Í£Ö¹ÌøÔ¾¡£
+    /// pauseä¼šç«‹å³åœæ­¢è·³è·ƒã€‚
     /// </summary>
     public bool PauseGame()
     {
