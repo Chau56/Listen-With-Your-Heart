@@ -15,8 +15,7 @@ public class Distance : SwitchBehavior
     [SerializeField]
     [Tooltip("增长速度。每秒增长50次speed。")]
     private int speed = 1;
-    private bool run;
-    private int bonusStart;
+    private bool run, bonus;
 
     public int Bonus
     {
@@ -25,12 +24,12 @@ public class Distance : SwitchBehavior
 
     public void StartBonus()
     {
-        bonusStart = Value;
+        bonus = true;
     }
 
     public void EndBonus()
     {
-        Bonus += Value - bonusStart;
+        bonus = false;
     }
     /// <summary>
     /// 不含Bonus的距离。
@@ -93,6 +92,10 @@ public class Distance : SwitchBehavior
         {
             Value += speed;
             distance.text = Value.ToString();
+            if (bonus)
+            {
+                Bonus += speed;
+            }
         }
     }
 }
