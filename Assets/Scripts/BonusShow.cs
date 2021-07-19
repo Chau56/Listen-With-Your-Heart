@@ -14,7 +14,7 @@ using UnityEngine.UI;
 public class BonusShow : MonoBehaviour
 {
     [SerializeField]
-    private Distance d;
+    private Distance dist;
     private Text BonusScore;
 
     private void Start()
@@ -24,7 +24,7 @@ public class BonusShow : MonoBehaviour
 
     void Update()
     {
-        BonusScore.text = d.Bonus.ToString();
+        BonusScore.text = dist.Bonus.ToString();
     }
 
 }

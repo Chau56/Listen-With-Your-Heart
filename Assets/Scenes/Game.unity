@@ -8724,7 +8724,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 850437964815864435, guid: 154bdb1144b2c0e4f98a76762fa49e24, type: 3}
       propertyPath: m_Volume
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 850437964815864435, guid: 154bdb1144b2c0e4f98a76762fa49e24, type: 3}
       propertyPath: m_Enabled
@@ -18635,7 +18635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f2448c23e0890f43a2dbd18a8421e47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  d: {fileID: 60576642}
+  dist: {fileID: 60576642}
 --- !u!1 &4727770213980573073
 GameObject:
   m_ObjectHideFlags: 0
@@ -24285,7 +24285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2127886828, guid: ed1a8174f1d37944dad85deb0232e4f1, type: 3}
       propertyPath: m_Emitting
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2127886828, guid: ed1a8174f1d37944dad85deb0232e4f1, type: 3}
       propertyPath: m_Parameters.colorGradient.atime1
@@ -24453,7 +24453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f2448c23e0890f43a2dbd18a8421e47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  d: {fileID: 890598180}
+  dist: {fileID: 890598180}
 --- !u!224 &8916628014576635478
 RectTransform:
   m_ObjectHideFlags: 0

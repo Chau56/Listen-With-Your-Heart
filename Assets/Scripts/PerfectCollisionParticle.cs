@@ -19,7 +19,6 @@ public class PerfectCollisionParticle : MonoBehaviour
     [SerializeField]
     private Distance d2;
 
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         var obj = collision.gameObject;
@@ -31,21 +30,30 @@ public class PerfectCollisionParticle : MonoBehaviour
             //完美碰撞时触发粒子特效
             PerfectParticle();
 
-            //进入Bonus状态时，记录当前双方距离大小
+            //进入Bonus状态时，记录当前双方距离大小,更改bonus状态为true
             d1.StartBonus();
             d2.StartBonus();
         }
+        
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        //退出Bonus状态时，再次记录双方距离大小,更改bonus状态为false
+        float whiteY = whiteBlock.velocity.y;
+        float blackY = blackBlock.velocity.y;
+        if (blackY < 0)
+        {
+            d1.EndBonus();
+        }
+        if (whiteY > 0)
+        {
+            d2.EndBonus();
+        }
+
         var obj = collision.gameObject;
         if (obj.CompareTag("White") || obj.CompareTag("Black"))
         {
-            //退出Bonus状态时，再次记录双方距离大小
-            d1.EndBonus();
-            d2.EndBonus();
-
             //停止播放完美碰撞粒子特效
             whitePerfectCollision.Stop();
             blackPerfectCollision.Stop();
@@ -62,7 +70,6 @@ public class PerfectCollisionParticle : MonoBehaviour
         //将方块竖直方向速度清零
         ClearY(blackBlock);
         ClearY(whiteBlock);
-
     }
 
     private void ClearY(Rigidbody2D body)
