@@ -18,6 +18,10 @@ public class Distance : SwitchBehavior
     private int speed = 1;
     private bool run, bonus;
 
+    //[SerializeField]
+    private int TempBonusStart;     //临时变量记录每次Bonus初始位置
+    public int eachBonus;           //每次Bonus数值
+
     public int Bonus
     {
         get; private set;
@@ -26,11 +30,13 @@ public class Distance : SwitchBehavior
     public void StartBonus()
     {
         bonus = true;
+        TempBonusStart = Value;
     }
 
     public void EndBonus()
     {
         bonus = false;
+        eachBonus = Value - TempBonusStart;
     }
     /// <summary>
     /// 不含Bonus的距离。

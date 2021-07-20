@@ -29,6 +29,11 @@ public class PerfectCollisionParticle : MonoBehaviour
     [SerializeField]
     private GameObject WhiteBonus;
 
+    [SerializeField]
+    private GameObject BlackOriginalTrail, BlackUpdatedTrail;
+    [SerializeField]
+    private GameObject WhiteOriginalTrail, WhiteUpdatedTrail;
+
     //private float halfScreen;
     private bool isDie;
 
@@ -42,6 +47,9 @@ public class PerfectCollisionParticle : MonoBehaviour
         //开始时隐藏Bonus
         BlackBonusDisappear();
         WhiteBonusDisappear();
+
+        // 开始时显示原拖尾
+        UpdatedTurnOriginalTrail();
     }
 
     private void SetDeath()
@@ -68,6 +76,9 @@ public class PerfectCollisionParticle : MonoBehaviour
             //进入Bonus状态时，记录当前双方距离大小,更改bonus状态为true
             BlackDistance.StartBonus();
             WhiteDistance.StartBonus();
+
+            // 显示新拖尾（黑白反相）
+            originalTurnUpdatedTrail();
         }
     }
 
@@ -96,6 +107,9 @@ public class PerfectCollisionParticle : MonoBehaviour
             //停止播放完美碰撞粒子特效
             whitePerfectCollision.Stop();
             blackPerfectCollision.Stop();
+
+            // 显示原拖尾
+            UpdatedTurnOriginalTrail();
         }
     }
 
@@ -145,5 +159,21 @@ public class PerfectCollisionParticle : MonoBehaviour
     {
         WhitePlus.SetActive(false);
         WhiteBonus.SetActive(false);
+    }
+
+    //拖尾切换
+    private void originalTurnUpdatedTrail()
+    {
+        BlackOriginalTrail.SetActive(false);
+        WhiteOriginalTrail.SetActive(false);
+        BlackUpdatedTrail.SetActive(true);
+        WhiteUpdatedTrail.SetActive(true);
+    }
+    private void UpdatedTurnOriginalTrail()
+    {
+        BlackUpdatedTrail.SetActive(false);
+        WhiteUpdatedTrail.SetActive(false);
+        BlackOriginalTrail.SetActive(true);
+        WhiteOriginalTrail.SetActive(true);
     }
 }

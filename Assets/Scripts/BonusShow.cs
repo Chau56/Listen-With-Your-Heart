@@ -2,7 +2,7 @@
 ///作者：周澄鑫
 ///创建日期：2021-7-19
 ///更新者：周权
-///最新修改日期：2021-7-19
+///最新修改日期：2021-7-20
 ///</summary>
 
 
@@ -24,7 +24,9 @@ public class BonusShow : MonoBehaviour
 
     void Update()
     {
-        BonusScore.text = dist.Bonus.ToString();
+        //BonusScore.text = dist.Bonus.ToString();
+        // 显示每次Bonus的数值
+        BonusScore.text = dist.eachBonus.ToString();
     }
 
 }
