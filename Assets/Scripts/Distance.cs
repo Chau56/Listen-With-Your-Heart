@@ -1,7 +1,8 @@
 ///<summary>
 ///作者：周权
 ///创建日期：2021-7-6
-///最新修改日期：2021-7-19
+///更新者：周澄鑫
+///最新修改日期：2021-7-20
 ///</summary>
 
 
@@ -69,6 +70,7 @@ public class Distance : SwitchBehavior
     {
         distance = GetComponent<Text>();
         RegisterEvents();
+        ResetProgress();
     }
 
     private void RegisterEvents()

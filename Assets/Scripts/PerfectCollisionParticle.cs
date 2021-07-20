@@ -2,10 +2,11 @@
 ///作者：周澄鑫
 ///创建日期：2021-7-16
 ///更新者：周权
-///最新修改日期：2021-7-19
+///最新修改日期：2021-7-20
 ///</summary>
 
 
+using System;
 using UnityEngine;
 
 public class PerfectCollisionParticle : MonoBehaviour
@@ -15,9 +16,43 @@ public class PerfectCollisionParticle : MonoBehaviour
     [SerializeField]
     private Rigidbody2D whiteBlock, blackBlock;
     [SerializeField]
-    private Distance d1;
+    private Distance BlackDistance;
     [SerializeField]
-    private Distance d2;
+    private Distance WhiteDistance;
+
+    [SerializeField]
+    private GameObject BlackPlus;
+    [SerializeField]
+    private GameObject WhitePlus;
+    [SerializeField]
+    private GameObject BlackBonus;
+    [SerializeField]
+    private GameObject WhiteBonus;
+
+    //private float halfScreen;
+    private bool isDie;
+
+    private void Start()
+    {
+        var events = GameEvents.instance;
+        events.BlackWillDie += SetDeath;
+        events.WhiteWillDie += SetDeath;
+        events.GameBeforeAwake += ResetDeath;
+
+        //开始时隐藏Bonus
+        BlackBonusDisappear();
+        WhiteBonusDisappear();
+    }
+
+    private void SetDeath()
+    {
+        isDie = true;
+    }
+
+    private void ResetDeath()
+    {
+        isDie = false;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -31,29 +66,33 @@ public class PerfectCollisionParticle : MonoBehaviour
             PerfectParticle();
 
             //进入Bonus状态时，记录当前双方距离大小,更改bonus状态为true
-            d1.StartBonus();
-            d2.StartBonus();
+            BlackDistance.StartBonus();
+            WhiteDistance.StartBonus();
         }
-        
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        //退出Bonus状态时，再次记录双方距离大小,更改bonus状态为false
-        float whiteY = whiteBlock.velocity.y;
-        float blackY = blackBlock.velocity.y;
-        if (blackY < 0)
-        {
-            d1.EndBonus();
-        }
-        if (whiteY > 0)
-        {
-            d2.EndBonus();
-        }
+        //Vector2 screenY = new Vector2(Screen.width / 2, Screen.height / 2);
 
         var obj = collision.gameObject;
         if (obj.CompareTag("White") || obj.CompareTag("Black"))
         {
+            //判断方块是否回到自己的区域或者死亡
+            //if(blackBlock.transform.position.y < screenY.y)
+            if (whiteBlock.transform.position.y > blackBlock.transform.position.y || isDie)
+            {
+                BlackBonusAppear();
+                BlackDistance.EndBonus();
+                Invoke("BlackBonusDisappear", 1f);
+            }
+            //if (whiteBlock.transform.position.y > screenY.y)
+            if (whiteBlock.transform.position.y > blackBlock.transform.position.y || isDie)
+            {
+                WhiteBonusAppear();
+                WhiteDistance.EndBonus();
+                Invoke("WhiteBonusDisappear", 1f);
+            }
             //停止播放完美碰撞粒子特效
             whitePerfectCollision.Stop();
             blackPerfectCollision.Stop();
@@ -82,5 +121,29 @@ public class PerfectCollisionParticle : MonoBehaviour
         //从自己区域触发完美碰撞时播放粒子特效，反之不触发
         whitePerfectCollision.Play();
         blackPerfectCollision.Play();
+    }
+
+    //Bonus分数显示
+    private void BlackBonusAppear()
+    {
+        BlackPlus.SetActive(true);
+        BlackBonus.SetActive(true);
+    }
+    private void WhiteBonusAppear()
+    {
+        WhitePlus.SetActive(true);
+        WhiteBonus.SetActive(true);
+    }
+
+    //Bonus分数消失
+    private void BlackBonusDisappear()
+    {
+        BlackPlus.SetActive(false);
+        BlackBonus.SetActive(false);
+    }
+    private void WhiteBonusDisappear()
+    {
+        WhitePlus.SetActive(false);
+        WhiteBonus.SetActive(false);
     }
 }
