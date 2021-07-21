@@ -1,4 +1,20 @@
-﻿using System.Collections;
+﻿
+/// <summary>
+/// <author>
+/// 张翔宇
+/// </author>
+///<updater>
+///周权
+/// </updater>
+/// <date>
+/// 2021/7/16
+/// </date>
+/// <update>
+/// 2021/7/19
+/// </update>
+/// </summary>
+
+using System.Collections;
 using UnityEngine;
 
 public class RecordStorage : MonoBehaviour
