@@ -2,7 +2,7 @@
 ///作者：周权
 ///创建日期：2021-7-6
 ///更新者：周澄鑫
-///最新修改日期：2021-7-20
+///最新修改日期：2021-7-21
 ///</summary>
 
 
@@ -16,7 +16,9 @@ public class Distance : SwitchBehavior
     [SerializeField]
     [Tooltip("增长速度。每秒增长50次speed。")]
     private int speed = 1;
-    private bool run, bonus;
+    //private bool run, bonus;
+    private bool run;
+    public bool bonus;
 
     //[SerializeField]
     private int TempBonusStart;     //临时变量记录每次Bonus初始位置
