@@ -15,6 +15,7 @@ public class AutoMovement : SwitchBehavior
     [SerializeField]
     [Tooltip("物体移动速度")]
     private Vector2 speed = new Vector2(8.5f, 0);
+    private Vector3 startPosition;
     private Vector2 velocityPaused;
     [SerializeField]
     private bool shouldImpulse;
@@ -40,9 +41,14 @@ public class AutoMovement : SwitchBehavior
         velocityPaused = myRigidbody.velocity;
         myRigidbody.velocity = Vector2.zero;
     }
+    private void ResetPosition()
+    {
+        transform.position = startPosition;
+    }
 
     private void Start()
     {
+        startPosition = transform.position;
         myRigidbody = GetComponent<Rigidbody2D>();
         RegisterEvents();
     }
@@ -53,5 +59,6 @@ public class AutoMovement : SwitchBehavior
         events.GamePause += Pause;
         events.GameResume += Resume;
         events.GameAbnormalEnd += Pause;
+        events.GameBeforeAwake += ResetPosition;
     }
 }

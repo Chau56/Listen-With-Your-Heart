@@ -678,6 +678,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd432fa4ce33bd5448c2d548a5c0b9e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blackText: {fileID: 0}
+  whiteText: {fileID: 0}
   d1: {fileID: 3460897492978478194}
   d2: {fileID: 4274805097175808229}
 --- !u!1 &153327887
@@ -1312,8 +1314,8 @@ SpringJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
-  m_DampingRatio: 0
-  m_Frequency: 6
+  m_DampingRatio: 0.8
+  m_Frequency: 20
 --- !u!1 &347065366
 GameObject:
   m_ObjectHideFlags: 0
@@ -3353,8 +3355,8 @@ SpringJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
-  m_DampingRatio: 0
-  m_Frequency: 7
+  m_DampingRatio: 0.8
+  m_Frequency: 20
 --- !u!1 &893200095
 GameObject:
   m_ObjectHideFlags: 0
@@ -4502,6 +4504,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd432fa4ce33bd5448c2d548a5c0b9e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blackText: {fileID: 0}
+  whiteText: {fileID: 0}
   d1: {fileID: 3460897492978478194}
   d2: {fileID: 4274805097175808229}
 --- !u!1 &1487035252
@@ -6465,6 +6469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: 0
   speed: 1
+  eachBonus: 0
 --- !u!1 &5663029778774835441
 GameObject:
   m_ObjectHideFlags: 0
@@ -6559,6 +6564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: 1
   speed: 1
+  eachBonus: 0
 --- !u!1 &6259396398837847838
 GameObject:
   m_ObjectHideFlags: 0
@@ -6834,8 +6840,8 @@ SpringJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
-  m_DampingRatio: 0
-  m_Frequency: 7
+  m_DampingRatio: 0.8
+  m_Frequency: 20
 --- !u!1 &7572411570266737766
 GameObject:
   m_ObjectHideFlags: 0
@@ -7062,5 +7068,5 @@ SpringJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
-  m_DampingRatio: 0
-  m_Frequency: 6
+  m_DampingRatio: 0.8
+  m_Frequency: 20
