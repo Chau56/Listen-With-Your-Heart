@@ -1,18 +1,16 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class CameraPath : MonoBehaviour
 {
+    private new Rigidbody2D rigidbody;
     [SerializeField]
-    private Vector3 endPosition;
-    [SerializeField]
-    private float speed;
+    private Vector2 speed;
     private Vector3 startPosition;
-    private float totalTime, curTime;
-    private bool running;
     private void Start()
     {
+        rigidbody = GetComponent<Rigidbody2D>();
         startPosition = transform.position;
-        totalTime = (endPosition.x - startPosition.x) / speed;
         var events = GameEvents.instance;
         events.GameStart += Run;
         events.GamePause += Stop;
@@ -22,23 +20,29 @@ public class CameraPath : MonoBehaviour
     }
     private void Run()
     {
-        running = true;
+        rigidbody.velocity = speed;
     }
     private void Stop()
     {
-        running = false;
+        rigidbody.velocity = Vector2.zero;
     }
     private void ResetPosition()
     {
         transform.position = startPosition;
-        curTime = 0;
     }
-    private void Update()
+    private void DetectTag(Collider2D collision)
     {
-        if (running)
+        if (collision.CompareTag("Endline"))
         {
-            transform.position = Vector3.Lerp(startPosition, endPosition, curTime / totalTime);
-            curTime += Time.deltaTime;
+            Stop();
         }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        DetectTag(collision);
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        DetectTag(collision);
     }
 }

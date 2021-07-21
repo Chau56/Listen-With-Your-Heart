@@ -1643,41 +1643,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78e2763c3fe2d914a848f7368257bf6b, type: 3}
---- !u!1 &1094879179 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2503245905842365485, guid: 1573ebc9c4a86f44bb43a6fcff77ac9e, type: 3}
-  m_PrefabInstance: {fileID: 2503245905484504145}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1094879184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1094879179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EventMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_MaxRayIntersections: 0
---- !u!114 &1094879185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1094879179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d38549532c650f43a3d7d2e3e9e3ce7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  endPosition: {x: 344.57, y: 0.01, z: -10}
-  speed: 8.5
 --- !u!1 &1124184822
 GameObject:
   m_ObjectHideFlags: 0
@@ -9080,14 +9045,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BrainCamera
       objectReference: {fileID: 0}
-    - target: {fileID: 2503245905842365486, guid: 1573ebc9c4a86f44bb43a6fcff77ac9e, type: 3}
-      propertyPath: orthographic size
-      value: 7.47
-      objectReference: {fileID: 0}
-    - target: {fileID: 2503245905842365487, guid: 1573ebc9c4a86f44bb43a6fcff77ac9e, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2503245905842365649, guid: 1573ebc9c4a86f44bb43a6fcff77ac9e, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -9098,7 +9055,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2503245905842365649, guid: 1573ebc9c4a86f44bb43a6fcff77ac9e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.00999999
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 2503245905842365649, guid: 1573ebc9c4a86f44bb43a6fcff77ac9e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9132,8 +9089,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2503245905842365487, guid: 1573ebc9c4a86f44bb43a6fcff77ac9e, type: 3}
+    - target: {fileID: 4347429273144925293, guid: 1573ebc9c4a86f44bb43a6fcff77ac9e, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1573ebc9c4a86f44bb43a6fcff77ac9e, type: 3}
 --- !u!61 &2517122557738256507
 BoxCollider2D:
