@@ -25,7 +25,7 @@ public class GetBonus : MonoBehaviour
     }
     private void Renew()
     {
-       
+        StartCoroutine(Bonus());
     }
     public IEnumerator Bonus()
     {

@@ -5,29 +5,35 @@
 ///</summary>
 
 using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Text))]
 public class GetScore : MonoBehaviour
-{
-    private Text text;
+{ 
+    [SerializeField]
+    private Text blackText;
+    [SerializeField]
+    private Text whiteText;
     [SerializeField]
     private Distance d1;
     [SerializeField]
     private Distance d2;
-    int maxValue;
-    int minValue;
-    int Times;
+    
+    private int maxValue;
+    private int minValue;
+    private int Times;
     private void Start()
     {
-        text = GetComponent<Text>();
+        
         GameEvents.instance.GameWin += Renew;
     }
 
     private void Renew()
-    {  
-       
+    {
+        Parallel.Invoke(() =>StartCoroutine(BlackScore()), () => StartCoroutine(WhiteScore()));
+        Parallel.Invoke(() => StartCoroutine(BlackTotalScore()), () => StartCoroutine(WhiteTotalScore()));
     }
     public IEnumerator BlackScore()
     {
@@ -38,10 +44,10 @@ public class GetScore : MonoBehaviour
         for (int i = 0; i < Times; i++)
         {
             result++;
-            text.text = $"{result}";
+            blackText.text = $"{result}";
             yield return new WaitForSeconds(0.01f);
         }
-        text.text = $"{maxValue}";
+        blackText.text = $"{maxValue}";
         StopCoroutine(BlackScore());
     }
     public IEnumerator WhiteScore()
@@ -53,13 +59,13 @@ public class GetScore : MonoBehaviour
         for (int i = 0; i < Times; i++)
         {
             result++;
-            text.text = $"{result}";
+            whiteText.text = $"{result}";
             yield return new WaitForSeconds(0.01f);
         }
-        text.text = $"{maxValue}";
+        whiteText.text = $"{maxValue}";
         StopCoroutine(WhiteScore());
     }
-    public IEnumerator TotalScore()
+    public IEnumerator BlackTotalScore()
     {
         maxValue = d2.Value+d1.Bonus+d2.Value + d2.Bonus;
         minValue = d1.Value+d1.Bonus;
@@ -68,10 +74,25 @@ public class GetScore : MonoBehaviour
         for (int i = 0; i < Times; i++)
         {
             result++;
-            text.text = $"{result}";
+            blackText.text = $"{result}";
             yield return new WaitForSeconds(0.01f);
         }
-        text.text = $"{maxValue}";
-        StopCoroutine(TotalScore());
+        blackText.text = $"{maxValue}";
+        StopCoroutine(BlackTotalScore());
+    }
+    public IEnumerator WhiteTotalScore()
+    {
+        maxValue = d2.Value + d1.Bonus + d2.Value + d2.Bonus;
+        minValue = d2.Value + d2.Bonus;
+        Times = maxValue;
+        int result = minValue;
+        for (int i = 0; i < Times; i++)
+        {
+            result++;
+            whiteText.text = $"{result}";
+            yield return new WaitForSeconds(0.01f);
+        }
+        whiteText.text = $"{maxValue}";
+        StopCoroutine(WhiteTotalScore());
     }
 }

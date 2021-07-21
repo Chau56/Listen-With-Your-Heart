@@ -4,50 +4,50 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class EndGameManager : MonoBehaviour
-{  
+public class EndUISlider : MonoBehaviour
+{
     [Header("通关进度条")]
     [SerializeField]
-    private Slider whiteSlider;
-    [SerializeField]
-    private Slider blackSlider;
+    private Slider completeSlider;
+   
     [Header("进度")]
     [SerializeField]
-    private ProgressCalculate black;
+    private ProgressCalculate progress;
+   
+    [Header("文本")]
     [SerializeField]
-    private ProgressCalculate white;
-    public int maxValue;
-    public int minValue;
-    private int changeTimes;
-  
-    public IEnumerator BlackCrement()
-    {
-        maxValue = black.Percent;  //一为黑色进度条
-        minValue = 0;
-        changeTimes = maxValue;
-        int result = minValue;
-        for(int i = 0; i < changeTimes; i++)
-        {
-            result ++;
-            blackSlider.value = result;
-            yield return new WaitForSeconds(0.01f);
-        }
-        StopCoroutine(BlackCrement());
-    }
+    private Text Percent;
 
-    public IEnumerator WhiteCrement()
+    private int maxValue;
+    private int minValue;
+    private int changeTimes;
+    private void Start()
     {
-        maxValue = white.Percent;  //一为黑色进度条
+        GameEvents.instance.GameWin += rerun;
+    }
+    private void rerun()
+    {
+        StartCoroutine(SliderCrement());
+
+    }
+    public IEnumerator SliderCrement()
+    {
+        maxValue = progress.Percent;  //一为黑色进度条
         minValue = 0;
         changeTimes = maxValue;
         int result = minValue;
         for (int i = 0; i < changeTimes; i++)
         {
-            result ++;
-            whiteSlider.value = result;
-            yield return new WaitForSeconds(0.01f);   
+            result++;
+            completeSlider.value = result;
+            Percent.text = $"{result}+%";
+            yield return new WaitForSeconds(0.01f);
         }
-        StopCoroutine(WhiteCrement());
+        completeSlider.value = maxValue;
+        Percent.text = $"{maxValue}+%";
+        StopCoroutine(SliderCrement());
     }
+
+    
 
 }
