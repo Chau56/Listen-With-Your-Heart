@@ -6,7 +6,6 @@
 ///</summary>
 
 
-using System;
 using UnityEngine;
 
 public class PerfectCollisionParticle : MonoBehaviour

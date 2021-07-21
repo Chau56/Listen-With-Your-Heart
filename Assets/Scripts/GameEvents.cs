@@ -13,7 +13,7 @@ using UnityEngine;
 public class GameEvents
 {
     public static GameEvents instance = new GameEvents();
-    public event Action GameBeforeAwake,
+    public event Action GameBeforeAwake, GameRestart,
         GameAwake, GameStart, GameFailed, GameWin, GamePause, GameResume, GameEnd, GameAbnormalEnd,
         Jump1Start, Jump2Start, Jump1Finished, Jump2Finished,
         BlackReviving, WhiteReviving, BlackDying, WhiteDying,
@@ -191,7 +191,11 @@ public class GameEvents
 
     public bool EndGame(bool win)
     {
-        if (!gameNotEnd) return false;
+        if (!gameNotEnd)
+        {
+            GameRestart();
+            return false;
+        }
         StopTwoProgress();
         gameNotEnd = false;
         if (win) GameWin();
@@ -204,6 +208,7 @@ public class GameEvents
     {
         if (!gameNotEnd)
         {
+            GameRestart();
             return false;
         }
         StopTwoProgress();
@@ -249,6 +254,7 @@ public class GameEvents
 
     public void ClearEvents()
     {
+        GameRestart =
         BlackWillDie =
         WhiteWillDie =
         GameBeforeAwake =

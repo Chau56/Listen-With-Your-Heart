@@ -11,20 +11,20 @@ using UnityEngine;
 public class AnimatorLogic : MonoBehaviour
 {
     private Animator animator;
-    private GameEvents events;
 
     private void Start()
     {
-        events = GameEvents.instance;
         animator = GetComponent<Animator>();
         RegisterEvents();
     }
 
     private void RegisterEvents()
     {
+        var events = GameEvents.instance;
         events.GameBeforeAwake += Fadein;
         events.GameFailed += FadeOut;
         events.GameAbnormalEnd += FadeOut;
+        events.GameRestart += FadeOut;
     }
 
     private void Fadein()

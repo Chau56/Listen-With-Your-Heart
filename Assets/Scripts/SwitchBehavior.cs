@@ -5,7 +5,7 @@
 ///</summary>
 
 
-﻿using System;
+using System;
 using UnityEngine;
 
 public abstract class SwitchBehavior : MonoBehaviour

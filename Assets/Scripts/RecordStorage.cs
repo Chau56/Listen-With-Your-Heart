@@ -27,7 +27,7 @@ public class RecordStorage : MonoBehaviour
         PlayerPrefs.SetInt("BlackRate", P1.Percent);
         PlayerPrefs.SetInt("WhiteRate", P2.Percent);
         PlayerPrefs.SetInt("Score", score);
-}
+    }
 
     // Start is called before the first frame update
     private void Start()
@@ -39,8 +39,8 @@ public class RecordStorage : MonoBehaviour
 
     private void debugTest()
     {
-        Debug.Log($"Distance: {PlayerPrefs.GetInt("BlackDistance",-1)} {PlayerPrefs.GetInt("WhiteDistance",-1)}");
+        Debug.Log($"Distance: {PlayerPrefs.GetInt("BlackDistance", -1)} {PlayerPrefs.GetInt("WhiteDistance", -1)}");
         Debug.Log($"Rate: {PlayerPrefs.GetInt("BlackRate", -1)} {PlayerPrefs.GetInt("WhiteRate", -1)}");
-        Debug.Log($"Score: {PlayerPrefs.GetInt("Score",-1)}");
+        Debug.Log($"Score: {PlayerPrefs.GetInt("Score", -1)}");
     }
 }

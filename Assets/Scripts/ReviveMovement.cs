@@ -9,7 +9,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class CameraMovement : MonoBehaviour
+public class ReviveMovement : MonoBehaviour
 {
     private GameEvents events;
     private new Rigidbody2D rigidbody;
