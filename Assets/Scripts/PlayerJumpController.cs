@@ -6,6 +6,7 @@
 ///</summary>
 
 
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
@@ -19,6 +20,8 @@ public class PlayerJumpController : SwitchBehavior
     private string reviveTag;
     private Rigidbody2D rigidBody;
     private bool jumpPressed;
+    [SerializeField]
+    private float disableJumpDelay = 0.02f;
     /// <summary>
     /// 暴露的接口，指示是否在跳跃。
     /// </summary>
@@ -85,6 +88,12 @@ public class PlayerJumpController : SwitchBehavior
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        StartCoroutine(Delay());
+    }
+
+    private IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(disableJumpDelay);
         canJump = false;
     }
 
