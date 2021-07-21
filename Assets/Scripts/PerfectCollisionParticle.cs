@@ -32,8 +32,13 @@ public class PerfectCollisionParticle : MonoBehaviour
     private GameObject BlackOriginalTrail, BlackUpdatedTrail;
     [SerializeField]
     private GameObject WhiteOriginalTrail, WhiteUpdatedTrail;
+    
+    [SerializeField]
+    private ParticleSystem whiteOriginalTrailParticle, blackOriginalTrailParticle;
+    [SerializeField]
+    private ParticleSystem whiteUpdatedTrailParticle, blackUpdatedTrailParticle;
 
-    //private bool isCollide;
+
     private bool isDie;
 
     private void Start()
@@ -49,6 +54,7 @@ public class PerfectCollisionParticle : MonoBehaviour
 
         // 开始时显示原拖尾
         UpdatedTurnOriginalTrail();
+        updatedTurnoriginalTrailParticle();
     }
 
     private void Update()
@@ -78,8 +84,12 @@ public class PerfectCollisionParticle : MonoBehaviour
             //完美碰撞时触发粒子特效
             PerfectParticle();
 
-            // 显示新拖尾（黑白反相）
+            // 显示新拖尾和拖尾粒子（黑白反相）
             originalTurnUpdatedTrail();
+            originalTurnUpdatedTrailParticle();
+
+            //显示Bonus数值1s
+            bonusDisplay();
         }
     }
 
@@ -88,25 +98,13 @@ public class PerfectCollisionParticle : MonoBehaviour
         var obj = collision.gameObject;
         if (obj.CompareTag("White") || obj.CompareTag("Black"))
         {
-            //显示Bonus数值1s
-            if (!WhiteDistance.bonus)
-            {
-                WhiteBonusAppear();
-                Invoke("WhiteBonusDisappear", 1f);
-            }
-
-            if (!BlackDistance.bonus)
-            {
-                BlackBonusAppear();
-                Invoke("BlackBonusDisappear", 1f);
-            }
-
-            //停止播放完美碰撞粒子特效
+            //分离时停止播放完美碰撞粒子特效
             whitePerfectCollision.Stop();
             blackPerfectCollision.Stop();
 
-            // 显示原拖尾
+            // 显示原拖尾和拖尾粒子
             UpdatedTurnOriginalTrail();
+            updatedTurnoriginalTrailParticle();
         }
     }
 
@@ -174,24 +172,14 @@ public class PerfectCollisionParticle : MonoBehaviour
         WhiteOriginalTrail.SetActive(true);
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)     //碰撞触发
-    //{
-    //    //每次碰撞改变状态
-    //    if (collision.tag == "White")
-    //    {
-    //        isCollide = !isCollide;
-    //    }
-    //}
-
     private void whiteBonusCalculate()
     {
-        //if (isCollide || whiteBlock.transform.position.y > 0)
         //进入Bonus状态时，记录当前白块距离大小,更改bonus状态为true
         if (whiteBlock.transform.position.y > 0)
         {
             WhiteDistance.StartBonus();
         }
-        //else if(!isCollide || isDie || whiteBlock.transform.position.y < 0)
+
         //判断白块是否回到自己的区域或者死亡
         else if (isDie || whiteBlock.transform.position.y < 0)
         {
@@ -206,13 +194,44 @@ public class PerfectCollisionParticle : MonoBehaviour
         {
             BlackDistance.StartBonus();
         }
-        //else if(!isCollide || isDie || whiteBlock.transform.position.y < 0)
+
         //判断方块是否回到自己的区域或者死亡
         else if (isDie || blackBlock.transform.position.y > 0)
         {
             BlackDistance.EndBonus();
         }
+    }
 
+    //Bonus的显示和消失
+    private void bonusDisplay()
+    {
+        if (!WhiteDistance.bonus)
+        {
+            WhiteBonusAppear();
+            Invoke("WhiteBonusDisappear", 1.2f);
+        }
 
+        if (!BlackDistance.bonus)
+        {
+            BlackBonusAppear();
+            Invoke("BlackBonusDisappear", 1.2f);
+        }
+    }
+
+    //拖尾粒子切换
+    private void originalTurnUpdatedTrailParticle()
+    {
+        blackUpdatedTrailParticle.Play();
+        whiteUpdatedTrailParticle.Play();
+        blackOriginalTrailParticle.Stop();
+        whiteOriginalTrailParticle.Stop();
+    }
+
+    private void updatedTurnoriginalTrailParticle()
+    {
+        blackOriginalTrailParticle.Play();
+        whiteOriginalTrailParticle.Play();
+        blackUpdatedTrailParticle.Stop();
+        whiteUpdatedTrailParticle.Stop();
     }
 }
