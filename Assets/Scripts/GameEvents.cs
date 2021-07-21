@@ -176,8 +176,8 @@ public class GameEvents
             await Task.Delay(beforeStartDelay, token);
             GameAwake();
             await Task.Delay(startDelay, token);
-            gameNotEnd = true;
             GameStart();
+            gameNotEnd = true;
             StartTwoProgress();
             behold = false;
             //startMutex.ReleaseMutex();
