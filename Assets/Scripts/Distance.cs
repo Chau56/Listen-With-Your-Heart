@@ -18,11 +18,17 @@ public class Distance : SwitchBehavior
     private int speed = 1;
     //private bool run, bonus;
     private bool run;
-    public bool bonus;
+    public bool bonus
+    {
+        get;private set;
+    }
 
     //[SerializeField]
     private int TempBonusStart;     //临时变量记录每次Bonus初始位置
-    public int eachBonus;           //每次Bonus数值
+    public int eachBonus            //每次Bonus数值
+    {
+        get; private set;
+    }          
 
     public int Bonus
     {
@@ -68,9 +74,12 @@ public class Distance : SwitchBehavior
     private void ResetProgress()
     {
         Debug.Log($"{player} {nameof(ResetProgress)}");
+        EndBonus();
         Value = 0;
         Bonus = 0;
         distance.text = "0";
+        TempBonusStart = 0;
+        eachBonus = 0;
     }
 
     // Start is called before the first frame update

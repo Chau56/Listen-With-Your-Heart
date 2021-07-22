@@ -17,30 +17,16 @@ public class GetBonus : MonoBehaviour
     private int maxValue;
     private int minValue;
     private int Times;
+    private GameEvents events;
     private void Start()
     {
         text = GetComponent<Text>();
-        GameEvents.instance.GameWin += Renew;
-        
+        events = GameEvents.instance;
+        events.GameWin += () => text.text = $"+{distance.Value - distance.Bonus}";
+
+
     }
-    private void Renew()
-    {
-        StartCoroutine(Bonus());
-    }
-    public IEnumerator Bonus()
-    {
-        maxValue = distance.Bonus;
-        minValue = 0;
-        Times = distance.Bonus;
-        int result  = minValue;
-        for (int i = 0; i < Times; i++)
-        {
-            result++;
-            text.text = $"+{result}";
-            yield return new WaitForSeconds(0.01f);
-        }
-        text.text = $"+{maxValue}";
-        StopCoroutine(Bonus());
-    }
+
+  
    
 }

@@ -44,11 +44,11 @@ public class EndUISlider : MonoBehaviour
         {
             result++;
             completeSlider.value = result;
-            Percent.text = $"{result}+%";
+            Percent.text = $"{result}%";
             yield return new WaitForSeconds(0.01f);
         }
         completeSlider.value = maxValue;
-        Percent.text = $"{maxValue}+%";
+        Percent.text = $"{maxValue}%";
         completeAnim.LevelComplete(isBlack);
     }
 

@@ -35,16 +35,15 @@ public class CompleteAnim : MonoBehaviour
         blackComplete.Play("Base Layer.Complete0", 0, 0);
         whiteComplete.Play("Base Layer.Complete0", 0, 0);
        
-        bBonus.Play("Base Layer.BlackBonusIntialState");
-        wBonus.Play("Base Layer.WhiteBonusIntialState");
+        bBonus.Play("Base Layer.BlackBonusInitialState",0,0);
+        wBonus.Play("Base Layer.WhiteBonusInitialState",0,0);
         
         blackRevive.Play("Base Layer.Blank", 0, 0);
         blackRevived.Play("Base Layer.Blank", 0, 0);
         whiteRevive.Play("Base Layer.Blank", 0, 0);
         whiteRevived.Play("Base Layer.Blank", 0, 0);
 
-        bBonus.Play("Base Layer.InitialState", 0, 0);
-        wBonus.Play("Base Layer.InitialState", 0, 0);
+        
         bDistanceTrans.Play("Base Layer.InitialState", 0, 0);
         wDistanceTrans.Play("Base Layer.InitialState", 0, 0);
 
