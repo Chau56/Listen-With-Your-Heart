@@ -2,7 +2,7 @@
 ///作者：周澄鑫
 ///创建日期：2021-7-16
 ///更新者：周权
-///最新修改日期：2021-7-21
+///最新修改日期：2021-7-22
 ///</summary>
 
 
@@ -52,9 +52,11 @@ public class PerfectCollisionParticle : MonoBehaviour
         BlackBonusDisappear();
         WhiteBonusDisappear();
 
-        // 开始时显示原拖尾
+        // 开始时显示原拖尾及其粒子
         UpdatedTurnOriginalTrail();
         updatedTurnoriginalTrailParticle();
+
+        ResetDeath();
     }
 
     private void Update()
@@ -90,6 +92,18 @@ public class PerfectCollisionParticle : MonoBehaviour
 
             //显示Bonus数值1s
             bonusDisplay();
+        }
+
+        //死亡时停止播放完美碰撞粒子特效、显示原拖尾及其粒子
+        if (isDie)
+        {
+            whitePerfectCollision.Stop();
+            blackPerfectCollision.Stop();
+
+            UpdatedTurnOriginalTrail();
+            updatedTurnoriginalTrailParticle();
+
+            ResetDeath();
         }
     }
 
@@ -195,7 +209,7 @@ public class PerfectCollisionParticle : MonoBehaviour
             BlackDistance.StartBonus();
         }
 
-        //判断方块是否回到自己的区域或者死亡
+        //判断黑块是否回到自己的区域或者死亡
         else if (isDie || blackBlock.transform.position.y > 0)
         {
             BlackDistance.EndBonus();
