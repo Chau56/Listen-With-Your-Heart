@@ -45,7 +45,7 @@ public class DeathLogic : SwitchBehavior
             events.WhiteReviving += Revive;
             events.WhiteDying += Die;
         });
-        events.GameAwake += Die;
+        events.GameRestart += Die;
         events.GameStart += () => StartCoroutine(WaitCamera());
         events.GameAbnormalEnd += Die;
     }

@@ -59,6 +59,6 @@ public class AutoMovement : SwitchBehavior
         events.GamePause += Pause;
         events.GameResume += Resume;
         events.GameAbnormalEnd += Pause;
-        events.GameBeforeAwake += ResetPosition;
+        events.GameAwake += ResetPosition;
     }
 }
