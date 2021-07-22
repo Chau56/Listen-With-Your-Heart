@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 [RequireComponent(typeof(Text))]
 public class GetScore : MonoBehaviour
 {
@@ -23,13 +24,6 @@ public class GetScore : MonoBehaviour
     [SerializeField]
     private CompleteAnim completeAnim;
 
-    private int maxValue;
-    private int minValue;
-    private int Times;
-   
-
-   
-
     public void playBlackScore()
     {
         StartCoroutine(BlackScore());
@@ -37,16 +31,19 @@ public class GetScore : MonoBehaviour
 
     private IEnumerator BlackScore()
     {
-        maxValue = d1.Value + d1.Bonus;
-        minValue = 0;
-        Times = maxValue;
+        int maxValue = 2*d1.Value - d1.Bonus;
+        int minValue = 0;
+        int Times = maxValue;
         int result = minValue;
-        for (int i = 0; i < Times; i++)
+       
+        for (int i = 0; i <= Times; i++)
         {
             result++;
             blackText.text = $"{result}";
-            yield return new WaitForSeconds(0.01f);
+            
+            yield return new WaitForSeconds(0.005f);
         }
+       
         blackText.text = $"{maxValue}";
         completeAnim.ScoreTrans(true);
     }
@@ -58,15 +55,15 @@ public class GetScore : MonoBehaviour
 
     private IEnumerator WhiteScore()
     {
-        maxValue = d2.Value + d2.Bonus;
-        minValue = 0;
-        Times = maxValue;
+        int maxValue = 2*d2.Value - d2.Bonus;
+        int minValue = 0;
+        int Times = maxValue;
         int result = minValue;
-        for (int i = 0; i < Times; i++)
+        for (int i = 0; i <= Times; i++)
         {
             result++;
-            whiteText.text = $"{result}";
-            yield return new WaitForSeconds(0.01f);
+            whiteText.text = $"{result}";        
+            yield return new WaitForSeconds(0.005f);
         }
         whiteText.text = $"{maxValue}";
         completeAnim.ScoreTrans(false);
@@ -79,15 +76,15 @@ public class GetScore : MonoBehaviour
 
     private IEnumerator BlackTotalScore()
     {
-        maxValue = d2.Value + d1.Bonus + d2.Value + d2.Bonus;
-        minValue = d1.Value + d1.Bonus;
-        Times = maxValue;
+        int maxValue = 2*d1.Value - d1.Bonus +2* d2.Value - d2.Bonus;
+        int minValue = 2*d1.Value - d1.Bonus;
+        int Times = maxValue-minValue;
         int result = minValue;
-        for (int i = 0; i < Times; i++)
+        for (int i = 0; i <= Times; i++)
         {
             result++;
             blackText.text = $"{result}";
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.005f);
         }
         blackText.text = $"{maxValue}";
     }
@@ -99,15 +96,15 @@ public class GetScore : MonoBehaviour
 
     private IEnumerator WhiteTotalScore()
     {
-        maxValue = d2.Value + d1.Bonus + d2.Value + d2.Bonus;
-        minValue = d2.Value + d2.Bonus;
-        Times = maxValue;
+        int maxValue = 2*d1.Value - d1.Bonus + 2*d2.Value - d2.Bonus;
+        int minValue = 2*d2.Value - d2.Bonus;
+        int Times = maxValue-minValue;
         int result = minValue;
-        for (int i = 0; i < Times; i++)
+        for (int i = 0; i <= Times; i++)
         {
             result++;
             whiteText.text = $"{result}";
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.005f);
         }
         whiteText.text = $"{maxValue}";
     }
