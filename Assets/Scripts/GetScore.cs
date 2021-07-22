@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(Text))]
 public class GetScore : MonoBehaviour
-{ 
+{
     [SerializeField]
     private Text blackText;
     [SerializeField]
@@ -20,27 +20,35 @@ public class GetScore : MonoBehaviour
     private Distance d1;
     [SerializeField]
     private Distance d2;
-    
+    [SerializeField]
+    private CompleteAnim completeAnim;
+
     private int maxValue;
     private int minValue;
     private int Times;
     private void Start()
     {
-        
-        GameEvents.instance.GameWin += Renew;
+
+        //GameEvents.instance.GameWin += Renew;
     }
 
     private void Renew()
     {
-        Parallel.Invoke(() =>StartCoroutine(BlackScore()), () => StartCoroutine(WhiteScore()));
+        Parallel.Invoke(() => StartCoroutine(BlackScore()), () => StartCoroutine(WhiteScore()));
         Parallel.Invoke(() => StartCoroutine(BlackTotalScore()), () => StartCoroutine(WhiteTotalScore()));
     }
-    public IEnumerator BlackScore()
+
+    public void playBlackScore()
     {
-        maxValue = d1.Value+d1.Bonus;
+        StartCoroutine(BlackScore());
+    }
+
+    private IEnumerator BlackScore()
+    {
+        maxValue = d1.Value + d1.Bonus;
         minValue = 0;
         Times = maxValue;
-        int result  = minValue;
+        int result = minValue;
         for (int i = 0; i < Times; i++)
         {
             result++;
@@ -48,14 +56,20 @@ public class GetScore : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         blackText.text = $"{maxValue}";
-        StopCoroutine(BlackScore());
+        completeAnim.ScoreTrans(true);
     }
-    public IEnumerator WhiteScore()
+
+    public void playWhiteScore()
+    {
+        StartCoroutine(WhiteScore());
+    }
+
+    private IEnumerator WhiteScore()
     {
         maxValue = d2.Value + d2.Bonus;
         minValue = 0;
         Times = maxValue;
-        int result  = minValue;
+        int result = minValue;
         for (int i = 0; i < Times; i++)
         {
             result++;
@@ -63,14 +77,20 @@ public class GetScore : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         whiteText.text = $"{maxValue}";
-        StopCoroutine(WhiteScore());
+        completeAnim.ScoreTrans(false);
     }
-    public IEnumerator BlackTotalScore()
+
+    public void playBlackTotalScore()
     {
-        maxValue = d2.Value+d1.Bonus+d2.Value + d2.Bonus;
-        minValue = d1.Value+d1.Bonus;
-        Times = maxValue ;
-        int result  = minValue;
+        StartCoroutine(BlackTotalScore());
+    }
+
+    private IEnumerator BlackTotalScore()
+    {
+        maxValue = d2.Value + d1.Bonus + d2.Value + d2.Bonus;
+        minValue = d1.Value + d1.Bonus;
+        Times = maxValue;
+        int result = minValue;
         for (int i = 0; i < Times; i++)
         {
             result++;
@@ -78,9 +98,14 @@ public class GetScore : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         blackText.text = $"{maxValue}";
-        StopCoroutine(BlackTotalScore());
     }
-    public IEnumerator WhiteTotalScore()
+
+    public void playWhiteTotalScore()
+    {
+        StartCoroutine(WhiteTotalScore());
+    }
+
+    private IEnumerator WhiteTotalScore()
     {
         maxValue = d2.Value + d1.Bonus + d2.Value + d2.Bonus;
         minValue = d2.Value + d2.Bonus;
@@ -93,6 +118,5 @@ public class GetScore : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         whiteText.text = $"{maxValue}";
-        StopCoroutine(WhiteTotalScore());
     }
 }

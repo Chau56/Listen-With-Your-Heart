@@ -9,28 +9,32 @@ public class EndUISlider : MonoBehaviour
     [Header("通关进度条")]
     [SerializeField]
     private Slider completeSlider;
-   
+
     [Header("进度")]
     [SerializeField]
     private ProgressCalculate progress;
-   
+
     [Header("文本")]
     [SerializeField]
     private Text Percent;
 
+    [SerializeField]
+    private CompleteAnim completeAnim;
+
+    [SerializeField]
+    private bool isBlack = true;
     private int maxValue;
     private int minValue;
     private int changeTimes;
+    private GameEvents events;
     private void Start()
     {
-        GameEvents.instance.GameWin += rerun;
+        events = GameEvents.instance;
+        events.GameEnd += () => StartCoroutine(SliderCrement());
+        events.GameStart += () => completeAnim.ResetAnim();
     }
-    private void rerun()
-    {
-        StartCoroutine(SliderCrement());
 
-    }
-    public IEnumerator SliderCrement()
+    private IEnumerator SliderCrement()
     {
         maxValue = progress.Percent;  //一为黑色进度条
         minValue = 0;
@@ -45,9 +49,9 @@ public class EndUISlider : MonoBehaviour
         }
         completeSlider.value = maxValue;
         Percent.text = $"{maxValue}+%";
-        StopCoroutine(SliderCrement());
+        completeAnim.LevelComplete(isBlack);
     }
 
-    
+
 
 }

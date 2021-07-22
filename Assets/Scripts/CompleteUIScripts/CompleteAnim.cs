@@ -2,52 +2,111 @@ using UnityEngine;
 
 public class CompleteAnim : MonoBehaviour
 {
-    private AnimatorStateInfo info;
-    private Animator animator;
-    public bool animFinished = false;
-    void Start()
+  
+    [SerializeField]
+    private Animator blackComplete;
+    [SerializeField]
+    private Animator whiteComplete;
+    [SerializeField]
+    private Animator blackRevive;
+    [SerializeField]
+    private Animator whiteRevive;
+    [SerializeField]
+    private Animator blackRevived;
+    [SerializeField]
+    private Animator whiteRevived;
+    [SerializeField]
+    private Animator bBonus;
+    [SerializeField]
+    private Animator wBonus;
+    [SerializeField]
+    private Animator bDistanceTrans;
+    [SerializeField]
+    private Animator wDistanceTrans;
+    [SerializeField]
+    private Animator bSorce;
+    [SerializeField]
+    private Animator wSorce;
+
+
+
+    public void ResetAnim()
     {
-        animator = GetComponent<Animator>();
+        blackComplete.Play("Base Layer.Complete0", 0, 0);
+        whiteComplete.Play("Base Layer.Complete0", 0, 0);
+       
+        bBonus.Play("Base Layer.BlackBonusIntialState");
+        wBonus.Play("Base Layer.WhiteBonusIntialState");
+        
+        blackRevive.Play("Base Layer.Blank", 0, 0);
+        blackRevived.Play("Base Layer.Blank", 0, 0);
+        whiteRevive.Play("Base Layer.Blank", 0, 0);
+        whiteRevived.Play("Base Layer.Blank", 0, 0);
+
+        bBonus.Play("Base Layer.InitialState", 0, 0);
+        wBonus.Play("Base Layer.InitialState", 0, 0);
+        bDistanceTrans.Play("Base Layer.InitialState", 0, 0);
+        wDistanceTrans.Play("Base Layer.InitialState", 0, 0);
+
+        bSorce.Play("Base Layer.ScoreInitialState");
+        wSorce.Play("Base Layer.ScoreInitialState");
     }
 
-    public void LevelComplete()
+    public void LevelComplete(bool isBlack)
     {
-        animator.Play("Base Layer.LevelComplete", 0, 0);
+        if(isBlack)
+        blackComplete.Play("Base Layer.LevelComplete", 0, 0);
+        else
+        whiteComplete.Play("Base Layer.LevelComplete", 0, 0);
 
     }
-    public void BonusAutoEnlarge()
+
+   
+    public void BonusAutoEnlarge(bool isblack)
     {
-        animator.Play("Base Layer.BlackBonusAutoEnlarge", 0, 0);
-        animator.Play("Base Layer.WhiteBonusAutoEnlarge", 0, 0);
+        if (isblack)
+        {
+            bBonus.Play("Base Layer.BlackBonusAutoEnlarge", 0, 0);
+        }
+        else
+        {
+            wBonus.Play("Base Layer.WhiteBonusAutoEnlarge", 0, 0);
+        }
     }
 
+    
     public void ReviveNumShowup()
     {
-        animator.Play("Base Layer.ReviveNumShowup", 0, 0);
+        blackRevive.Play("Base Layer.ReviveNumShowup", 0, 0);
+        blackRevived.Play("Base Layer.ReviveNumShowup", 0, 0);
+        whiteRevive.Play("Base Layer.ReviveNumShowup", 0, 0);
+        whiteRevived.Play("Base Layer.ReviveNumShowup", 0, 0);
 
     }
     public void BonusDistanceTransPlay()
     {
-        animator.Play("Base Layer.BlackBonusTrans", 0, 0);
-        animator.Play("Base Layer.WhiteBonusTrans", 0, 0);
-        animator.Play("Base Layer.BlackDistanceTrans", 0, 0);
-        animator.Play("Base Layer.WhiteDistanceTrans", 0, 0);
+        bBonus.Play("Base Layer.BlackBonusTrans", 0, 0);
+        wBonus.Play("Base Layer.WhiteBonusTrans", 0, 0);
+        bDistanceTrans.Play("Base Layer.BlackDistanceTrans", 0, 0);
+        wDistanceTrans.Play("Base Layer.WhiteDistanceTrans", 0, 0);
 
     }
 
-    public void BScoreTrans()
+    public void ScoreTrans(bool boolindex)
     {
-        animator.Play("Base Layer.BlackScoreTrans");
-        animator.Play("Base Layer.WhiteScoreTrans");
-
-    }
-
-    private void Update()
-    {
-        info = animator.GetCurrentAnimatorStateInfo(0);
-        if (info.normalizedTime >= 1.0f)
+        Debug.Log("¶¯»­ÒÑÖ´ÐÐ");
+        if (boolindex)
         {
-            animFinished = true;
+            bSorce.Play("Base Layer.BlackScoreTrans");
         }
+        else
+        {
+            wSorce.Play("Base Layer.WhiteScoreTrans"); 
+        }
+        
     }
+    
+        
+   
+
 }

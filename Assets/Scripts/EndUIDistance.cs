@@ -6,41 +6,38 @@ public class EndUIDistance : MonoBehaviour
 {
     [SerializeField]
     private Distance Distance;
- 
+
     [SerializeField]
     private Text RoleDistance;
 
+    [SerializeField]
+    private bool isBlack = true;
+
+    [SerializeField]
+    private CompleteAnim completeAnim;
     private int maxValue;
     private int minValue;
     private int changeTimes;
-    private void Start()
-    {
-        RegisterEvents();
-    }
-    void RegisterEvents()
-    {
-        var events = GameEvents.instance;
-        events.GameWin += run;
-    }
-    void run()
+
+    public void playDistanceCrement()
     {
         StartCoroutine(DistanceCrement());
-        
+
     }
-    public IEnumerator DistanceCrement()
+    private IEnumerator DistanceCrement()
     {
         maxValue = Distance.Value;
         minValue = 0;
         changeTimes = maxValue;
         int result = minValue;
-        for(int i = 0; i < changeTimes; i++)
+        for (int i = 0; i < changeTimes; i++)
         {
-            result ++;
+            result++;
             RoleDistance.text = result.ToString();
             yield return new WaitForSeconds(0.01f);
         }
         RoleDistance.text = maxValue.ToString();
-        StopCoroutine(DistanceCrement());
-    }  
+        completeAnim.BonusAutoEnlarge(isBlack);
+    }
 
 }
