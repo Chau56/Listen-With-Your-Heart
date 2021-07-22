@@ -8,9 +8,15 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class BottomClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler
+public class BottomClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler, IDeselectHandler
 {
     private GameEvents events = GameEvents.instance;
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+        events.FinishJump1();
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         Debug.Log("bottom click down");
