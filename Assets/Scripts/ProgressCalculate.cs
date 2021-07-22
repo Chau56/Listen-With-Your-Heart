@@ -46,8 +46,9 @@ public class ProgressCalculate : SwitchBehavior
              events.WhiteReviving += SetStartPosition;
          });
         events.GamePause += Show;
-        events.GameEnd += Show;
         events.GameBeforeAwake += ResetProgress;
+        events.GameWin += Show;
+        events.GameFailed += Show;
     }
 
     private void SetStartPosition()
