@@ -18,7 +18,11 @@ public class CompleteAnim : MonoBehaviour
     [SerializeField]
     private Animator bBonus;
     [SerializeField]
+    private Animator bBonusCopy;
+    [SerializeField]
     private Animator wBonus;
+    [SerializeField]
+    private Animator wBonusCopy;
     [SerializeField]
     private Animator bDistanceTrans;
     [SerializeField]
@@ -37,7 +41,9 @@ public class CompleteAnim : MonoBehaviour
        
         bBonus.Play("Base Layer.BlackBonusInitialState",0,0);
         wBonus.Play("Base Layer.WhiteBonusInitialState",0,0);
-        
+        bBonusCopy.Play("Base Layer.WhiteBonusInitialState", 0, 0);
+        wBonusCopy.Play("Base Layer.WhiteBonusInitialState", 0, 0);
+
         blackRevive.Play("Base Layer.Blank", 0, 0);
         blackRevived.Play("Base Layer.Blank", 0, 0);
         whiteRevive.Play("Base Layer.Blank", 0, 0);
@@ -66,10 +72,12 @@ public class CompleteAnim : MonoBehaviour
         if (isblack)
         {
             bBonus.Play("Base Layer.BlackBonusAutoEnlarge", 0, 0);
+            bBonusCopy.Play("Base Layer.BlackBonusAutoEnlarge", 0, 0);
         }
         else
         {
             wBonus.Play("Base Layer.WhiteBonusAutoEnlarge", 0, 0);
+            wBonusCopy.Play("Base Layer.WhiteBonusAutoEnlarge", 0, 0);
         }
     }
 

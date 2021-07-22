@@ -26,17 +26,9 @@ public class GetScore : MonoBehaviour
     private int maxValue;
     private int minValue;
     private int Times;
-    private void Start()
-    {
+   
 
-        //GameEvents.instance.GameWin += Renew;
-    }
-
-    private void Renew()
-    {
-        Parallel.Invoke(() => StartCoroutine(BlackScore()), () => StartCoroutine(WhiteScore()));
-        Parallel.Invoke(() => StartCoroutine(BlackTotalScore()), () => StartCoroutine(WhiteTotalScore()));
-    }
+   
 
     public void playBlackScore()
     {
