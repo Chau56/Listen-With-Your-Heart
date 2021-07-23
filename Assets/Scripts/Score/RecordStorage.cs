@@ -65,7 +65,7 @@ public class RecordStorage : MonoBehaviour
         score = 2 * D1.Value - D1.Bonus + 2 * D2.Value - D2.Bonus;
         if (score > PlayerPrefs.GetInt("Score", -1))
         {
-            yield return new WaitForSecondsRealtime(17f);
+            yield return new WaitForSecondsRealtime(7f);
             black.enabled = true;
             white.enabled = true;
         }
