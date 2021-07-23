@@ -38,11 +38,11 @@ public class EndUIDistance : MonoBehaviour
         minValue = 0;
         changeTimes = maxValue;
         int result = minValue;
-        for (int i = 0; i < changeTimes; i++)
+        for (int i = 0; i < changeTimes; i+=3)
         {
-            result++;
+            result+=3;
             RoleDistance.text = result.ToString();
-            yield return new WaitForSeconds(0.005f);
+            yield return new WaitForSeconds(0.002f);
         }
         RoleDistance.text = maxValue.ToString();
         completeAnim.BonusAutoEnlarge(isBlack);
