@@ -1,3 +1,10 @@
+///<summary>
+///作者：张翔宇
+///创建日期：2021-7-21
+///最新修改日期：2021-7-23
+///</summary>
+
+
 using UnityEngine;
 
 public class CompleteAnim : MonoBehaviour
