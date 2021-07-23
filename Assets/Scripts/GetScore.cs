@@ -71,7 +71,7 @@ public class GetScore : MonoBehaviour
 
     public void playBlackTotalScore()
     {
-        StartCoroutine(BlackTotalScore());
+        blackText.text = $"{2 * d1.Value - d1.Bonus + 2 * d2.Value - d2.Bonus}";
     }
 
     private IEnumerator BlackTotalScore()
@@ -91,7 +91,7 @@ public class GetScore : MonoBehaviour
 
     public void playWhiteTotalScore()
     {
-        StartCoroutine(WhiteTotalScore());
+        whiteText.text = $"{2 * d1.Value - d1.Bonus + 2 * d2.Value - d2.Bonus}";
     }
 
     private IEnumerator WhiteTotalScore()
