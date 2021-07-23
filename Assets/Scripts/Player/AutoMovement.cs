@@ -32,6 +32,7 @@ public class AutoMovement : SwitchBehavior
     private void Resume()
     {
         myRigidbody.velocity = velocityPaused;
+        if (shouldImpulse) StartCoroutine(Impulse());
     }
     /// <summary>
     /// 速度归零。
