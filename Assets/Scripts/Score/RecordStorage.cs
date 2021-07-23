@@ -4,13 +4,13 @@
 /// 张翔宇
 /// </author>
 ///<updater>
-///周权
+///周权,张翔宇
 /// </updater>
 /// <date>
 /// 2021/7/16
 /// </date>
 /// <update>
-/// 2021/7/19
+/// 2021/7/23
 /// </update>
 /// </summary>
 
@@ -56,11 +56,16 @@ public class RecordStorage : MonoBehaviour
         black.enabled = false;
         white.enabled = false;
     }
-    private void show()
+    private void delay()
+    {
+        StartCoroutine(show());
+    }
+    private IEnumerator show()
     {
         score = 2 * D1.Value - D1.Bonus + 2 * D2.Value - D2.Bonus;
         if (score > PlayerPrefs.GetInt("Score", -1))
         {
+            yield return new WaitForSecondsRealtime(17f);
             black.enabled = true;
             white.enabled = true;
         }
@@ -74,7 +79,7 @@ public class RecordStorage : MonoBehaviour
         black.enabled = false;
         var events = GameEvents.instance;
         events.GameRestart += ResetRecord;
-        events.GameWin += show;
+        events.GameWin += delay;
         events.GameEnd += StoreScore;
         events.GameBeforeAwake += debugTest;
         PlayerPrefs.DeleteAll();
