@@ -23,6 +23,19 @@ public class GetScore : MonoBehaviour
     private Distance d2;
     [SerializeField]
     private CompleteAnim completeAnim;
+    private GameEvents events;
+
+    private void Start()
+    {
+        events = GameEvents.instance;
+        events.GameStart += ResetScore;
+    }
+
+    private void ResetScore() 
+    {
+        blackText.text = $"0";
+        whiteText.text = $"0";
+    }
 
     public void playBlackScore()
     {
@@ -74,38 +87,12 @@ public class GetScore : MonoBehaviour
         blackText.text = $"{2 * d1.Value - d1.Bonus + 2 * d2.Value - d2.Bonus}";
     }
 
-    private IEnumerator BlackTotalScore()
-    {
-        int maxValue = 2*d1.Value - d1.Bonus +2* d2.Value - d2.Bonus;
-        int minValue = 2*d1.Value - d1.Bonus;
-        int Times = maxValue-minValue;
-        int result = minValue;
-        for (int i = 0; i <= Times; i++)
-        {
-            result++;
-            blackText.text = $"{result}";
-            yield return new WaitForSeconds(0.001f);
-        }
-        blackText.text = $"{maxValue}";
-    }
+   
 
     public void playWhiteTotalScore()
     {
         whiteText.text = $"{2 * d1.Value - d1.Bonus + 2 * d2.Value - d2.Bonus}";
     }
 
-    private IEnumerator WhiteTotalScore()
-    {
-        int maxValue = 2*d1.Value - d1.Bonus + 2*d2.Value - d2.Bonus;
-        int minValue = 2*d2.Value - d2.Bonus;
-        int Times = maxValue-minValue;
-        int result = minValue;
-        for (int i = 0; i <= Times; i++)
-        {
-            result++;
-            whiteText.text = $"{result}";
-            yield return new WaitForSeconds(0.001f);
-        }
-        whiteText.text = $"{maxValue}";
-    }
+   
 }

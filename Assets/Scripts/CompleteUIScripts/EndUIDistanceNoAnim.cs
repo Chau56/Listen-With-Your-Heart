@@ -14,6 +14,13 @@ public class EndUIDistanceNoAnim : MonoBehaviour
     private int maxValue;
     private int minValue;
     private int changeTimes;
+    private GameEvents events;
+
+    private void Start()
+    {
+        events = GameEvents.instance;
+        events.GameStart += () => RoleDistance.text =$"0" ;
+    }
 
     public void playDistanceCrement()
     {
