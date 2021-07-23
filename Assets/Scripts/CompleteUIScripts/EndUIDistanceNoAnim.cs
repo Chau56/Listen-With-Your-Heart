@@ -30,7 +30,7 @@ public class EndUIDistanceNoAnim : MonoBehaviour
         {
             result++;
             RoleDistance.text = result.ToString();
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.001f);
         }
         RoleDistance.text = maxValue.ToString();
     }

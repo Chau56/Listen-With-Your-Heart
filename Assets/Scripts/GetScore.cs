@@ -41,7 +41,7 @@ public class GetScore : MonoBehaviour
             result++;
             blackText.text = $"{result}";
             
-            yield return new WaitForSeconds(0.005f);
+            yield return new WaitForSeconds(0.001f);
         }
        
         blackText.text = $"{maxValue}";
@@ -63,7 +63,7 @@ public class GetScore : MonoBehaviour
         {
             result++;
             whiteText.text = $"{result}";        
-            yield return new WaitForSeconds(0.005f);
+            yield return new WaitForSeconds(0.001f);
         }
         whiteText.text = $"{maxValue}";
         completeAnim.ScoreTrans(false);
@@ -84,7 +84,7 @@ public class GetScore : MonoBehaviour
         {
             result++;
             blackText.text = $"{result}";
-            yield return new WaitForSeconds(0.005f);
+            yield return new WaitForSeconds(0.001f);
         }
         blackText.text = $"{maxValue}";
     }
@@ -104,7 +104,7 @@ public class GetScore : MonoBehaviour
         {
             result++;
             whiteText.text = $"{result}";
-            yield return new WaitForSeconds(0.005f);
+            yield return new WaitForSeconds(0.001f);
         }
         whiteText.text = $"{maxValue}";
     }
