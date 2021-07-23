@@ -39,48 +39,19 @@ public class GetScore : MonoBehaviour
 
     public void playBlackScore()
     {
-        StartCoroutine(BlackScore());
-    }
-
-    private IEnumerator BlackScore()
-    {
-        int maxValue = 2*d1.Value - d1.Bonus;
-        int minValue = 0;
-        int Times = maxValue;
-        int result = minValue;
-       
-        for (int i = 0; i <= Times; i++)
-        {
-            result++;
-            blackText.text = $"{result}";
-            
-            yield return new WaitForSeconds(0.001f);
-        }
-       
-        blackText.text = $"{maxValue}";
+        blackText.text = $"{2 * d1.Value - d1.Bonus}";
         completeAnim.ScoreTrans(true);
     }
 
+   
+
     public void playWhiteScore()
     {
-        StartCoroutine(WhiteScore());
-    }
-
-    private IEnumerator WhiteScore()
-    {
-        int maxValue = 2*d2.Value - d2.Bonus;
-        int minValue = 0;
-        int Times = maxValue;
-        int result = minValue;
-        for (int i = 0; i <= Times; i++)
-        {
-            result++;
-            whiteText.text = $"{result}";        
-            yield return new WaitForSeconds(0.001f);
-        }
-        whiteText.text = $"{maxValue}";
+        whiteText.text = $"{2 * d2.Value - d2.Bonus}";
         completeAnim.ScoreTrans(false);
     }
+
+  
 
     public void playBlackTotalScore()
     {
