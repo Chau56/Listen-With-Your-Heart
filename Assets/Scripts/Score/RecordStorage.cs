@@ -59,6 +59,12 @@ public class RecordStorage : MonoBehaviour
         white.enabled = false;
     }
 
+    private void ResetBool() 
+    {
+        blackIndex = false;
+        whiteIndex = false;
+    }
+
     public void ShowImage() 
     {
         if (blackIndex && whiteIndex) 
@@ -85,6 +91,7 @@ public class RecordStorage : MonoBehaviour
         black.enabled = false;
         var events = GameEvents.instance;
         events.GameRestart += ResetRecord;
+        events.GameRestart += ResetBool;
         events.GameWin += show;
         events.GameEnd += StoreScore;
         events.GameBeforeAwake += debugTest;
