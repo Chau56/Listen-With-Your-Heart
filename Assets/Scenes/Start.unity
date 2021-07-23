@@ -632,7 +632,7 @@ FixedJoint2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6143841160680086628}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 6020128563559270582}
@@ -1400,7 +1400,7 @@ FixedJoint2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7685317719438334489}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 6020128562449440699}
@@ -13893,6 +13893,7 @@ MonoBehaviour:
   player: 0
   jumpSpeed: {x: 0, y: 17}
   revivePosition: {fileID: 6020128563559270579}
+  disableJumpDelay: 0.02
 --- !u!114 &6143841160680086655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13923,6 +13924,7 @@ MonoBehaviour:
   player: 1
   jumpSpeed: {x: 0, y: -17}
   revivePosition: {fileID: 6020128562449440702}
+  disableJumpDelay: 0.02
 --- !u!114 &7685317719438334482
 MonoBehaviour:
   m_ObjectHideFlags: 0
