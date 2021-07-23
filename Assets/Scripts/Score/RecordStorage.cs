@@ -33,6 +33,8 @@ public class RecordStorage : MonoBehaviour
     private GameObject blackRecord;
     private Image white;
     private Image black;
+    private bool blackIndex;
+    private bool whiteIndex;
     private int score = 0;
     private void StoreScore()
     {
@@ -56,21 +58,25 @@ public class RecordStorage : MonoBehaviour
         black.enabled = false;
         white.enabled = false;
     }
-    private void delay()
+
+    public void ShowImage() 
     {
-        StartCoroutine(show());
-    }
-    private IEnumerator show()
-    {
-        score = 2 * D1.Value - D1.Bonus + 2 * D2.Value - D2.Bonus;
-        if (score > PlayerPrefs.GetInt("Score", -1))
+        if (blackIndex && whiteIndex) 
         {
-            yield return new WaitForSecondsRealtime(7f);
             black.enabled = true;
             white.enabled = true;
         }
     }
-    // Start is called before the first frame update
+    private void show()
+    {
+        score = 2 * D1.Value - D1.Bonus + 2 * D2.Value - D2.Bonus;
+        if (score > PlayerPrefs.GetInt("Score", -1))
+        {
+           
+            blackIndex = true;
+            whiteIndex= true;
+        }
+    }
     private void Start()
     {
         white = whiteRecord.GetComponent<Image>();
@@ -79,7 +85,7 @@ public class RecordStorage : MonoBehaviour
         black.enabled = false;
         var events = GameEvents.instance;
         events.GameRestart += ResetRecord;
-        events.GameWin += delay;
+        events.GameWin += show;
         events.GameEnd += StoreScore;
         events.GameBeforeAwake += debugTest;
         PlayerPrefs.DeleteAll();

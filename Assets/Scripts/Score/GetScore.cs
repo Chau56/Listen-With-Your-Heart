@@ -23,6 +23,7 @@ public class GetScore : MonoBehaviour
     private Distance d2;
     [SerializeField]
     private CompleteAnim completeAnim;
+    
     private GameEvents events;
 
     private void Start()
@@ -56,6 +57,7 @@ public class GetScore : MonoBehaviour
     public void playBlackTotalScore()
     {
         blackText.text = $"{2 * d1.Value - d1.Bonus + 2 * d2.Value - d2.Bonus}";
+        
     }
 
    

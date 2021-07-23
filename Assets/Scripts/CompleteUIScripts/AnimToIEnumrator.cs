@@ -20,6 +20,8 @@ public class AnimToIEnumrator : MonoBehaviour
     private GetScore blackTotalScoreCopy;
     [SerializeField]
     private GetScore whiteTotalScoreCopy;
+    [SerializeField]
+    private RecordStorage recordStorage;
     private void playDistanceEnum() 
     {
         blackEndDistance.playDistanceCrement();
@@ -39,10 +41,13 @@ public class AnimToIEnumrator : MonoBehaviour
     private void playBlackTotalScoreEnum() 
     {
         blackTotalScoreCopy.playBlackTotalScore();
+        recordStorage.ShowImage();
         
     }
     private void playWhiteTotalScoreEnum() 
     {
         whiteTotalScoreCopy.playWhiteTotalScore();
+       
+
     }
 }

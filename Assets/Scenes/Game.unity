@@ -1552,6 +1552,7 @@ MonoBehaviour:
   whiteDistanceNoAnim: {fileID: 507184186}
   blackTotalScoreCopy: {fileID: 0}
   whiteTotalScoreCopy: {fileID: 0}
+  recordStorage: {fileID: 0}
 --- !u!114 &704189388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1848,6 +1849,7 @@ MonoBehaviour:
   whiteDistanceNoAnim: {fileID: 0}
   blackTotalScoreCopy: {fileID: 0}
   whiteTotalScoreCopy: {fileID: 0}
+  recordStorage: {fileID: 0}
 --- !u!95 &729169562
 Animator:
   serializedVersion: 3
@@ -3542,6 +3544,7 @@ MonoBehaviour:
   whiteDistanceNoAnim: {fileID: 0}
   blackTotalScoreCopy: {fileID: 1788746814}
   whiteTotalScoreCopy: {fileID: 729169559}
+  recordStorage: {fileID: 0}
 --- !u!95 &1435604800
 Animator:
   serializedVersion: 3
@@ -3581,6 +3584,7 @@ MonoBehaviour:
   whiteDistanceNoAnim: {fileID: 0}
   blackTotalScoreCopy: {fileID: 1788746814}
   whiteTotalScoreCopy: {fileID: 729169559}
+  recordStorage: {fileID: 1939257311}
 --- !u!95 &1435604802
 Animator:
   serializedVersion: 3
@@ -3620,6 +3624,7 @@ MonoBehaviour:
   whiteDistanceNoAnim: {fileID: 0}
   blackTotalScoreCopy: {fileID: 1788746814}
   whiteTotalScoreCopy: {fileID: 729169559}
+  recordStorage: {fileID: 1939257311}
 --- !u!95 &1435604804
 Animator:
   serializedVersion: 3
@@ -4455,6 +4460,7 @@ MonoBehaviour:
   whiteDistanceNoAnim: {fileID: 0}
   blackTotalScoreCopy: {fileID: 0}
   whiteTotalScoreCopy: {fileID: 0}
+  recordStorage: {fileID: 1939257311}
 --- !u!95 &1788746817
 Animator:
   serializedVersion: 3
@@ -4958,6 +4964,7 @@ MonoBehaviour:
   whiteDistanceNoAnim: {fileID: 507184186}
   blackTotalScoreCopy: {fileID: 0}
   whiteTotalScoreCopy: {fileID: 0}
+  recordStorage: {fileID: 0}
 --- !u!1 &2126697726
 GameObject:
   m_ObjectHideFlags: 0
@@ -10560,7 +10567,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 850437964815864435, guid: 154bdb1144b2c0e4f98a76762fa49e24, type: 3}
       propertyPath: m_Volume
-      value: 0
+      value: 0.059999995
       objectReference: {fileID: 0}
     - target: {fileID: 850437964815864435, guid: 154bdb1144b2c0e4f98a76762fa49e24, type: 3}
       propertyPath: m_Enabled
